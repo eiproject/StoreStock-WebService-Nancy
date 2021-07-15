@@ -11,7 +11,7 @@
   <div class="relative bg-white overflow-hidden">
     <div class="mx-auto">
       <div class="relative z-1000 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-        <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/4" 
+        <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/4"
              fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <polygon points="50,0 100,0 50,100 0,100" />
         </svg>
@@ -24,7 +24,7 @@
                   <a href="/">
                     <span class="sr-only">Workflow</span>
                     <!--<img class="h-32 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg">-->
-                    <img class="h-32 w-auto sm:h-10" src="content/logo.svg">
+                    <img class="h-32 w-auto sm:h-10" src="/content/logo.svg">
                   </a>
                   <div class="-mr-2 flex items-center md:hidden">
                     <button type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
@@ -102,61 +102,9 @@
             rel="stylesheet">
       <div class="mt-8 lg:mt-20 lg:mr-20">
         <div class="overflow-auto lg:overflow-visible ">
-          <table class="table text-gray-700 border-separate space-y-6 text-sm">
-            <thead class="bg-gray-100 text-gray-700">
-              <tr>
-                <th class="p-3">Title</th>
-                <th class="p-3">Category</th>
-                <th class="p-3">Amount</th>
-                <th class="p-3">Price</th>
-                <th class="p-3">Brand</th>
-                <th class="p-3">Info</th>
-                <th class="p-3">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-gray-100">
-                <td class="p-3 ">
-                  <div class="flex align-items-center">
-                    <img class="rounded-full h-12 w-12" 
-                         src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="unsplash image">
-                    <div class="ml-3 lg:w-4/5">
-                      <div class="">Magic Tree House Boxed Set, Books 1-4, Magic Tree House Boxed Set, Books 1-4, Magic Tree House Boxed Set, Books 1-4</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="p-3 text-center">
-                  Book
-                </td>
-                <td class="p-3 font-bold text-center">
-                  100
-                </td>
-                <td class="p-3 text-center">
-                  <span class="">895000</span>
-                </td>
-                <td class="p-3 text-center">
-                  <span class="">
-                    A Brand
-                  </span>
-                </td>
-                <td class="p-3 text-center">
-                  <!--<span class="bg-green-400 text-gray-50 rounded-md px-2">available</span>-->
-                  A5
-                </td>
-                <td class="p-3 md:w-1/6 text-center">
-                  <a href="#" class="text-gray-400 hover:text-gray-100 mr-2">
-                    <i class="material-icons-outlined text-base">visibility</i>
-                  </a>
-                  <a href="#" class="text-gray-400 hover:text-gray-100  mx-2">
-                    <i class="material-icons-outlined text-base">edit</i>
-                  </a>
-                  <a href="#" class="text-gray-400 hover:text-gray-100  ml-2">
-                    <i class="material-icons-round text-base">delete_outline</i>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div>
+            @Section['ViewTable']
+          </div>
         </div>
       </div>
     </div>

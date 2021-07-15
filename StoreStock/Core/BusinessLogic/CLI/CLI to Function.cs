@@ -37,7 +37,7 @@ namespace StoreStock.BusinessLogic {
       }
       else {
         Console.WriteLine("Thanks for using Store Stock.");
-        store.IsRunning = false;
+        // store.IsRunning = false;
       }
     }
   }

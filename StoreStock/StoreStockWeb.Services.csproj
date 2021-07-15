@@ -89,6 +89,8 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="Modules\index.html" />
+    <EmbeddedResource Include="Views\LandingPage.html" />
+    <EmbeddedResource Include="Views\StockViewerTable.html" />
     <EmbeddedResource Include="Views\StockViewer.html" />
     <EmbeddedResource Include="Views\content\logo.svg" />
     <Content Include="Views\content\tailwind.min.css" />

@@ -4,6 +4,25 @@ using System.Text;
 
 namespace StoreStock.Models {
   public class Werehouse {
+    private List<Stock> _werehouseData;
+    private string _storeName;
+    internal Werehouse() {
+      _werehouseData = new List<Stock>();
+    }
+    internal List<Stock> WerehouseData { get { return _werehouseData; } }
+    internal void SetStoreName(string name) {
+      _storeName = name;
+    }
+    internal string GetStoreName() {
+      return _storeName;
+    }
+  }
+}
+
+
+// Singleton Pattern
+/*namespace StoreStock.Models {
+  public class Werehouse {
     private static object _myLock = new object(); // threadsafe
     private static Werehouse _store;
 
@@ -28,3 +47,4 @@ namespace StoreStock.Models {
     }
   }
 }
+*/
