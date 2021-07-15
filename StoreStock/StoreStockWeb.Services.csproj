@@ -79,7 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigInfo.cs" />
-    <Compile Include="Core\Models\IStore.cs" />
+    <Compile Include="Core\Models\ObjectInterface\IStock.cs" />
+    <Compile Include="Core\Models\ObjectInterface\IStore.cs" />
     <Compile Include="StoreStockModule.cs" />
     <Compile Include="ConfigModule.cs" />
     <Compile Include="Core\BusinessLogic\AddingStock\SavingProcess.cs" />
@@ -97,13 +98,13 @@
     <Compile Include="Core\BusinessLogic\ViewingStock\JSONParser.cs" />
     <Compile Include="Core\BusinessLogic\ViewingStock\ViewStock.cs" />
     <Compile Include="Core\DummyData\GenerateDummyData.cs" />
-    <Compile Include="Core\Models\Book.cs" />
-    <Compile Include="Core\Models\Pen.cs" />
-    <Compile Include="Core\Models\Pencil.cs" />
+    <Compile Include="Core\Models\Object\Book.cs" />
+    <Compile Include="Core\Models\Object\Pen.cs" />
+    <Compile Include="Core\Models\Object\Pencil.cs" />
     <Compile Include="Core\Models\RepositoryManager\Interface.cs" />
     <Compile Include="Core\Models\RepositoryManager\RepositoryManager.cs" />
-    <Compile Include="Core\Models\Stock.cs" />
-    <Compile Include="Core\Models\Store.cs" />
+    <Compile Include="Core\Models\ObjectInterface\Stock.cs" />
+    <Compile Include="Core\Models\ObjectInterface\Store.cs" />
     <Compile Include="Core\Program.cs" />
     <Compile Include="CustomBootstrapper.cs" />
     <Compile Include="MainModule.cs" />
@@ -130,8 +131,6 @@
     <EmbeddedResource Include="Views\index.html" />
     <EmbeddedResource Include="Views\MasterPage.html" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\SingletonPattern\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,18 +5,15 @@ using System.Text;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class Repository : IUserRepository {
-    List<Stock> storeStock;
-    Store curentWerehouse;
-    internal Repository(Store TheStore) {
-      storeStock = TheStore.WerehouseData;
-      curentWerehouse = TheStore;
+  class Repository : IRepository { 
+    IStore _store;
+    internal Repository(IStore TheStore) {
+      _store = TheStore;
     }
 
     // Method of the repository start here
-    public List<Stock> AllStock() {
-      List<Stock> allStock = storeStock;
-      return allStock;
+    void IRepository.CreateStoreStock() {
+      
     }
     public List<Stock> FilterStocksByCategory(string className) {
       List<Stock> allStock = storeStock;

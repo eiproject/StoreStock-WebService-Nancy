@@ -9,11 +9,6 @@ namespace StoreStock.Models {
     private const decimal _maxDiscount = 0.3m; // max discount
     private const decimal _maxDiscountStock = 1000m; // max stock that get discount
 
-    // internal static data
-    /*internal static int countID;*/
-    /*internal static List<Stock> allStock = new List<Stock>();*/
-
-    
     private int _id;
     private string _title;
     private int _quantity;
