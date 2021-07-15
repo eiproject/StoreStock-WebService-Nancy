@@ -8,8 +8,8 @@ namespace StoreStock.Models {
   interface IStore {
     decimal MaxDiscount { get; }
     decimal MaxAmountThatGetDiscount { get; }
-    void SetStoreName(string name);
     string GetStoreName();
     List<IStock> GetListOfStoreStock();
+    void AddStock(IStock newStock);
   }
 }

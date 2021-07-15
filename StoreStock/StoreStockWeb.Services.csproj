@@ -79,6 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigInfo.cs" />
+    <Compile Include="Core\Models\Factory\Factory.cs" />
+    <Compile Include="Core\Models\Factory\IFactory.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStock.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStore.cs" />
     <Compile Include="StoreStockModule.cs" />
@@ -101,8 +103,8 @@
     <Compile Include="Core\Models\Object\Book.cs" />
     <Compile Include="Core\Models\Object\Pen.cs" />
     <Compile Include="Core\Models\Object\Pencil.cs" />
-    <Compile Include="Core\Models\RepositoryManager\Interface.cs" />
-    <Compile Include="Core\Models\RepositoryManager\RepositoryManager.cs" />
+    <Compile Include="Core\Models\RepositoryManager\IRepository.cs" />
+    <Compile Include="Core\Models\RepositoryManager\Repository.cs" />
     <Compile Include="Core\Models\ObjectInterface\Stock.cs" />
     <Compile Include="Core\Models\ObjectInterface\Store.cs" />
     <Compile Include="Core\Program.cs" />

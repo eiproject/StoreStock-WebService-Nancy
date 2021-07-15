@@ -15,7 +15,7 @@ namespace StoreStock.Models {
     string Category { get; }
     string SubCategory { get; }
     string Size { get; }
-    void CreateStock(string type, int id, int amount, string title, decimal price, string category, string subCategory, string size);
+    void UpdateStockInformation(string type, int id, int amount, string title, decimal price, string category, string subCategory, string size);
     void UpdateStockAmount(int newAmount);
   }
 }

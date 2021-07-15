@@ -6,7 +6,14 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   interface IRepository {
-    void CreateStoreStock();
+    void CreateStoreStock(string type,
+      int id,
+      int amount,
+      string title,
+      decimal price,
+      string publisher,
+      string genre,
+      string size);
     List<IStock> ReadStoreStock();
     List<IStock> ReadStocksByType(string type);
     void UpdateStoreStock(int stockID, int amount);

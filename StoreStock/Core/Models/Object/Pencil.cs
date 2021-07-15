@@ -33,7 +33,7 @@ namespace StoreStock.Models {
     string IStock.Type => _type;
     string IStock.Title => _title;
 
-    void IStock.CreateStock(
+    void IStock.UpdateStockInformation(
       string type,
       int id,
       int amount,

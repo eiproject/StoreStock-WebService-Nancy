@@ -6,14 +6,24 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class Repository : IRepository { 
-    IStore _store;
+    private IStock _stock;
+    private IStore _store;
+    private IFactory _creator;
     internal Repository(IStore TheStore) {
       _store = TheStore;
     }
 
     // Method of the repository start here
-    void IRepository.CreateStoreStock() {
-      
+    void IRepository.CreateStoreStock(string type,
+      int id,
+      int amount,
+      string title,
+      decimal price,
+      string publisher,
+      string genre,
+      string size) {
+      _stock = _creator.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
+      _store.AddStock(_stock);
     }
     public List<Stock> FilterStocksByCategory(string className) {
       List<Stock> allStock = storeStock;
