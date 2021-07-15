@@ -6,7 +6,6 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class Repository : IRepository { 
-    private IStock _stock;
     private IStore _store;
     private IFactory _creator;
     internal Repository(IStore TheStore) {
@@ -22,8 +21,8 @@ namespace StoreStock.BusinessLogic {
       string publisher,
       string genre,
       string size) {
-      _stock = _creator.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
-      _store.AddStock(_stock);
+      IStock stock = _creator.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
+      _store.AddStock(stock);
     }
     List<IStock> IRepository.ReadStoreStock() {
       return _store.GetListOfStoreStock();
@@ -35,10 +34,9 @@ namespace StoreStock.BusinessLogic {
       return filteredData.ToList();
     }
 
-    public void AddMoreStock(Stock obj) {
-      List<Stock> allStock = storeStock;
-      allStock.Add(obj);
-      Console.WriteLine("Adding Stock Done.");
+    void IRepository.UpdateStoreStock(int stockID, int amountDifference) {
+      IStock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
+      stock.UpdateStockAmount(amountDifference);
     }
 
     public void DeleteStock(int stockID) {

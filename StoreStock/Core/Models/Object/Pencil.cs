@@ -52,7 +52,7 @@ namespace StoreStock.Models {
       _lineSize = size;
     }
     void IStock.UpdateStockAmount(int newAmount) {
-      _amount = newAmount;
+      _amount += newAmount;
     }
     internal Pencil(IStore store) {
       _store = store;

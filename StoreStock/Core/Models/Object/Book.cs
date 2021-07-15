@@ -52,7 +52,7 @@ namespace StoreStock.Models {
       _paperSize = size;
     }
     void IStock.UpdateStockAmount(int newAmount) {
-      _amount = newAmount;
+      _amount += newAmount;
     }
     internal Book(IStore store) {
       _store = store;
