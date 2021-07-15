@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
@@ -26,6 +27,16 @@ namespace StoreStock.BusinessLogic {
     }
     List<IStock> IRepository.ReadStoreStock() {
       return _store.GetListOfStoreStock();
+    }
+    string IRepository.ReadStoreStockAsJSONString() {
+      StringBuilder jsonStrings = new StringBuilder();
+      foreach (Stock data in _store.GetListOfStoreStock()) {
+        AutomaticObjectConverter converter = new AutomaticObjectConverter(data);
+        string _jsonString = JsonSerializer.Serialize(converter.ConvertedObject);
+        jsonStrings.Append(_jsonString);
+        Console.WriteLine(_jsonString);
+      }
+      return jsonStrings.ToString();
     }
     List<IStock> IRepository.ReadStocksByType(string type) {
       IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
