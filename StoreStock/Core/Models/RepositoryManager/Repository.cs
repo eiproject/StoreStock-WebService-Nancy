@@ -5,7 +5,7 @@ using System.Text;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class Repository : IRepository { 
+  class Repository : IRepository {
     private IStore _store;
     private IFactory _creator;
     internal Repository(IStore TheStore) {
@@ -30,45 +30,32 @@ namespace StoreStock.BusinessLogic {
     List<IStock> IRepository.ReadStocksByType(string type) {
       IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
         data => data.Type == type);
-      
+
       return filteredData.ToList();
     }
 
     void IRepository.UpdateStoreStock(int stockID, int amountDifference) {
       IStock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
-      stock.UpdateStockAmount(amountDifference);
-    }
-
-    public void DeleteStock(int stockID) {
-      List<Stock> allStock = storeStock;
-      Stock target = allStock.Find(data => data.ID == stockID);
-      if (target != null) {
-        allStock.Remove(target);
-        Console.WriteLine($"Product iD: {target?.ID } '{target?.Title}' Quantitiy: { target?.Quantity } sucessfully removed.");
-      }
-      else {
-        Console.WriteLine($"Product ID: { stockID } is not exist.");
-      }
-    }
-
-    public void SellStock(int stockID, int amount) {
-      List<Stock> allStock = storeStock;
-      Stock target = allStock.Find(data => data.ID == stockID);
-      if (target != null) {
-        if (amount > target.Quantity) {
-          Console.WriteLine($"Amount { amount } is exceed Product ID: { stockID } stock. (Available: {target?.Quantity})");
+      if (stock != null) {
+        if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {
+          Console.WriteLine("Input amount INVALID | UpdateStoreStock");
         }
         else {
-          target.RemoveSomeQuantitiy(amount);
-          Console.WriteLine($"Product iD: {target?.ID } '{target?.Title}' Sold { amount } pcs");
-          if (target.Quantity == 0) {
-            Repository del = new Repository(curentWerehouse);
-            del.DeleteStock(stockID);
-          }
+          stock.UpdateStockAmount(amountDifference);
         }
       }
       else {
-        Console.WriteLine($"Product ID: { stockID } is not exist.");
+        Console.WriteLine("Input ID INVALID | UpdateStoreStock");
+      }
+    }
+
+    void IRepository.DeleteStoreStock(int stockID) {
+      IStock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
+      if (stock != null) {
+        _store.RemoveStock(stock);
+      }
+      else {
+        Console.WriteLine("Input ID INVALID | DeleteStoreStock");
       }
     }
   }

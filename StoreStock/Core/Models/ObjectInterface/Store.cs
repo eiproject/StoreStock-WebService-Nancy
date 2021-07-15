@@ -23,6 +23,10 @@ namespace StoreStock.Models {
     void IStore.AddStock(IStock newStock) {
       _storeData.Add(newStock);
     }
+
+    void IStore.RemoveStock(IStock stock) {
+      _storeData.Remove(stock);
+    }
   }
 }
 

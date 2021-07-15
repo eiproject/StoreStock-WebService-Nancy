@@ -10,6 +10,7 @@ namespace StoreStock.Models {
     decimal MaxAmountThatGetDiscount { get; }
     string GetStoreName();
     List<IStock> GetListOfStoreStock();
-    void AddStock(IStock newStock);
+    void AddStock(IStock stock);
+    void RemoveStock(IStock stock);
   }
 }
