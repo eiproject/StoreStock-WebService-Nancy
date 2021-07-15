@@ -9,6 +9,9 @@ namespace StoreStock.BusinessLogic {
     private string[] _testInput;
     
     internal GenerateDummyData(Werehouse _theStore) {
+     
+    }
+    internal void Generate() {
       _testInput = new string[] {
         "Book#100#895000#Magic Tree House Boxed Set, Books 1-4#Dongeng#A5",
         "PENcil#210#49800#Conte Pieree Noire#Conte#3B",

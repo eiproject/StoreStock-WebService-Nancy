@@ -1,17 +1,19 @@
 ﻿using Nancy;
 using Nancy.ModelBinding;
+using System;
 
 namespace StoreStockWeb.Services { 
 	public class StoreStockModule : NancyModule
 	{
 		private const string MessageKey = "message";
 		private const string ConfigInfoKey = "ci";
-
+		private ViewStockModel _viewModel;
 		public StoreStockModule()
 			: base("/store-stock")
 		{
-      Get["/"] = x => {
-        return View["StockViewer.html"];
+      Get["/view-stock"] = x => {
+				_viewModel = new ViewStockModel();
+        return View["StockViewer.html", _viewModel];
       };
       Post["/update"] = parameters =>
 								{
@@ -28,11 +30,8 @@ namespace StoreStockWeb.Services {
 
 	public class ViewStockModel
 	{
-		public string Message { get; set; }
-		public ConfigInfo Config { get; set; }
-		public bool HasMessage
-		{
-			get { return !string.IsNullOrWhiteSpace(Message); }
-		}
+    internal ViewStockModel() {
+			Console.WriteLine("View Stock Model run");
+    }
 	}
 }
