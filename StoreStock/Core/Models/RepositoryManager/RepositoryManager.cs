@@ -7,8 +7,8 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   class Repository : IUserRepository {
     List<Stock> storeStock;
-    Werehouse curentWerehouse;
-    internal Repository(Werehouse TheStore) {
+    Store curentWerehouse;
+    internal Repository(Store TheStore) {
       storeStock = TheStore.WerehouseData;
       curentWerehouse = TheStore;
     }

@@ -20,7 +20,7 @@ Your input:";
       pencil,
       pen
     }
-    internal CLIView(Werehouse theStore) : base(theStore) {
+    internal CLIView(Store theStore) : base(theStore) {
     }
 
     internal override void InterfaceView() {

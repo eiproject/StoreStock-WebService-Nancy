@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace StoreStock.Models {
-  public class Werehouse {
+  public class Store : IStore{
     private List<Stock> _werehouseData;
     private string _storeName;
-    internal Werehouse() {
+    internal Store() {
       _werehouseData = new List<Stock>();
     }
-    internal List<Stock> WerehouseData { get { return _werehouseData; } }
-    internal void SetStoreName(string name) {
-      _storeName = name;
+    void IStore.SetStoreName(string storeName) {
+      _storeName = storeName;
     }
-    internal string GetStoreName() {
+    string IStore.GetStoreName() {
       return _storeName;
+    }
+    List<Stock> IStore.GetListOfStoreStock() {
+      return _werehouseData;
     }
   }
 }

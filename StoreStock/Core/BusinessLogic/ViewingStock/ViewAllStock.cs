@@ -8,7 +8,7 @@ using System.Linq;
 namespace StoreStock.BusinessLogic {
   class ViewAllStock : ViewStock {
     string jsonString;
-    internal ViewAllStock(Werehouse theStore) {
+    internal ViewAllStock(Store theStore) {
       Repository repo = new Repository(theStore);
       fetchedStock = repo.AllStock();
       JSONParser viewer = new JSONParser(fetchedStock);

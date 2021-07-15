@@ -15,8 +15,8 @@ namespace StoreStock.BusinessLogic {
   }*/
 
   class CLI {
-    internal Werehouse store;
-    internal CLI(Werehouse theStore) {
+    internal Store store;
+    internal CLI(Store theStore) {
       store = theStore;
     }
     internal virtual void InterfaceMenu() { }

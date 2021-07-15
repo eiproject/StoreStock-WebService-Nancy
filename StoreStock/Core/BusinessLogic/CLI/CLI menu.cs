@@ -17,7 +17,7 @@ namespace StoreStock.BusinessLogic {
 99. Exit
 Choose menu:";
     string strChoosenMainMenu;
-    internal CLIMenu(Werehouse theStore) : base(theStore) {
+    internal CLIMenu(Store theStore) : base(theStore) {
 
     }
     internal override void InterfaceMenu() {

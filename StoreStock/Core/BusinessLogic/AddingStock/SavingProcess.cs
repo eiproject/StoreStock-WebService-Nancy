@@ -8,8 +8,8 @@ namespace StoreStock.BusinessLogic {
   class SavingProcess {
     int currentID;
     internal List<Stock> currentStocks;
-    Werehouse store;
-    internal SavingProcess(Werehouse theStore) {
+    Store store;
+    internal SavingProcess(Store theStore) {
       currentStocks = theStore.WerehouseData;
 
       if (currentStocks.Count != 0) {

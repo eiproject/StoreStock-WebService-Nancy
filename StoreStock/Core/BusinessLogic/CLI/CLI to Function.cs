@@ -13,7 +13,7 @@ namespace StoreStock.BusinessLogic {
       deleteStock,
       sellStock,
     }
-    internal MainMenuSelection(Werehouse theStore) : base(theStore) {
+    internal MainMenuSelection(Store theStore) : base(theStore) {
 
     }
     internal override void InterfaceMenuSelector(int menuSelected) {

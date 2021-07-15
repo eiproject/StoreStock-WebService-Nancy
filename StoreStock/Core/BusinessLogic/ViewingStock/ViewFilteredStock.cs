@@ -8,7 +8,7 @@ using System.Linq;
 namespace StoreStock.BusinessLogic {
   class ViewFilteredStock : ViewStock {
     string jsonString;
-    internal ViewFilteredStock(string className, Werehouse theStore) {
+    internal ViewFilteredStock(string className, Store theStore) {
       Repository repo = new Repository(theStore);
       fetchedStock = repo.AllStock();
       IEnumerable<Stock> filteredData = fetchedStock.Where(

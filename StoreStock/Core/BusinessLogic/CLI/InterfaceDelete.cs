@@ -6,7 +6,7 @@ using StoreStock.BusinessLogic;
 
 namespace StoreStock.BusinessLogic {
   class CLIDelete : CLI{
-    internal CLIDelete(Werehouse theStore) : base(theStore) {
+    internal CLIDelete(Store theStore) : base(theStore) {
     }
     internal override void InterfaceDelete() {
       Console.WriteLine("Enter Specific ID to delete: ");

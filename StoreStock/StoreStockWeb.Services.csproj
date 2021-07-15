@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigInfo.cs" />
+    <Compile Include="Core\Models\IStore.cs" />
     <Compile Include="StoreStockModule.cs" />
     <Compile Include="ConfigModule.cs" />
     <Compile Include="Core\BusinessLogic\AddingStock\SavingProcess.cs" />
@@ -102,7 +103,7 @@
     <Compile Include="Core\Models\RepositoryManager\Interface.cs" />
     <Compile Include="Core\Models\RepositoryManager\RepositoryManager.cs" />
     <Compile Include="Core\Models\Stock.cs" />
-    <Compile Include="Core\Models\Werehouse.cs" />
+    <Compile Include="Core\Models\Store.cs" />
     <Compile Include="Core\Program.cs" />
     <Compile Include="CustomBootstrapper.cs" />
     <Compile Include="MainModule.cs" />

@@ -24,12 +24,10 @@ namespace StoreStockWeb.Services {
         if (id == null) {
           Console.WriteLine("Params: " + storeName + " " + id);
           _viewModel = new ViewStockModel();
-          JSONParser parser = new JSONParser(_viewModel.ListOfStoreStock);
-          string resultJSON = parser.ListStockToJSON();
-
           StoreStockSerializable serialize = new StoreStockSerializable();
-          serialize.JSON = parser.JsonStrings;
-          serialize.AllStock = _viewModel.ListOfStoreStock;
+          serialize.Data = _viewModel.ListOfStoreStock;
+          serialize.Store = _viewModel.StoreName;
+
           return Response.AsJson(serialize);
         }
         else {

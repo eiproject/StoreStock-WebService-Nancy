@@ -6,7 +6,7 @@ using StoreStock.BusinessLogic;
 
 namespace StoreStock.BusinessLogic {
   class CLISell : CLI{
-    internal CLISell(Werehouse theStore) : base(theStore) {
+    internal CLISell(Store theStore) : base(theStore) {
     }
     internal override void InterfaceSell() {
       Console.WriteLine("Enter Specific ID to sell: ");

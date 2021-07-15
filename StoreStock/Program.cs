@@ -13,7 +13,7 @@ using System.Text;
 
 namespace StoreStockWeb.Services {
   class Program {
-    internal static Werehouse TheStore;
+    internal static Store TheStore;
     static string _hostUri = "http://127.0.0.1:5000";
     Program() { }
     static void Main(string[] args) {

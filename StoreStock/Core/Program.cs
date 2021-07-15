@@ -4,12 +4,12 @@ using StoreStock.Models;
 
 namespace StoreStock {
   class Run {
-    private Werehouse _store;
-    internal Werehouse Store { get { return _store; } }
+    private Store _store;
+    internal Store Store { get { return _store; } }
     internal Run() {
     }
     internal void Start() {
-      Werehouse bookStore = new Werehouse();
+      Store bookStore = new Store();
       bookStore.SetStoreName("Nano Store");
       _store = bookStore;
     }

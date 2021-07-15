@@ -5,7 +5,7 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class CLIAdd : CLI {
-    internal CLIAdd(Werehouse theStore) : base(theStore) {
+    internal CLIAdd(Store theStore) : base(theStore) {
     }
 
     internal override void InterfaceAdd() {

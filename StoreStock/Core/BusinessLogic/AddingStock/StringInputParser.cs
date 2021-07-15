@@ -5,7 +5,7 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   internal class StringInputParser {
-    internal StringInputParser(string inputText, Werehouse theStore) {
+    internal StringInputParser(string inputText, Store theStore) {
       /*Console.WriteLine("inputText: " + inputText);*/
       string[] data = inputText.Split('#');
       SavingProcess newStock = new SavingProcess(theStore);
