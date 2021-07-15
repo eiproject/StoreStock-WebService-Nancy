@@ -25,10 +25,13 @@ namespace StoreStock.BusinessLogic {
       _stock = _creator.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
       _store.AddStock(_stock);
     }
-    public List<Stock> FilterStocksByCategory(string className) {
-      List<Stock> allStock = storeStock;
-      IEnumerable<Stock> filteredData = allStock.Where(
-        data => data.Type == className);
+    List<IStock> IRepository.ReadStoreStock() {
+      return _store.GetListOfStoreStock();
+    }
+    List<IStock> IRepository.ReadStocksByType(string type) {
+      IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
+        data => data.Type == type);
+      
       return filteredData.ToList();
     }
 
