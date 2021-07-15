@@ -10,6 +10,7 @@ using StoreStock;
 using StoreStock.Models;
 using StoreStock.BusinessLogic;
 using System.Text;
+using TinyIoC;
 
 namespace StoreStockWeb.Services {
   class Program {
@@ -17,6 +18,10 @@ namespace StoreStockWeb.Services {
     static string _hostUri = "http://127.0.0.1:5000";
     Program() { }
     static void Main(string[] args) {
+      // https://gist.github.com/manadart/886534/f87af151aec21c78ee77bb558354fdc018cabdd3
+      var container = TinyIoC.TinyIoCContainer.Current;
+      container.Register<IStore, Store>().AsMultiInstance();
+
       //  Start Store Stock Services
       Run storeStock = new Run();
       storeStock.Start();

@@ -9,6 +9,6 @@ namespace StoreStockWeb.Services {
   [Serializable]
   public class StoreStockSerializable {
     public string Store { get; set; }
-    public List<Stock> Data { get; set; }
+    public List<IStock> Data { get; set; }
   }
 }

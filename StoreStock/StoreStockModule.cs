@@ -25,7 +25,7 @@ namespace StoreStockWeb.Services {
           Console.WriteLine("Params: " + storeName + " " + id);
           _viewModel = new ViewStockModel();
           StoreStockSerializable serialize = new StoreStockSerializable();
-          serialize.Data = _viewModel.ListOfStoreStock;
+          serialize.Data = _viewModel;
           serialize.Store = _viewModel.StoreName;
 
           return Response.AsJson(serialize);
@@ -48,7 +48,7 @@ namespace StoreStockWeb.Services {
   }
 
   public class ViewStockModel {
-    public string StoreName { get { return Program.TheStore.GetStoreName(); } }
+    public string StoreName { get { return ; } }
     public List<Stock> ListOfStoreStock { get { return Program.TheStore.WerehouseData; } }
     internal ViewStockModel() {
       Console.WriteLine("View Stock Model run");

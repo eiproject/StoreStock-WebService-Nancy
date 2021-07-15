@@ -1,5 +1,5 @@
 ﻿namespace StoreStock.Models {
-  interface IStock {
+  public interface IStock {
     decimal Discount { get; }
     decimal Price { get; }
     int ID { get; }

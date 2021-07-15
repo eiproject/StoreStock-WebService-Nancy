@@ -41,7 +41,6 @@ namespace StoreStock.BusinessLogic {
     List<IStock> IRepository.ReadStocksByType(string type) {
       IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
         data => data.Type == type);
-
       return filteredData.ToList();
     }
 
