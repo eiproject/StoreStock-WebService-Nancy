@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nancy;
 
-namespace StoreStockWebServices.BusinessLogic {
+namespace StoreStockWeb.Services.BusinessLogic {
   public class MainModule : NancyModule {
     public MainModule() {
 /*      Get["/"] = x => {

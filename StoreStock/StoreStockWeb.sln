@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreStockWebServices", "StoreStockWebServices.csproj", "{7FE2485C-DD57-4516-BA89-78B8EED6DD1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreStockWeb.Services", "StoreStockWeb.Services.csproj", "{7FE2485C-DD57-4516-BA89-78B8EED6DD1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reloader", "..\Reloader\Reloader.csproj", "{13B44479-6991-4E71-BB30-F80460D3B7CA}"
 EndProject
