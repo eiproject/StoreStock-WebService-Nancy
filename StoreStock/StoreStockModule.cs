@@ -13,7 +13,7 @@ namespace StoreStockWeb.Services {
 		{
       Get["/view-stock"] = x => {
 				_viewModel = new ViewStockModel();
-        return View["StockViewerTable.html", _viewModel];
+        return View["StockViewerIndex.html", _viewModel];
       };
       Post["/update"] = parameters =>
 								{
@@ -30,8 +30,8 @@ namespace StoreStockWeb.Services {
 
 	public class ViewStockModel
 	{
-    internal ViewStockModel() {
-			
+		public string StoreName { get { return Program.TheStore.GetStoreName(); } }
+		internal ViewStockModel() {
 			Console.WriteLine("View Stock Model run");
     }
 	}
