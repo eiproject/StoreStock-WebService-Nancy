@@ -8,6 +8,8 @@ using Nancy.TinyIoc;
 using System.Reflection;
 using StoreStock;
 using StoreStock.Models;
+using StoreStock.BusinessLogic;
+using System.Text;
 
 namespace StoreStockWeb.Services {
   class Program {
@@ -21,6 +23,10 @@ namespace StoreStockWeb.Services {
       storeStock.UseDummyData();
       TheStore = storeStock.Store;
 
+/*      JSONParser parser = new JSONParser(TheStore.WerehouseData);
+      StringBuilder A =parser.ListStockToJSON();
+      Console.WriteLine(A);*/
+      
       // creating host
       NancyHost host = new NancyHost(new Uri(_hostUri), new CustomBootstrapper());
       host.Start(); // start hosting

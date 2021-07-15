@@ -1,38 +1,59 @@
 ﻿using Nancy;
 using Nancy.ModelBinding;
+using StoreStock.Models;
 using System;
+using System.Collections.Generic;
+using StoreStock.BusinessLogic;
+using System.Text;
 
-namespace StoreStockWeb.Services { 
-	public class StoreStockModule : NancyModule
-	{
-		private const string MessageKey = "message";
-		private const string ConfigInfoKey = "ci";
-		private ViewStockModel _viewModel;
-		public StoreStockModule()
-			: base("/store-stock")
-		{
-      Get["/view-stock"] = x => {
-				_viewModel = new ViewStockModel();
+namespace StoreStockWeb.Services {
+  public class StoreStockModule : NancyModule {
+    private const string MessageKey = "message";
+    private const string ConfigInfoKey = "ci";
+    private ViewStockModel _viewModel;
+    public StoreStockModule()
+      : base("/store-stock") {
+      Get["/view"] = parameters => {
+        _viewModel = new ViewStockModel();
         return View["StockViewerIndex.html", _viewModel];
       };
-      Post["/update"] = parameters =>
-								{
-									var config = this.Bind<ConfigInfo>();
+      Get["/"] = parameters => {
+        string storeName = this.Request.Query["store"];
+        string strId = this.Request.Query["id"];
+        int? id = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
+        if (id == null) {
+          Console.WriteLine("Params: " + storeName + " " + id);
+          _viewModel = new ViewStockModel();
+          JSONParser parser = new JSONParser(_viewModel.ListOfStoreStock);
+          string resultJSON = parser.ListStockToJSON();
 
-									// save information
+          StoreStockSerializable serialize = new StoreStockSerializable();
+          serialize.JSON = parser.JsonStrings;
+          serialize.AllStock = _viewModel.ListOfStoreStock;
+          return Response.AsJson(serialize);
+        }
+        else {
+          _viewModel = new ViewStockModel();
+          return View["StockViewerIndex.html", _viewModel];
+        }
+      };
+      Post["/"] = parameters => {
+        var config = this.Bind<ConfigInfo>();
 
-									Session[MessageKey] = "Configuration Updated";
-									Session[ConfigInfoKey] = config;
-									return Response.AsRedirect("/config");
-								};
-		}
-	}
+        // save information
 
-	public class ViewStockModel
-	{
-		public string StoreName { get { return Program.TheStore.GetStoreName(); } }
-		internal ViewStockModel() {
-			Console.WriteLine("View Stock Model run");
+        Session[MessageKey] = "Configuration Updated";
+        Session[ConfigInfoKey] = config;
+        return Response.AsRedirect("/config");
+      };
     }
-	}
+  }
+
+  public class ViewStockModel {
+    public string StoreName { get { return Program.TheStore.GetStoreName(); } }
+    public List<Stock> ListOfStoreStock { get { return Program.TheStore.WerehouseData; } }
+    internal ViewStockModel() {
+      Console.WriteLine("View Stock Model run");
+    }
+  }
 }

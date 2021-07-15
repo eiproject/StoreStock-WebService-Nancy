@@ -50,7 +50,7 @@ namespace StoreStock.Models {
     public decimal Discount { get { return _discount; } }
     public decimal Price {
       get {
-        return _price - _discount;
+        return _price;
       }
     }
     public string Title { get { return _title; } }

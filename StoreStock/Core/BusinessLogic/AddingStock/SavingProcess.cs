@@ -33,8 +33,8 @@ namespace StoreStock.BusinessLogic {
           paperSize = size
         };*/
 
-        Book newBook = Book.GetInstance(genreOrBrand, size);
-        //Book newBook = new Book();
+        // Book newBook = Book.GetInstance(genreOrBrand, size);
+        Book newBook = new Book();
         newBook.SetBookData(genreOrBrand, size);
         newBook.SetStockData(currentID, title, quantity, price, type);
 

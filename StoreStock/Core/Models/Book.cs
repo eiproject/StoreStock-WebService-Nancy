@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StoreStock.Models {
   class Book : Stock {
-    private static Book _book;
+    // private static Book _book;
 
     private string _genre;
     private string _paperSize;
@@ -15,7 +15,7 @@ namespace StoreStock.Models {
       _genre = genre;
       _paperSize = paperSize;
     }
-
+/*
     // Singleton pattern
     private Book() {
 
@@ -28,6 +28,6 @@ namespace StoreStock.Models {
         _book._paperSize = size;
       }
       return _book;
-    }
+    }*/
   }
 }

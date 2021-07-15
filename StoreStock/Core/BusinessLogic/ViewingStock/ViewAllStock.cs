@@ -11,7 +11,7 @@ namespace StoreStock.BusinessLogic {
     internal ViewAllStock(Werehouse theStore) {
       Repository repo = new Repository(theStore);
       fetchedStock = repo.AllStock();
-      ViewJSON viewer = new ViewJSON(fetchedStock);
+      JSONParser viewer = new JSONParser(fetchedStock);
     }
   }
 }

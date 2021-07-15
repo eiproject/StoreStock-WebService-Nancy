@@ -14,7 +14,7 @@ namespace StoreStock.BusinessLogic {
       IEnumerable<Stock> filteredData = fetchedStock.Where(
         data => data.Type == className);
       fetchedStock = filteredData.ToList();
-      ViewJSON viewer = new ViewJSON(fetchedStock);
+      JSONParser viewer = new JSONParser(fetchedStock);
     }
   }
 }
