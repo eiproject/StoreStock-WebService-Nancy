@@ -14,16 +14,17 @@ namespace StoreStock.BusinessLogic {
     }
 
     // Method of the repository start here
-    void IRepository.CreateStoreStock(string type,
-      int id,
+    IStock IRepository.CreateStoreStock(string type,
       int amount,
       string title,
       decimal price,
       string publisher,
       string genre,
       string size) {
+      int id = _store.GetLastId();
       IStock stock = _creator.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
       _store.AddStock(stock);
+      return stock;
     }
     List<IStock> IRepository.ReadStoreStock() {
       return _store.GetListOfStoreStock();
@@ -41,6 +42,11 @@ namespace StoreStock.BusinessLogic {
     List<IStock> IRepository.ReadStocksByType(string type) {
       IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
         data => data.Type == type);
+      return filteredData.ToList();
+    }
+    List<IStock> IRepository.ReadStocksById(int id) {
+      IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
+        data => data.ID == id);
       return filteredData.ToList();
     }
 

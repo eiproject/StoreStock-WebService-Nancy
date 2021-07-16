@@ -83,6 +83,8 @@
     <Compile Include="Core\Models\Factory\IFactory.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStock.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStore.cs" />
+    <Compile Include="HTTPResponse.cs" />
+    <Compile Include="SerializableStock.cs" />
     <Compile Include="StoreStockModule.cs" />
     <Compile Include="ConfigModule.cs" />
     <Compile Include="Core\BusinessLogic\AddingStock\SavingProcess.cs" />
@@ -113,7 +115,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Modules.cs" />
-    <Compile Include="StoreStockSerializable.cs" />
+    <Compile Include="SerializableStoreStock.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>

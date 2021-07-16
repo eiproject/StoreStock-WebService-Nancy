@@ -4,8 +4,7 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   interface IRepository {
-    void CreateStoreStock(string type,
-      int id,
+    IStock CreateStoreStock(string type,
       int amount,
       string title,
       decimal price,
@@ -15,6 +14,7 @@ namespace StoreStock.BusinessLogic {
     List<IStock> ReadStoreStock();
     string ReadStoreStockAsJSONString();
     List<IStock> ReadStocksByType(string type);
+    List<IStock> ReadStocksById(int id);
     void UpdateStoreStock(int stockID, int amount);
     void DeleteStoreStock(int stockID);
   }
