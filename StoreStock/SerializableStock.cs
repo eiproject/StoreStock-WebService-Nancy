@@ -14,15 +14,12 @@ namespace StoreStockWeb.Services {
     public int Code { get { return _code; } }
     public string Message { get { return _message; } }
     public IStock Stock { get { return _stock; } }
-    internal SerializableStock() { }
+    internal SerializableStock(HTTPResponse response) {
+      _code = response.Code;
+      _message = response.Message;
+    }
     internal void SetStock(IStock newStock) {
       _stock = newStock;
-    }
-    internal void SetCode(int code) {
-      _code = code;
-    }
-    internal void SetMessage(string message) {
-      _message = message;
     }
   }
 }

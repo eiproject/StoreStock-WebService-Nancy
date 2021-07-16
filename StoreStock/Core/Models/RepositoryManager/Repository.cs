@@ -50,7 +50,7 @@ namespace StoreStock.BusinessLogic {
       return filteredData.ToList();
     }
 
-    void IRepository.UpdateStoreStock(int stockID, int amountDifference) {
+    IStock IRepository.UpdateStoreStock(int stockID, int amountDifference) {
       IStock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
       if (stock != null) {
         if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {
@@ -63,6 +63,8 @@ namespace StoreStock.BusinessLogic {
       else {
         Console.WriteLine("Input ID INVALID | UpdateStoreStock");
       }
+
+      return stock;
     }
 
     void IRepository.DeleteStoreStock(int stockID) {

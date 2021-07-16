@@ -13,15 +13,17 @@ namespace StoreStockWeb.Services {
     IStore _store; // just init, edit this to works
     public StoreStockModule()
       : base("/store-stock") {
-      // Basic command start here
-      SerializableStoreStock storeData = new SerializableStoreStock();
+      // Basic constrcutor start here
+      HTTPResponse response = new HTTPResponse();
+
+      SerializableStoreStock storeData = new SerializableStoreStock(response);
       ModelStoreStock storeModel = new ModelStoreStock(storeData);
       IRepository repository = new Repository(_store);
 
 
-      SerializableStock stockData = new SerializableStock();
+      SerializableStock stockData = new SerializableStock(response);
       ModelStock stockModel = new ModelStock(stockData);
-      // init command end here
+      // Basic constrcutor end here
       Get["/view"] = parameters => {
         return View["StockViewerIndex.html", storeModel];
       };
@@ -33,51 +35,70 @@ namespace StoreStockWeb.Services {
           if (id == null) {
             storeData.SetStoreName(_store.GetStoreName());
             storeData.SetStoreData(repository.ReadStoreStock());
-            storeData.SetCode(200);
-            storeData.SetMessage("Success");
+            response.SetCode(200);
           }
           else {
             storeData.SetStoreName(_store.GetStoreName());
             storeData.SetStoreData(repository.ReadStocksById((int)id));
-            storeData.SetCode(200);
-            storeData.SetMessage("Success");
+            response.SetCode(200);
           }
         }
         catch {
-          storeData.SetStoreName(_store.GetStoreName());
-          storeData.SetCode(200);
-          storeData.SetMessage("error");
+          response.SetCode(500);
         }
         return Response.AsJson(storeModel.StoreStockData);
       };
 
       Post["/"] = parameters => {
-        string type = this.Request.Query["type"];
-        int amount = this.Request.Query["amount"];
-        string title = this.Request.Query["title"];
-        decimal price = this.Request.Query["price"];
-        string category = this.Request.Query["category"];
-        string subCategory = this.Request.Query["sub-cateegory"];
-        string size = this.Request.Query["size"];
         try {
+          string type = this.Request.Query["type"];
+          int amount = this.Request.Query["amount"];
+          string title = this.Request.Query["title"];
+          decimal price = this.Request.Query["price"];
+          string category = this.Request.Query["category"];
+          string subCategory = this.Request.Query["sub-cateegory"];
+          string size = this.Request.Query["size"];
+
           IStock newStock = repository.CreateStoreStock(
             type, amount, title, price, category, subCategory, size
             );
-          stockData.SetStock(newStock);
-          stockData.SetMessage("success");
+          if (newStock != null) {
+            stockData.SetStock(newStock);
+            response.SetCode(201);
+          }
+          else {
+            response.SetCode(409);
+          }
         }
         catch {
-          stockData.SetMessage("error");
+          response.SetCode(500);
         }
         return Response.AsJson(stockModel.SerializedStock);
       };
 
       Patch["/"] = parameters => {
-        var config = this.Bind<ConfigInfo>();
-        // Parsing query
-        string type = this.Request.Query["id"];
-        int amount = this.Request.Query["amount"]; ;
-
+        try {
+          // Parsing query
+          int id = this.Request.Query["id"];
+          int amount = this.Request.Query["amount"]; ;
+          List<IStock> listStock = repository.ReadStocksById(id);
+          if (listStock.Count > 0) {
+            IStock stock = repository.UpdateStoreStock(id, amount);
+            if (stock != null) {
+              stockData.SetStock(stock);
+              response.SetCode(200);
+            }
+            else {
+              response.SetCode(409);
+            }
+          }
+          else { // Not Found
+            response.SetCode(404);
+          }
+        }
+        catch {
+          response.SetCode(500);
+        }
         // save information
         return Response.AsRedirect("/config");
       };

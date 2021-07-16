@@ -15,19 +15,16 @@ namespace StoreStockWeb.Services {
     public int Code { get { return _code; } }
     public string Message { get { return _message; } }
     public string StoreName { get { return _storeName; } }
-    public List<IStock> StoreData { get; }
-    internal SerializableStoreStock() { }
+    public List<IStock> StoreData { get { return _storeData; } }
+    internal SerializableStoreStock(HTTPResponse response) {
+      _code = response.Code;
+      _message = response.Message;
+    }
     internal void SetStoreName(string name) {
       _storeName = name;
     }
     internal void SetStoreData(List<IStock> listOfIStock) {
       _storeData = listOfIStock;
-    }
-    internal void SetCode(int code) {
-      _code = code;
-    }
-    internal void SetMessage(string message) {
-      _message = message;
     }
   }
 }

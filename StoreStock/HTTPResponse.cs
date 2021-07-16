@@ -6,31 +6,34 @@ using System.Threading.Tasks;
 
 namespace StoreStockWeb.Services {
   public class HTTPResponse {
-    private int _code;
-    private string _status;
+    private int _code = 500;
+    private string _message = "Unknown";
     public int Code { get { return _code; } }
-    public string Status { get { return _status; } }
-    internal HTTPResponse(string condition) {
-      if (condition.ToLower() == "success") {
-        _code = 200;
-        _status = "Success";
+    public string Message { get { return _message; } }
+    internal HTTPResponse() {
+      
+    }
+    internal void SetCode(int code) {
+      _code = code;
+      if (code == 200) {
+        _message = "Success";
       }
-      else if (condition.ToLower() == "not found") {
-        _code = 404;
-        _status = "Not Found";
+      if (code == 201) {
+        _message = "Created";
       }
-      else if (condition.ToLower() == "method not allowed") {
-        _code = 404;
-        _status = "Method Not Allowed";
+      else if (code == 404) {
+        _message = "Not Found";
       }
-      else if (condition.ToLower() == "conflict") {
-        _code = 409;
-        _status = "Conflict";
+      else if (code == 404) {
+        _message = "Method Not Allowed";
+      }
+      else if (code == 409) {
+        _message = "Conflict";
       }
       // Error or unknown
       else {
         _code = 500;
-        _status = "Internal Server Error";
+        _message = "Internal Server Error";
       }
     }
   }
