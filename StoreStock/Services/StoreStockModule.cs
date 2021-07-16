@@ -8,44 +8,57 @@ using System.Text;
 
 namespace StoreStockWeb.Services {
   public class StoreStockModule : NancyModule {
+    HTTPResponse response;
+    SerializableStoreStock storeData;
     private const string MessageKey = "message";
     private const string ConfigInfoKey = "ci";
-    IStore _store; // just init, edit this to works
+    private IStore _store; // just init, edit this to works
     public StoreStockModule()
       : base("/store-stock") {
       // Basic constrcutor start here
-      HTTPResponse response = new HTTPResponse();
+      IStore store = TinyIoC.TinyIoCContainer.Current.Resolve<IStore>();
+      _store = store;
 
-      SerializableStoreStock storeData = new SerializableStoreStock(response);
+      response = new HTTPResponse();
+
+      storeData = new SerializableStoreStock(response);
       ModelStoreStock storeModel = new ModelStoreStock(storeData);
-      IRepository repository = new Repository(_store);
+      IFactory factory = new Factory(_store);
+      IRepository repository = new Repository(_store, factory);
 
 
       SerializableStock stockData = new SerializableStock(response);
       ModelStock stockModel = new ModelStock(stockData);
+
+      Console.WriteLine("Here I am 0");
       // Basic constrcutor end here
       Get["/view"] = parameters => {
         return View["StockViewerIndex.html", storeModel];
       };
 
       Get["/"] = parameters => {
-        try {
-          string strId = this.Request.Query["id"];
-          int? id = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
-          if (id == null) {
-            storeData.SetStoreName(_store.GetStoreName());
-            storeData.SetStoreData(repository.ReadStoreStock());
-            response.SetCode(200);
-          }
-          else {
-            storeData.SetStoreName(_store.GetStoreName());
-            storeData.SetStoreData(repository.ReadStocksById((int)id));
-            response.SetCode(200);
-          }
+        Console.WriteLine("Here I am 1");
+        //        try {
+        string strId = this.Request.Query["id"];
+        int? id = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
+        if (id == null) {
+          Console.WriteLine("Here I am 2");
+          storeData.SetStoreName(_store.GetStoreName());
+          storeData.SetStoreData(repository.ReadStoreStock());
+          response.SetCode(200);
+          Console.WriteLine($"Here I am 3 { response.Message } {response.Code} {storeData.Code}");
         }
-        catch {
-          response.SetCode(500);
+        else {
+          storeData.SetStoreName(_store.GetStoreName());
+          storeData.SetStoreData(repository.ReadStocksById((int)id));
+          response.SetCode(200);
         }
+        //        }
+        //        catch (Exception e){
+        //          Console.WriteLine(e);
+        //          response.SetCode(500);
+        //        }
+
         return Response.AsJson(storeModel.StoreStockData);
       };
 
@@ -123,21 +136,4 @@ namespace StoreStockWeb.Services {
       };
     }
   }
-
-  public class ModelStoreStock {
-    private SerializableStoreStock _storeStockData;
-    public SerializableStoreStock StoreStockData { get { return _storeStockData; } }
-    internal ModelStoreStock(SerializableStoreStock serializedStoreStock) {
-      _storeStockData = serializedStoreStock;
-    }
-  }
-  public class ModelStock {
-    private SerializableStock _serializedStock;
-    public SerializableStock SerializedStock { get { return _serializedStock; } }
-    internal ModelStock(SerializableStock serializedStock) {
-      _serializedStock = serializedStock;
-    }
-  }
 }
-
-

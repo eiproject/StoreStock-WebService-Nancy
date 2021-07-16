@@ -8,8 +8,8 @@ namespace StoreStock.BusinessLogic {
       int amount,
       string title,
       decimal price,
-      string publisher,
-      string genre,
+      string category,
+      string subcategory,
       string size);
     List<IStock> ReadStoreStock();
     string ReadStoreStockAsJSONString();

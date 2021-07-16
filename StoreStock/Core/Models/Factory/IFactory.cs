@@ -1,4 +1,6 @@
-﻿namespace StoreStock.Models {
+﻿using StoreStock.Models;
+
+namespace StoreStock.BusinessLogic {
   interface IFactory {
     IStock FactoryStoreStock(string type,
   int id,

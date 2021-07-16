@@ -1,7 +1,6 @@
 using Nancy;
 using Nancy.Hosting.Self;
 using System;
-using StoreStockWeb.Services.BusinessLogic;
 using Nancy.Bootstrapper;
 using Nancy.ViewEngines;
 using Nancy.TinyIoc;

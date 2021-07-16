@@ -62,10 +62,10 @@ namespace TinyIoC
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
 
+  using System.Reflection;
 #if EXPRESSIONS
-    using System.Linq.Expressions;
+  using System.Linq.Expressions;
 #endif
 
 #if NETFX_CORE
@@ -651,6 +651,7 @@ namespace TinyIoC
 
     public sealed partial class TinyIoCContainer : IDisposable
     {
+
         #region Fake NETFX_CORE Classes
 #if NETFX_CORE
         private sealed class MethodAccessException : Exception
@@ -2331,10 +2332,10 @@ namespace TinyIoC
             public MultiInstanceFactory(Type registerType, Type registerImplementation)
             {
 //#if NETFX_CORE
-//				if (registerImplementation.GetTypeInfo().IsAbstract() || registerImplementation.GetTypeInfo().IsInterface())
+//				if (registerImplementation.GetTypeInfo().IsAbstract || registerImplementation.GetTypeInfo().IsInterface)
 //					throw new TinyIoCRegistrationTypeException(registerImplementation, "MultiInstanceFactory");
 //#else
-                if (registerImplementation.IsAbstract() || registerImplementation.IsInterface())
+                if (registerImplementation.IsAbstract || registerImplementation.IsInterface)
                     throw new TinyIoCRegistrationTypeException(registerImplementation, "MultiInstanceFactory");
 //#endif
                 if (!IsValidAssignment(registerType, registerImplementation))
@@ -2661,9 +2662,9 @@ namespace TinyIoC
             public SingletonFactory(Type registerType, Type registerImplementation)
             {
 //#if NETFX_CORE
-//				if (registerImplementation.GetTypeInfo().IsAbstract() || registerImplementation.GetTypeInfo().IsInterface())
+//				if (registerImplementation.GetTypeInfo().IsAbstract || registerImplementation.GetTypeInfo().IsInterface)
 //#else
-                if (registerImplementation.IsAbstract() || registerImplementation.IsInterface())
+                if (registerImplementation.IsAbstract || registerImplementation.IsInterface)
 //#endif
                     throw new TinyIoCRegistrationTypeException(registerImplementation, "SingletonFactory");
 
@@ -2752,9 +2753,9 @@ namespace TinyIoC
                     throw new TinyIoCRegistrationTypeException(registerImplementation, "SingletonFactory");
 
 //#if NETFX_CORE
-//				if (registerImplementation.GetTypeInfo().IsAbstract() || registerImplementation.GetTypeInfo().IsInterface())
+//				if (registerImplementation.GetTypeInfo().IsAbstract || registerImplementation.GetTypeInfo().IsInterface)
 //#else
-                if (registerImplementation.IsAbstract() || registerImplementation.IsInterface())
+                if (registerImplementation.IsAbstract || registerImplementation.IsInterface)
 //#endif
                     throw new TinyIoCRegistrationTypeException(registerImplementation, errorMessage);
 
@@ -2914,7 +2915,7 @@ namespace TinyIoC
                 var types = assemblies.SelectMany(a => a.SafeGetTypes()).Where(t => !IsIgnoredType(t, registrationPredicate)).ToList();
 
                 var concreteTypes = from type in types
-                                    where (type.IsClass() == true) && (type.IsAbstract() == false) && (type != this.GetType() && (type.DeclaringType != this.GetType()) && (!type.IsGenericTypeDefinition()))
+                                    where (type.IsClass == true) && (type.IsAbstract == false) && (type != this.GetType() && (type.DeclaringType != this.GetType()) && (!type.IsGenericTypeDefinition))
                                     select type;
 
                 foreach (var type in concreteTypes)
@@ -2930,13 +2931,13 @@ namespace TinyIoC
                 }
 
                 var abstractInterfaceTypes = from type in types
-                                             where ((type.IsInterface() == true || type.IsAbstract() == true) && (type.DeclaringType != this.GetType()) && (!type.IsGenericTypeDefinition()))
+                                             where ((type.IsInterface == true || type.IsAbstract == true) && (type.DeclaringType != this.GetType()) && (!type.IsGenericTypeDefinition))
                                              select type;
 
                 foreach (var type in abstractInterfaceTypes)
                 {
                     var implementations = from implementationType in concreteTypes
-                                          where implementationType.GetInterfaces().Contains(type) || implementationType.BaseType() == type
+                                          where implementationType.GetInterfaces().Contains(type) || implementationType.BaseType == type
                                           select implementationType;
 
                     if (!ignoreDuplicateImplementations && implementations.Count() > 1)
@@ -2988,11 +2989,11 @@ namespace TinyIoC
             {
                 t => t.FullName.StartsWith("System.", StringComparison.Ordinal),
                 t => t.FullName.StartsWith("Microsoft.", StringComparison.Ordinal),
-                t => t.IsPrimitive(),
+                t => t.IsPrimitive,
 #if !UNBOUND_GENERICS_GETCONSTRUCTORS
-                t => t.IsGenericTypeDefinition(),
+                t => t.IsGenericTypeDefinition,
 #endif
-                t => (t.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Length == 0) && !(t.IsInterface() || t.IsAbstract()),
+                t => (t.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Length == 0) && !(t.IsInterface || t.IsAbstract),
             };
 
             if (registrationPredicate != null)
@@ -3051,9 +3052,9 @@ namespace TinyIoC
         private ObjectFactoryBase GetDefaultObjectFactory(Type registerType, Type registerImplementation)
         {
 //#if NETFX_CORE
-//			if (registerType.GetTypeInfo().IsInterface() || registerType.GetTypeInfo().IsAbstract())
+//			if (registerType.GetTypeInfo().IsInterface || registerType.GetTypeInfo().IsAbstract)
 //#else
-            if (registerType.IsInterface() || registerType.IsAbstract())
+            if (registerType.IsInterface || registerType.IsAbstract)
 //#endif
                 return new SingletonFactory(registerType, registerImplementation);
 
@@ -3107,7 +3108,7 @@ namespace TinyIoC
 
             // Attempt unregistered construction if possible and requested
             // If we cant', bubble if we have a parent
-            if ((options.UnregisteredResolutionAction == UnregisteredResolutionActions.AttemptResolve) || (checkType.IsGenericType() && options.UnregisteredResolutionAction == UnregisteredResolutionActions.GenericsOnly))
+            if ((options.UnregisteredResolutionAction == UnregisteredResolutionActions.AttemptResolve) || (checkType.IsGenericType && options.UnregisteredResolutionAction == UnregisteredResolutionActions.GenericsOnly))
                 return (GetBestConstructor(checkType, parameters, options) != null) ? true : (_Parent != null) ? _Parent.CanResolveInternal(registration, parameters, options) : false;
 
             // Bubble resolution up the container tree if we have a parent
@@ -3119,7 +3120,7 @@ namespace TinyIoC
 
         private bool IsIEnumerableRequest(Type type)
         {
-            if (!type.IsGenericType())
+            if (!type.IsGenericType)
                 return false;
 
             Type genericType = type.GetGenericTypeDefinition();
@@ -3132,7 +3133,7 @@ namespace TinyIoC
 
         private bool IsAutomaticLazyFactoryRequest(Type type)
         {
-            if (!type.IsGenericType())
+            if (!type.IsGenericType)
                 return false;
 
             Type genericType = type.GetGenericTypeDefinition();
@@ -3197,7 +3198,7 @@ namespace TinyIoC
 
 #if RESOLVE_OPEN_GENERICS
             // Attempt container resolution of open generic
-            if (registration.Type.IsGenericType())
+            if (registration.Type.IsGenericType)
             {
                 var openTypeRegistration = new TypeRegistration(registration.Type.GetGenericTypeDefinition(),
                                                                 registration.Name);
@@ -3271,9 +3272,9 @@ namespace TinyIoC
                 return GetIEnumerableRequest(registration.Type);
 
             // Attempt unregistered construction if possible and requested
-            if ((options.UnregisteredResolutionAction == UnregisteredResolutionActions.AttemptResolve) || (registration.Type.IsGenericType() && options.UnregisteredResolutionAction == UnregisteredResolutionActions.GenericsOnly))
+            if ((options.UnregisteredResolutionAction == UnregisteredResolutionActions.AttemptResolve) || (registration.Type.IsGenericType && options.UnregisteredResolutionAction == UnregisteredResolutionActions.GenericsOnly))
             {
-                if (!registration.Type.IsAbstract() && !registration.Type.IsInterface())
+                if (!registration.Type.IsAbstract && !registration.Type.IsInterface)
                     return ConstructType(null, registration.Type, parameters, options);
             }
 
@@ -3284,7 +3285,7 @@ namespace TinyIoC
 #if EXPRESSIONS
         private object GetLazyAutomaticFactoryRequest(Type type)
         {
-            if (!type.IsGenericType())
+            if (!type.IsGenericType)
                 return null;
 
             Type genericType = type.GetGenericTypeDefinition();
@@ -3388,7 +3389,7 @@ namespace TinyIoC
 //#if NETFX_CORE                
 //				if (parameter.ParameterType.GetTypeInfo().IsPrimitive && !isParameterOverload)
 //#else
-                if (parameter.ParameterType.IsPrimitive() && !isParameterOverload)
+                if (parameter.ParameterType.IsPrimitive && !isParameterOverload)
 //#endif
                     return false;
 
@@ -3407,7 +3408,7 @@ namespace TinyIoC
 //#if NETFX_CORE
 //			if (type.GetTypeInfo().IsValueType)
 //#else
-            if (type.IsValueType())
+            if (type.IsValueType)
 //#endif
                 return null;
 
@@ -3447,12 +3448,12 @@ namespace TinyIoC
             var typeToConstruct = implementationType;
 
 #if RESOLVE_OPEN_GENERICS
-            if (implementationType.IsGenericTypeDefinition())
+            if (implementationType.IsGenericTypeDefinition)
             {
 //#if NETFX_CORE
-//				if (requestedType == null || !requestedType.IsGenericType() || !requestedType.GenericTypeArguments.Any())
+//				if (requestedType == null || !requestedType.IsGenericType || !requestedType.GenericTypeArguments.Any())
 //#else
-                if (requestedType == null || !requestedType.IsGenericType() || !requestedType.GetGenericArguments().Any())
+                if (requestedType == null || !requestedType.IsGenericType || !requestedType.GetGenericArguments().Any())
 //#endif
                     throw new TinyIoCResolutionException(typeToConstruct);
                  
@@ -3523,7 +3524,7 @@ namespace TinyIoC
 //							 select property;
 //#else
             var properties = from property in input.GetType().GetProperties()
-                             where (property.GetGetMethod() != null) && (property.GetSetMethod() != null) && !property.PropertyType.IsValueType()
+                             where (property.GetGetMethod() != null) && (property.GetSetMethod() != null) && !property.PropertyType.IsValueType
                              select property;
 //#endif
 
@@ -3576,30 +3577,30 @@ namespace TinyIoC
 //			}
 //			else
 //			{
-//				if (registerTypeDef.IsInterface())
+//				if (registerTypeDef.IsInterface)
 //				{
 //					if (!registerImplementationDef.ImplementedInterfaces.Any(t => t.GetTypeInfo().Name == registerTypeDef.Name))
 //						return false;
 //				}
-//				else if (registerTypeDef.IsAbstract() && registerImplementationDef.BaseType() != registerType)
+//				else if (registerTypeDef.IsAbstract && registerImplementationDef.BaseType != registerType)
 //				{
 //					return false;
 //				}
 //			}
 //#else
-            if (!registerType.IsGenericTypeDefinition())
+            if (!registerType.IsGenericTypeDefinition)
             {
                 if (!registerType.IsAssignableFrom(registerImplementation))
                     return false;
             }
             else
             {
-                if (registerType.IsInterface())
+                if (registerType.IsInterface)
                 {
                     if (!registerImplementation.FindInterfaces((t, o) => t.Name == registerType.Name, null).Any())
                         return false;
                 }
-                else if (registerType.IsAbstract() && registerImplementation.BaseType() != registerType)
+                else if (registerType.IsAbstract && registerImplementation.BaseType != registerType)
                 {
                     return false;
                 }

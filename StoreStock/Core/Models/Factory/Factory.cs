@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StoreStock.Models;
 
-namespace StoreStock.Models {
+namespace StoreStock.BusinessLogic {
   class Factory : IFactory {
     private IStock _newStock;
     private IStore _store;

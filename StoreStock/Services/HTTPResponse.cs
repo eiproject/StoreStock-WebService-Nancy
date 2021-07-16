@@ -18,7 +18,7 @@ namespace StoreStockWeb.Services {
       if (code == 200) {
         _message = "Success";
       }
-      if (code == 201) {
+      else if (code == 201) {
         _message = "Created";
       }
       else if (code == 404) {

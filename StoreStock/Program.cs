@@ -1,7 +1,6 @@
 ﻿using Nancy;
 using Nancy.Hosting.Self;
 using System;
-using StoreStockWeb.Services.BusinessLogic;
 using Nancy.Bootstrapper;
 using Nancy.ViewEngines;
 using Nancy.TinyIoc;
@@ -14,19 +13,19 @@ using TinyIoC;
 
 namespace StoreStockWeb.Services {
   class Program {
-    internal static Store TheStore;
     static string _hostUri = "http://127.0.0.1:5000";
     Program() { }
     static void Main(string[] args) {
       // https://gist.github.com/manadart/886534/f87af151aec21c78ee77bb558354fdc018cabdd3
-      var container = TinyIoC.TinyIoCContainer.Current;
-      container.Register<IStore, Store>().AsMultiInstance();
+      TinyIoC.TinyIoCContainer container = TinyIoC.TinyIoCContainer.Current;
+      container.Register<IStore>( new Store("Nano Store"));
 
+      IStore store = container.Resolve<IStore>();
+      IFactory factory = new Factory(store);
       //  Start Store Stock Services
-      Run storeStock = new Run();
-      storeStock.Start();
+      Run storeStock = new Run(factory);
+      storeStock.Start(store);
       storeStock.UseDummyData();
-      TheStore = storeStock.Store;
 
 /*      JSONParser parser = new JSONParser(TheStore.WerehouseData);
       StringBuilder A =parser.ListStockToJSON();

@@ -8,9 +8,10 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   class Repository : IRepository {
     private IStore _store;
-    private IFactory _creator;
-    internal Repository(IStore TheStore) {
+    private IFactory _factory;
+    internal Repository(IStore TheStore, IFactory factory) {
       _store = TheStore;
+      _factory = factory;
     }
 
     // Method of the repository start here
@@ -22,7 +23,7 @@ namespace StoreStock.BusinessLogic {
       string genre,
       string size) {
       int id = _store.GetLastId();
-      IStock stock = _creator.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
+      IStock stock = _factory.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
       _store.AddStock(stock);
       return stock;
     }
@@ -31,9 +32,8 @@ namespace StoreStock.BusinessLogic {
     }
     string IRepository.ReadStoreStockAsJSONString() {
       StringBuilder jsonStrings = new StringBuilder();
-      foreach (Stock data in _store.GetListOfStoreStock()) {
-        AutomaticObjectConverter converter = new AutomaticObjectConverter(data);
-        string _jsonString = JsonSerializer.Serialize(converter.ConvertedObject);
+      foreach (IStock data in _store.GetListOfStoreStock()) {
+        string _jsonString = JsonSerializer.Serialize(data);
         jsonStrings.Append(_jsonString);
         Console.WriteLine(_jsonString);
       }
