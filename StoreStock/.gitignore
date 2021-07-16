@@ -1,3 +1,7 @@
 .vs
 bin
 obj
+Modules
+Core/Unused
+ConfigModule.cs
+ConfigInfo.cs
