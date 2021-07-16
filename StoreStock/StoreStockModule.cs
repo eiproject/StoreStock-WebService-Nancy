@@ -80,7 +80,7 @@ namespace StoreStockWeb.Services {
         try {
           // Parsing query
           int id = this.Request.Query["id"];
-          int amount = this.Request.Query["amount"]; ;
+          int amount = this.Request.Query["amount"];
           List<IStock> listStock = repository.ReadStocksById(id);
           if (listStock.Count > 0) {
             IStock stock = repository.UpdateStoreStock(id, amount);
@@ -100,7 +100,26 @@ namespace StoreStockWeb.Services {
           response.SetCode(500);
         }
         // save information
-        return Response.AsRedirect("/config");
+        return Response.AsJson(stockModel.SerializedStock);
+      };
+
+      Delete["/"] = parameters => {
+        try {
+          // Parsing query
+          int id = this.Request.Query["id"];
+          repository.DeleteStoreStock(id);
+          List<IStock> listStock = repository.ReadStocksById(id);
+          if (listStock.Count == 0) {
+            response.SetCode(200);
+          }
+          else {
+            response.SetCode(409);
+          }
+        }
+        catch {
+          response.SetCode(500);
+        }
+        return Response.AsJson(stockModel.SerializedStock);
       };
     }
   }
