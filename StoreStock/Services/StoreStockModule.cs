@@ -8,8 +8,6 @@ using System.Text;
 
 namespace StoreStockWeb.Services {
   public class StoreStockModule : NancyModule {
-    HTTPResponse response;
-    SerializableStoreStock storeData;
     private const string MessageKey = "message";
     private const string ConfigInfoKey = "ci";
     private IStore _store; // just init, edit this to works
@@ -19,45 +17,44 @@ namespace StoreStockWeb.Services {
       IStore store = TinyIoC.TinyIoCContainer.Current.Resolve<IStore>();
       _store = store;
 
-      response = new HTTPResponse();
-
-      storeData = new SerializableStoreStock(response);
+      HTTPResponse response = new HTTPResponse();
+      SerializableStoreStock storeData = new SerializableStoreStock(response);
       ModelStoreStock storeModel = new ModelStoreStock(storeData);
       IFactory factory = new Factory(_store);
       IRepository repository = new Repository(_store, factory);
 
-
       SerializableStock stockData = new SerializableStock(response);
       ModelStock stockModel = new ModelStock(stockData);
 
-      Console.WriteLine("Here I am 0");
       // Basic constrcutor end here
       Get["/view"] = parameters => {
         return View["StockViewerIndex.html", storeModel];
       };
 
       Get["/"] = parameters => {
-        Console.WriteLine("Here I am 1");
-        //        try {
-        string strId = this.Request.Query["id"];
-        int? id = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
-        if (id == null) {
-          Console.WriteLine("Here I am 2");
-          storeData.SetStoreName(_store.GetStoreName());
-          storeData.SetStoreData(repository.ReadStoreStock());
-          response.SetCode(200);
-          Console.WriteLine($"Here I am 3 { response.Message } {response.Code} {storeData.Code}");
+        try {
+          string strId = this.Request.Query["id"];
+          int? id = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
+          if (id == null) {
+            storeData.SetStoreName(_store.GetStoreName());
+            storeData.SetStoreData(repository.ReadStoreStock());
+            response.SetCode(200);
+          }
+          else {
+            storeData.SetStoreName(_store.GetStoreName());
+            if (repository.ReadStocksById((int)id).Count > 0) {
+              storeData.SetStoreData(repository.ReadStocksById((int)id));
+              response.SetCode(200);
+            }
+            else {
+              response.SetCode(404);
+            }
+          }
         }
-        else {
-          storeData.SetStoreName(_store.GetStoreName());
-          storeData.SetStoreData(repository.ReadStocksById((int)id));
-          response.SetCode(200);
+        catch (Exception e) {
+          Console.WriteLine(e);
+          response.SetCode(500);
         }
-        //        }
-        //        catch (Exception e){
-        //          Console.WriteLine(e);
-        //          response.SetCode(500);
-        //        }
 
         return Response.AsJson(storeModel.StoreStockData);
       };
@@ -117,21 +114,21 @@ namespace StoreStockWeb.Services {
       };
 
       Delete["/"] = parameters => {
-        try {
-          // Parsing query
-          int id = this.Request.Query["id"];
-          repository.DeleteStoreStock(id);
-          List<IStock> listStock = repository.ReadStocksById(id);
-          if (listStock.Count == 0) {
-            response.SetCode(200);
-          }
-          else {
-            response.SetCode(409);
-          }
+        /*        try {*/
+        // Parsing query
+        int id = this.Request.Query["id"];
+        repository.DeleteStoreStock(id);
+        List<IStock> listStock = repository.ReadStocksById(id);
+        if (listStock.Count == 0) {
+          response.SetCode(200);
         }
+        else {
+          response.SetCode(409);
+        }
+        /*}
         catch {
           response.SetCode(500);
-        }
+        }*/
         return Response.AsJson(stockModel.SerializedStock);
       };
     }

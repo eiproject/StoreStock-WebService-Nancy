@@ -8,17 +8,15 @@ using System.Threading.Tasks;
 namespace StoreStockWeb.Services {
   [Serializable]
   public class SerializableStoreStock {
-    private int _code;
-    private string _message;
+    private HTTPResponse _response;
     private string _storeName;
     private List<IStock> _storeData;
-    public int Code { get { return _code; } }
-    public string Message { get { return _message; } }
+    public int Code { get { return _response.Code; } }
+    public string Message { get { return _response.Message; } }
     public string StoreName { get { return _storeName; } }
     public List<IStock> StoreData { get { return _storeData; } }
     internal SerializableStoreStock(HTTPResponse response) {
-      _code = response.Code;
-      _message = response.Message;
+      _response = response;
     }
     internal void SetStoreName(string name) {
       _storeName = name;

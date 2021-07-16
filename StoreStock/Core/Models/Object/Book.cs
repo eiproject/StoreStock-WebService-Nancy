@@ -23,15 +23,15 @@ namespace StoreStock.Models {
         return decimal.Multiply(percentage, _price);
       }
     }
-    string IStock.Category => _publisher;
-    string IStock.SubCategory => _genre;
-    string IStock.Size => _paperSize;
-    decimal IStock.Discount => _discount;
-    decimal IStock.Price => _price;
-    int IStock.ID => _id;
-    int IStock.Amount => _amount;
-    string IStock.Type => _type;
-    string IStock.Title => _title;
+    public string Category => _publisher;
+    public string SubCategory => _genre;
+    public string Size => _paperSize;
+    public decimal Discount => _discount;
+    public decimal Price => _price;
+    public int ID => _id;
+    public int Amount => _amount;
+    public string Type => _type;
+    public string Title => _title;
 
     void IStock.UpdateStockInformation(
       string type,
