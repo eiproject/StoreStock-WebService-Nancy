@@ -79,18 +79,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\DummyData\StringInputParser.cs" />
-    <Compile Include="Services\ConfigInfo.cs" />
-    <Compile Include="Services\ConfigModule.cs" />
     <Compile Include="Core\Models\Factory\Factory.cs" />
     <Compile Include="Core\Models\Factory\IFactory.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStock.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStore.cs" />
     <Compile Include="Core\Run.cs" />
-    <Compile Include="Services\HTTPResponse.cs" />
-    <Compile Include="Services\ModelStock.cs" />
-    <Compile Include="Services\ModelStoreStock.cs" />
-    <Compile Include="Services\SerializableStock.cs" />
-    <Compile Include="Services\StoreStockModule.cs" />
+    <Compile Include="Services\Response\HTTPResponse.cs" />
+    <Compile Include="Services\Model\ModelStock.cs" />
+    <Compile Include="Services\Model\ModelStoreStock.cs" />
+    <Compile Include="Services\Serializer\SerializableStock.cs" />
+    <Compile Include="Services\Module\StoreStockModule.cs" />
     <Compile Include="Core\DummyData\GenerateDummyData.cs" />
     <Compile Include="Core\Models\Object\Book.cs" />
     <Compile Include="Core\Models\Object\Pen.cs" />
@@ -99,11 +97,11 @@
     <Compile Include="Core\BusinessLogic\RepositoryManager\Repository.cs" />
     <Compile Include="Core\Models\ObjectInterface\Stock.cs" />
     <Compile Include="Core\Models\ObjectInterface\Store.cs" />
-    <Compile Include="Services\CustomBootstrapper.cs" />
-    <Compile Include="Services\MainModule.cs" />
+    <Compile Include="Services\CustomBootstrapper\CustomBootstrapper.cs" />
+    <Compile Include="Services\Module\MainModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\SerializableStoreStock.cs" />
+    <Compile Include="Services\Serializer\SerializableStoreStock.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
