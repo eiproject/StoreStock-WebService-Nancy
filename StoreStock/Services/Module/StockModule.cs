@@ -1,25 +1,18 @@
 ﻿using Nancy;
-using Nancy.ModelBinding;
+using Nancy.Helpers;
+using Nancy.IO;
+using StoreStock.BusinessLogic;
 using StoreStock.Models;
 using System;
 using System.Collections.Generic;
-using StoreStock.BusinessLogic;
-using System.Text;
 using System.Linq;
-using Nancy.Helpers;
-using Nancy.IO;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace StoreStockWeb.Services {
-  public class StoreStockModule : NancyModule {
-    private const string MessageKey = "message";
-    private const string ConfigInfoKey = "ci";
-    private IStore _store; // just init, edit this to works
-    public StoreStockModule(IStore store)
-      : base("/store-stock") {
-      // Basic constrcutor start here
-      /*      IStore store = TinyIoC.TinyIoCContainer.Current.Resolve<IStore>();*/
-      _store = store;
-
+namespace StoreStockWeb.Services.Services.Module {
+  public class StockModule : NancyModule {
+    private IStore _store; // lock store
+    public StockModule(IStore store) : base("/stocks") {
       HTTPResponse response = new HTTPResponse();
       SerializableStoreStock storeData = new SerializableStoreStock(response);
       ModelStoreStock storeModel = new ModelStoreStock(storeData);
@@ -29,15 +22,12 @@ namespace StoreStockWeb.Services {
       SerializableStock stockData = new SerializableStock(response);
       ModelStock stockModel = new ModelStock(stockData);
 
-      // Basic constrcutor end here
       Get["/"] = parameters => {
         try {
           string strId = this.Request.Query["id"];
           int? id = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
           if (id == null) {
-            storeData.SetStoreName(_store.GetStoreName());
-            storeData.SetStoreData(repository.ReadStoreStock());
-            response.SetCode(200);
+            response.SetCode(404);
           }
           else {
             storeData.SetStoreName(_store.GetStoreName());
@@ -66,7 +56,7 @@ namespace StoreStockWeb.Services {
           id.Read(data, 0, (int)length);
           string body = Encoding.Default.GetString(data);
 
-          Dictionary<string , string> StringToArray = body.Split('&')
+          Dictionary<string, string> StringToArray = body.Split('&')
         .Select(s => s.Split('='))
         .ToDictionary(k => k.ElementAt(0), v => HttpUtility.UrlDecode(v.ElementAt(1)));
 
@@ -140,6 +130,8 @@ namespace StoreStockWeb.Services {
         }
         return Response.AsJson(stockModel.SerializedStock);
       };
+
+
     }
   }
 }

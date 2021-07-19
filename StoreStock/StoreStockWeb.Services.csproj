@@ -122,11 +122,12 @@
     <Compile Include="Core\Models\ObjectInterface\IStock.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStore.cs" />
     <Compile Include="Core\Run.cs" />
+    <Compile Include="Services\Module\StockModule.cs" />
     <Compile Include="Services\Response\HTTPResponse.cs" />
     <Compile Include="Services\Model\ModelStock.cs" />
     <Compile Include="Services\Model\ModelStoreStock.cs" />
     <Compile Include="Services\Serializer\SerializableStock.cs" />
-    <Compile Include="Services\Module\StoreStockModule.cs" />
+    <Compile Include="Services\Module\StoreModule.cs" />
     <Compile Include="Core\DummyData\GenerateDummyData.cs" />
     <Compile Include="Core\Models\Object\Book.cs" />
     <Compile Include="Core\Models\Object\Pen.cs" />
