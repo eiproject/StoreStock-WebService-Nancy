@@ -5,16 +5,11 @@ using System;
 using System.Collections.Generic;
 using StoreStock.BusinessLogic;
 using System.Text;
-using Newtonsoft.Json;
 using System.Linq;
 using Nancy.Helpers;
 using Nancy.IO;
 
 namespace StoreStockWeb.Services {
-  public class SimpleRequest {
-    [JsonProperty(PropertyName = "type")]
-    public string type { get; set; }
-  }
   public class StoreStockModule : NancyModule {
     private const string MessageKey = "message";
     private const string ConfigInfoKey = "ci";
@@ -36,6 +31,9 @@ namespace StoreStockWeb.Services {
 
       // Basic constrcutor end here
       Get["/view"] = parameters => {
+        storeData.SetStoreName(_store.GetStoreName());
+        storeData.SetStoreData(repository.ReadStoreStock());
+
         return View["StockViewerIndex.html", storeModel];
       };
 

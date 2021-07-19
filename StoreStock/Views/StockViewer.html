@@ -37,7 +37,7 @@
                 </div>
               </div>
               <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                <a href="/store-stock" class="font-medium text-gray-500 hover:text-red-500">Stock Viewer</a>
+                <a href="/store-stock/view" class="font-medium text-gray-500 hover:text-red-500">Stock Viewer</a>
                 <!--<a href="#" class="font-medium text-gray-500 hover:text-red-500">Log in</a>-->
               </div>
             </nav>
@@ -72,7 +72,11 @@
         <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:pl-20 xl:mt-28">
           <div class="sm:text-center lg:text-left  w-3/4">
             <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-              <span class="block">Hello, <span class="text-red-500">@Model.StoreName</span></span>
+              <span class="block">Hello, 
+                <span class="text-red-500">
+                  @Model.StoreStockData.StoreName
+                </span>
+              </span>
             </h1>
             <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-gray-900 sm:text-3xl md:text-4xl">
               <span class="block">Your Store Stock is Online!</span>
