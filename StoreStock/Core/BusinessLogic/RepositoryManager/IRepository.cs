@@ -15,6 +15,6 @@ namespace StoreStock.BusinessLogic {
     List<IStock> ReadStocksByType(string type);
     List<IStock> ReadStocksById(int id);
     IStock UpdateStockAmount(int stockID, int amount);
-    void DeleteStoreStock(int stockID);
+    bool DeleteStoreStock(int stockID);
   }
 }

@@ -38,7 +38,12 @@ namespace StoreStock.BusinessLogic {
     List<IStock> IRepository.ReadStocksById(int id) {
       IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
         data => data.ID == id);
-      return filteredData.ToList();
+      if (filteredData.Count() > 0) {
+        return filteredData.ToList();
+      }
+      else {
+        return null;
+      }
     }
 
     IStock IRepository.UpdateStockAmount(int stockID, int amountDifference) {
@@ -59,13 +64,15 @@ namespace StoreStock.BusinessLogic {
       return stock;
     }
 
-    void IRepository.DeleteStoreStock(int stockID) {
+    bool IRepository.DeleteStoreStock(int stockID) {
       IStock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
       if (stock != null) {
         _store.RemoveStock(stock);
+        return true;
       }
       else {
         Console.WriteLine("Input ID INVALID | DeleteStoreStock");
+        return false;
       }
     }
   }

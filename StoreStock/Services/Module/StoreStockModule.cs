@@ -117,13 +117,12 @@ namespace StoreStockWeb.Services {
         try {
           // Parsing query
           int id = this.Request.Query["id"];
-          repository.DeleteStoreStock(id);
-          List<IStock> listStock = repository.ReadStocksById(id);
-          if (listStock.Count == 0) {
+          bool res = repository.DeleteStoreStock(id);
+          if (res) {
             response.SetCode(200);
           }
           else {
-            response.SetCode(409);
+            response.SetCode(404);
           }
         }
         catch {
