@@ -32,7 +32,7 @@ namespace StoreStockWeb.Services {
       Console.WriteLine(A);*/
       
       // creating host
-      NancyHost host = new NancyHost(new Uri(_hostUri), new CustomBootstrapper());
+      NancyHost host = new NancyHost(new Uri(_hostUri), new Bootstrapper());
       host.Start(); // start hosting
       Console.WriteLine($"Starting host on { _hostUri }");
       Console.WriteLine("Press any key to exit.");

@@ -1,7 +1,7 @@
 ﻿using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  interface IFactory {
+  public interface IFactory {
     IStock FactoryStoreStock(string type,
   int id,
   int amount,

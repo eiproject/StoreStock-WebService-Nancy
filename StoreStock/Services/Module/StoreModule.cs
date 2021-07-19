@@ -11,12 +11,8 @@ using Nancy.IO;
 
 namespace StoreStockWeb.Services {
   public class StoreModule : NancyModule {
-    private const string MessageKey = "message";
-    private const string ConfigInfoKey = "ci";
     private IStore _store; // lock store
     public StoreModule(IStore store) : base("/stores") {
-      // Basic constrcutor start here
-      /*      IStore store = TinyIoC.TinyIoCContainer.Current.Resolve<IStore>();*/
       _store = store;
 
       HTTPResponse response = new HTTPResponse();
@@ -42,8 +38,6 @@ namespace StoreStockWeb.Services {
 
         return Response.AsJson(storeModel.StoreStockData);
       };
-
-
     }
   }
 }

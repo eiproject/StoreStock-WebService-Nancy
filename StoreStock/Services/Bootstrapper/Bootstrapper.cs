@@ -18,12 +18,30 @@ using Nancy.ViewEngines;
 using TinyIoC;
 */
 namespace StoreStockWeb.Services {
-	public class CustomBootstrapper : DefaultNancyBootstrapper
+	public class Bootstrapper : DefaultNancyBootstrapper
 	{
     protected override void ConfigureApplicationContainer(TinyIoCContainer container) {
-      base.ConfigureApplicationContainer(container);
-			container.Register<IStore>(new Store(new List<IStock>(), "Nano Store"));
-    }
+			IStore _store = new Store(new List<IStock>(), "Nano Store");
+			IFactory factory = new Factory(_store);
+			IRepository repository = new Repository(_store, factory);
+
+			HTTPResponse response = new HTTPResponse();
+			
+			SerializableStoreStock storeData = new SerializableStoreStock(response);
+			ModelStoreStock storeModel = new ModelStoreStock(storeData);
+			SerializableStock stockData = new SerializableStock(response);
+			ModelStock stockModel = new ModelStock(stockData);
+
+			base.ConfigureApplicationContainer(container);
+			container.Register(_store);
+			container.Register(response);
+			container.Register(storeData);
+			container.Register(storeModel);
+			container.Register(factory);
+			container.Register(repository);
+			container.Register(stockData);
+			container.Register(stockModel);
+		}
 
 		protected override void ApplicationStartup(TinyIoCContainer container,
 			IPipelines pipelines) {

@@ -3,7 +3,7 @@ using System.Text;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  interface IRepository {
+  public interface IRepository {
     IStock CreateStoreStock(string type,
       int amount,
       string title,

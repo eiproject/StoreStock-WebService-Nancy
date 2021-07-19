@@ -122,6 +122,8 @@
     <Compile Include="Core\Models\ObjectInterface\IStock.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStore.cs" />
     <Compile Include="Core\Run.cs" />
+    <Compile Include="Services\Action\StocksAPI.cs" />
+    <Compile Include="Services\Action\StoresAPI.cs" />
     <Compile Include="Services\Module\StockModule.cs" />
     <Compile Include="Services\Response\HTTPResponse.cs" />
     <Compile Include="Services\Model\ModelStock.cs" />
@@ -135,7 +137,7 @@
     <Compile Include="Core\BusinessLogic\RepositoryManager\IRepository.cs" />
     <Compile Include="Core\BusinessLogic\RepositoryManager\Repository.cs" />
     <Compile Include="Core\Models\ObjectInterface\Store.cs" />
-    <Compile Include="Services\CustomBootstrapper\CustomBootstrapper.cs" />
+    <Compile Include="Services\Bootstrapper\Bootstrapper.cs" />
     <Compile Include="Services\Module\MainModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
