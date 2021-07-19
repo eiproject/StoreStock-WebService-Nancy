@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
 namespace StoreStock.Models {
-  public interface IStore {
+  public interface Store {
     decimal MaxDiscount { get; }
     decimal MaxAmountThatGetDiscount { get; }
     string GetStoreName();
     int GetLastId();
-    List<IStock> GetListOfStoreStock();
-    void AddStock(IStock stock);
-    void RemoveStock(IStock stock);
+    List<Stock> GetListOfStoreStock();
+    void AddStock(Stock stock);
+    void RemoveStock(Stock stock);
   }
 }

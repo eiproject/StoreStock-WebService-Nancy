@@ -8,8 +8,8 @@ namespace StoreStock.Models {
     private string _storeName = "no-name";
     private const decimal _maxDiscount = 0.3m; // max discount
     private const decimal _maxAmountThatGetDiscount = 1000m; // max stock that get discount
-    internal Store(string storeName) {
-      _storeData = new List<IStock>();
+    internal Store(List<IStock> list, string storeName) {
+      _storeData = list;
       _storeName = storeName;
     }
     decimal IStore.MaxDiscount { get {return _maxDiscount; } }

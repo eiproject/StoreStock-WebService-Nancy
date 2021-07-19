@@ -14,10 +14,10 @@ namespace StoreStockWeb.Services {
     private const string MessageKey = "message";
     private const string ConfigInfoKey = "ci";
     private IStore _store; // just init, edit this to works
-    public StoreStockModule()
+    public StoreStockModule(IStore store)
       : base("/store-stock") {
       // Basic constrcutor start here
-      IStore store = TinyIoC.TinyIoCContainer.Current.Resolve<IStore>();
+      /*      IStore store = TinyIoC.TinyIoCContainer.Current.Resolve<IStore>();*/
       _store = store;
 
       HTTPResponse response = new HTTPResponse();

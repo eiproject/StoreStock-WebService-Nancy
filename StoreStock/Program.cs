@@ -17,7 +17,7 @@ namespace StoreStockWeb.Services {
     Program() { }
     static void Main(string[] args) {
       // https://gist.github.com/manadart/886534/f87af151aec21c78ee77bb558354fdc018cabdd3
-      TinyIoC.TinyIoCContainer container = TinyIoC.TinyIoCContainer.Current;
+/*      TinyIoC.TinyIoCContainer container = TinyIoC.TinyIoCContainer.Current;
       container.Register<IStore>( new Store("Nano Store"));
 
       IStore store = container.Resolve<IStore>();
@@ -25,7 +25,7 @@ namespace StoreStockWeb.Services {
       //  Start Store Stock Services
       Run storeStock = new Run(factory);
       storeStock.Start(store);
-      storeStock.UseDummyData();
+      storeStock.UseDummyData();*/
 
 /*      JSONParser parser = new JSONParser(TheStore.WerehouseData);
       StringBuilder A =parser.ListStockToJSON();
