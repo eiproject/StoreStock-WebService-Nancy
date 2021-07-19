@@ -30,13 +30,6 @@ namespace StoreStockWeb.Services {
       ModelStock stockModel = new ModelStock(stockData);
 
       // Basic constrcutor end here
-      Get["/view"] = parameters => {
-        storeData.SetStoreName(_store.GetStoreName());
-        storeData.SetStoreData(repository.ReadStoreStock());
-
-        return View["StockViewerIndex.html", storeModel];
-      };
-
       Get["/"] = parameters => {
         try {
           string strId = this.Request.Query["id"];

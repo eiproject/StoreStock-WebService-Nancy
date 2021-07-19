@@ -146,17 +146,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\LandingPage.html" />
-    <EmbeddedResource Include="Views\StockViewerIndex.html" />
-    <EmbeddedResource Include="Views\StockViewer.html" />
-    <EmbeddedResource Include="Views\content\logo.svg" />
     <Content Include=".gitignore" />
-    <Content Include="Views\content\tailwind.min.css" />
-    <EmbeddedResource Include="Views\config\index.html" />
-    <EmbeddedResource Include="Views\content\layout.css" />
-    <EmbeddedResource Include="Views\content\style.css" />
-    <EmbeddedResource Include="Views\index.html" />
-    <EmbeddedResource Include="Views\MasterPage.html" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

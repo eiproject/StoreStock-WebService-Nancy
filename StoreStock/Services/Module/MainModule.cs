@@ -5,7 +5,7 @@ namespace StoreStockWeb.Services {
 	{
 		public MainModule()
 		{
-			Get["/"] = x => View["index.html"];
+			Get["/"] = x => "Nice GET!";
 		}
 	}
 }
