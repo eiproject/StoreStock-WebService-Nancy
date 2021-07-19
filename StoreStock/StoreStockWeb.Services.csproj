@@ -95,7 +95,6 @@
     <Compile Include="Core\Models\Object\Pencil.cs" />
     <Compile Include="Core\BusinessLogic\RepositoryManager\IRepository.cs" />
     <Compile Include="Core\BusinessLogic\RepositoryManager\Repository.cs" />
-    <Compile Include="Core\Models\ObjectInterface\Stock.cs" />
     <Compile Include="Core\Models\ObjectInterface\Store.cs" />
     <Compile Include="Services\CustomBootstrapper\CustomBootstrapper.cs" />
     <Compile Include="Services\Module\MainModule.cs" />

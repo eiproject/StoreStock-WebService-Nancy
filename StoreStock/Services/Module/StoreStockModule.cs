@@ -86,14 +86,14 @@ namespace StoreStockWeb.Services {
         return Response.AsJson(stockModel.SerializedStock);
       };
 
-      Patch["/"] = parameters => {
+      Put["/"] = parameters => {
         try {
           // Parsing query
           int id = this.Request.Query["id"];
           int amount = this.Request.Query["amount"];
           List<IStock> listStock = repository.ReadStocksById(id);
           if (listStock.Count > 0) {
-            IStock stock = repository.UpdateStoreStock(id, amount);
+            IStock stock = repository.UpdateStockAmount(id, amount);
             if (stock != null) {
               stockData.SetStock(stock);
               response.SetCode(200);
@@ -114,21 +114,21 @@ namespace StoreStockWeb.Services {
       };
 
       Delete["/"] = parameters => {
-        /*        try {*/
-        // Parsing query
-        int id = this.Request.Query["id"];
-        repository.DeleteStoreStock(id);
-        List<IStock> listStock = repository.ReadStocksById(id);
-        if (listStock.Count == 0) {
-          response.SetCode(200);
+        try {
+          // Parsing query
+          int id = this.Request.Query["id"];
+          repository.DeleteStoreStock(id);
+          List<IStock> listStock = repository.ReadStocksById(id);
+          if (listStock.Count == 0) {
+            response.SetCode(200);
+          }
+          else {
+            response.SetCode(409);
+          }
         }
-        else {
-          response.SetCode(409);
-        }
-        /*}
         catch {
           response.SetCode(500);
-        }*/
+        }
         return Response.AsJson(stockModel.SerializedStock);
       };
     }

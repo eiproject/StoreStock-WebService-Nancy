@@ -12,10 +12,9 @@ namespace StoreStock.BusinessLogic {
       string subcategory,
       string size);
     List<IStock> ReadStoreStock();
-    string ReadStoreStockAsJSONString();
     List<IStock> ReadStocksByType(string type);
     List<IStock> ReadStocksById(int id);
-    IStock UpdateStoreStock(int stockID, int amount);
+    IStock UpdateStockAmount(int stockID, int amount);
     void DeleteStoreStock(int stockID);
   }
 }

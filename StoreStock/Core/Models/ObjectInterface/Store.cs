@@ -18,7 +18,12 @@ namespace StoreStock.Models {
       return _storeName;
     }
     int IStore.GetLastId() {
-      return _storeData.Count;
+      if (_storeData.Count > 0) {
+        return _storeData[_storeData.Count - 1].ID;
+      }
+      else {
+        return -1;
+      }
     }
     List<IStock> IStore.GetListOfStoreStock() {
       return _storeData;
