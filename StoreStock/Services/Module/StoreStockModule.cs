@@ -5,8 +5,16 @@ using System;
 using System.Collections.Generic;
 using StoreStock.BusinessLogic;
 using System.Text;
+using Newtonsoft.Json;
+using System.Linq;
+using Nancy.Helpers;
+using Nancy.IO;
 
 namespace StoreStockWeb.Services {
+  public class SimpleRequest {
+    [JsonProperty(PropertyName = "type")]
+    public string type { get; set; }
+  }
   public class StoreStockModule : NancyModule {
     private const string MessageKey = "message";
     private const string ConfigInfoKey = "ci";
@@ -61,13 +69,23 @@ namespace StoreStockWeb.Services {
 
       Post["/"] = parameters => {
         try {
-          string type = this.Request.Query["type"];
-          int amount = this.Request.Query["amount"];
-          string title = this.Request.Query["title"];
-          decimal price = this.Request.Query["price"];
-          string category = this.Request.Query["category"];
-          string subCategory = this.Request.Query["sub-cateegory"];
-          string size = this.Request.Query["size"];
+          RequestStream id = this.Request.Body;
+          long length = this.Request.Body.Length;
+          byte[] data = new byte[length];
+          id.Read(data, 0, (int)length);
+          string body = Encoding.Default.GetString(data);
+
+          Dictionary<string , string> StringToArray = body.Split('&')
+        .Select(s => s.Split('='))
+        .ToDictionary(k => k.ElementAt(0), v => HttpUtility.UrlDecode(v.ElementAt(1)));
+
+          string type = StringToArray["type"];
+          int amount = int.Parse(StringToArray["amount"]);
+          string title = StringToArray["title"];
+          decimal price = decimal.Parse(StringToArray["price"]);
+          string category = StringToArray["category"];
+          string subCategory = StringToArray["sub-category"];
+          string size = StringToArray["size"];
 
           IStock newStock = repository.CreateStoreStock(
             type, amount, title, price, category, subCategory, size
@@ -80,7 +98,8 @@ namespace StoreStockWeb.Services {
             response.SetCode(409);
           }
         }
-        catch {
+        catch (Exception e) {
+          Console.WriteLine(e);
           response.SetCode(500);
         }
         return Response.AsJson(stockModel.SerializedStock);
