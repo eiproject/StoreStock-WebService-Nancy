@@ -58,7 +58,7 @@ namespace StoreStockWeb.Services {
       return  response.AsJson(_storeModel.StoreStockData, _statusCode);
     }
 
-    internal SerializableStock CreateStock(Request request) {
+    internal Response CreateStock(IResponseFormatter response, Request request) {
       try {
         RequestStream id = request.Body;
         long length = request.Body.Length;
@@ -93,10 +93,10 @@ namespace StoreStockWeb.Services {
         Console.WriteLine(e);
         _statusCode = HttpStatusCode.InternalServerError;
       }
-      return _stockModel.SerializedStock;
+      return response.AsJson(_stockModel.SerializedStock, _statusCode);
     }
 
-    internal SerializableStock UpdateStockAmount(Request request) {
+    internal Response UpdateStockAmount(IResponseFormatter response, Request request) {
       try {
         // Parsing query
         int id = request.Query["id"];
@@ -120,9 +120,9 @@ namespace StoreStockWeb.Services {
         _statusCode = HttpStatusCode.InternalServerError;
       }
       // save information
-      return _stockModel.SerializedStock;
+      return response.AsJson(_stockModel.SerializedStock, _statusCode);
     }
-    internal SerializableStock DeleteStockByID(Request request) {
+    internal Response DeleteStockByID(IResponseFormatter response, Request request) {
       try {
         // Parsing query
         int id = request.Query["id"];
@@ -137,7 +137,7 @@ namespace StoreStockWeb.Services {
       catch {
         _statusCode = HttpStatusCode.InternalServerError;
       }
-      return _stockModel.SerializedStock;
+      return response.AsJson(_stockModel.SerializedStock, _statusCode);
     }
   }
 }
