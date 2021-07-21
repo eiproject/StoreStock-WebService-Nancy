@@ -5,16 +5,11 @@ using System.Collections.Generic;
 namespace StoreStockWeb.Services {
   [Serializable]
   public class SerializableStoreStock {
-    private HTTPResponse _response;
     private string _storeName;
     private List<IStock> _storeData;
-    public int Code { get { return _response.Code; } }
-    public string Message { get { return _response.Message; } }
     public string StoreName { get { return _storeName; } }
     public List<IStock> StoreData { get { return _storeData; } }
-    internal SerializableStoreStock(HTTPResponse response) {
-      _response = response;
-    }
+    internal SerializableStoreStock() { }
     internal void SetStoreName(string name) {
       _storeName = name;
     }

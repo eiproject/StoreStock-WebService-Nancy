@@ -24,17 +24,14 @@ namespace StoreStockWeb.Services {
 			IStore _store = new Store(new List<IStock>(), "Nano Store");
 			IFactory factory = new Factory(_store);
 			IRepository repository = new Repository(_store, factory);
-
-			HTTPResponse response = new HTTPResponse();
 			
-			SerializableStoreStock storeData = new SerializableStoreStock(response);
+			SerializableStoreStock storeData = new SerializableStoreStock();
 			ModelStoreStock storeModel = new ModelStoreStock(storeData);
-			SerializableStock stockData = new SerializableStock(response);
+			SerializableStock stockData = new SerializableStock();
 			ModelStock stockModel = new ModelStock(stockData);
 
 			base.ConfigureApplicationContainer(container);
 			container.Register(_store);
-			container.Register(response);
 			container.Register(storeData);
 			container.Register(storeModel);
 			container.Register(factory);

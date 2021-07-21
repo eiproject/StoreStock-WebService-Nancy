@@ -12,20 +12,19 @@ using System.Threading.Tasks;
 namespace StoreStockWeb.Services {
   public class StocksAPI {
     IStore _store;
-    HTTPResponse _response;
     SerializableStoreStock _storeData;
     ModelStoreStock _storeModel;
     IFactory _factory;
     IRepository _repository;
     SerializableStock _stockData;
     ModelStock _stockModel;
+    HttpStatusCode _statusCode;
 
     public StocksAPI(
-        IStore store, HTTPResponse response, SerializableStoreStock storeData,
+        IStore store, SerializableStoreStock storeData,
         ModelStoreStock storeModel, IFactory factory, IRepository repository,
         SerializableStock stockData, ModelStock stockModel) {
       _store = store;
-      _response = response;
       _storeData = storeData;
       _storeModel = storeModel;
       _factory = factory;
@@ -33,30 +32,30 @@ namespace StoreStockWeb.Services {
       _stockData = stockData;
       _stockModel = stockModel;
     }
-    internal SerializableStoreStock ReadStockByID(Request request) {
+    internal Response ReadStockByID(IResponseFormatter response,Request request) {
       try {
         string strId = request.Query["id"];
         int? id = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
         if (id == null) {
-          _response.SetCode(404);
+          _statusCode = HttpStatusCode.NotFound;
         }
         else {
           _storeData.SetStoreName(_store.GetStoreName());
           if (_repository.ReadStocksById((int)id).Count > 0) {
             _storeData.SetStoreData(_repository.ReadStocksById((int)id));
-            _response.SetCode(200);
+            _statusCode = HttpStatusCode.OK;
           }
           else {
-            _response.SetCode(404);
+            _statusCode = HttpStatusCode.NotFound;
           }
         }
       }
       catch (Exception e) {
         Console.WriteLine(e);
-        _response.SetCode(500);
+        _statusCode = HttpStatusCode.InternalServerError;
       }
 
-      return _storeModel.StoreStockData;
+      return  response.AsJson(_storeModel.StoreStockData, _statusCode);
     }
 
     internal SerializableStock CreateStock(Request request) {
@@ -84,15 +83,15 @@ namespace StoreStockWeb.Services {
           );
         if (newStock != null) {
           _stockData.SetStock(newStock);
-          _response.SetCode(201);
+          _statusCode = HttpStatusCode.OK;
         }
         else {
-          _response.SetCode(409);
+          _statusCode = HttpStatusCode.Conflict;
         }
       }
       catch (Exception e) {
         Console.WriteLine(e);
-        _response.SetCode(500);
+        _statusCode = HttpStatusCode.InternalServerError;
       }
       return _stockModel.SerializedStock;
     }
@@ -107,18 +106,18 @@ namespace StoreStockWeb.Services {
           IStock stock = _repository.UpdateStockAmount(id, amount);
           if (stock != null) {
             _stockData.SetStock(stock);
-            _response.SetCode(200);
+            _statusCode = HttpStatusCode.OK;
           }
           else {
-            _response.SetCode(409);
+            _statusCode = HttpStatusCode.Conflict;
           }
         }
         else { // Not Found
-          _response.SetCode(404);
+          _statusCode = HttpStatusCode.NotFound;
         }
       }
       catch {
-        _response.SetCode(500);
+        _statusCode = HttpStatusCode.InternalServerError;
       }
       // save information
       return _stockModel.SerializedStock;
@@ -129,14 +128,14 @@ namespace StoreStockWeb.Services {
         int id = request.Query["id"];
         bool res = _repository.DeleteStoreStock(id);
         if (res) {
-          _response.SetCode(200);
+          _statusCode = HttpStatusCode.OK;
         }
         else {
-          _response.SetCode(404);
+          _statusCode = HttpStatusCode.NotFound;
         }
       }
       catch {
-        _response.SetCode(500);
+        _statusCode = HttpStatusCode.InternalServerError;
       }
       return _stockModel.SerializedStock;
     }
