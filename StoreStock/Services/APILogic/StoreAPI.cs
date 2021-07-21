@@ -15,16 +15,14 @@ namespace StoreStockWeb.Services {
     private SerializableStoreStock _storeData;
     private IFactory _factory;
     private IStoreRepository _repository;
-    private SerializableStock _stockData;
     private HttpStatusCode _statusCode;
     public StoreAPI(
         Store store, SerializableStoreStock storeData, IFactory factory, 
-        IStoreRepository repository, SerializableStock stockData) {
+        IStoreRepository repository) {
       _store = store;
       _storeData = storeData;
       _factory = factory;
       _repository = repository;
-      _stockData = stockData;
     }
     internal Response ReadStore(IResponseFormatter response, Request request) {
       try {

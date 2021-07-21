@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 namespace StoreStockWeb.Services {
   public class StockAPI {
     private Store _store;
+    private SerializableStock _stockData;
     private IFactory _factory;
     private IStockRepository _repository;
-    private SerializableStock _stockData;
     private HttpStatusCode _statusCode;
 
     public StockAPI(
@@ -25,7 +25,7 @@ namespace StoreStockWeb.Services {
       _repository = repository;
       _stockData = stockData;
 
-      // _stockData.SetStock(null);
+      _stockData.SetStock(null);
     }
     internal Response ReadStockByID(IResponseFormatter response,Request request) {
       try {
