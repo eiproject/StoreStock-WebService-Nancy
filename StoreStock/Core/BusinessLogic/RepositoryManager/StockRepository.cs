@@ -6,16 +6,15 @@ using System.Text.Json;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class Repository : IRepository {
+  class StockRepository : IStockRepository {
     private IStore _store;
     private IFactory _factory;
-    internal Repository(IStore TheStore, IFactory factory) {
+    internal StockRepository(IStore TheStore, IFactory factory) {
       _store = TheStore;
       _factory = factory;
     }
-
     // Method of the repository start here
-    Stock IRepository.CreateStoreStock(string type,
+    Stock IStockRepository.CreateStock(string type,
       int amount,
       string title,
       decimal price,
@@ -27,15 +26,8 @@ namespace StoreStock.BusinessLogic {
       _store.AddStock(stock);
       return stock;
     }
-    List<Stock> IRepository.ReadStoreStock() {
-      return _store.GetListOfStoreStock();
-    }
-    List<Stock> IRepository.ReadStocksByType(string type) {
-      IEnumerable<Stock> filteredData = _store.GetListOfStoreStock().Where(
-        data => data.Type == type);
-      return filteredData.ToList();
-    }
-    Stock IRepository.ReadStocksById(int id) {
+
+    Stock IStockRepository.ReadStock(int id) {
       IEnumerable<Stock> filteredData = _store.GetListOfStoreStock().Where(
         data => data.ID == id);
       if (filteredData.Count() > 0) {
@@ -45,8 +37,7 @@ namespace StoreStock.BusinessLogic {
         return null;
       }
     }
-
-    Stock IRepository.UpdateStockAmount(int stockID, int amountDifference) {
+    Stock IStockRepository.UpdateStock_Amount(int stockID, int amountDifference) {
       Stock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
       if (stock != null) {
         if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {
@@ -63,8 +54,7 @@ namespace StoreStock.BusinessLogic {
 
       return stock;
     }
-
-    bool IRepository.DeleteStoreStock(int stockID) {
+    bool IStockRepository.DeleteStock(int stockID) {
       Stock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
       if (stock != null) {
         _store.RemoveStock(stock);

@@ -116,6 +116,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\BusinessLogic\RepositoryManager\IStoreRepository.cs" />
+    <Compile Include="Core\BusinessLogic\RepositoryManager\StoreRepository.cs" />
     <Compile Include="Core\DummyData\StringInputParser.cs" />
     <Compile Include="Core\Models\Factory\Factory.cs" />
     <Compile Include="Core\Models\Factory\IFactory.cs" />
@@ -134,8 +136,8 @@
     <Compile Include="Core\Models\Object\Book.cs" />
     <Compile Include="Core\Models\Object\Pen.cs" />
     <Compile Include="Core\Models\Object\Pencil.cs" />
-    <Compile Include="Core\BusinessLogic\RepositoryManager\IRepository.cs" />
-    <Compile Include="Core\BusinessLogic\RepositoryManager\Repository.cs" />
+    <Compile Include="Core\BusinessLogic\RepositoryManager\IStockRepository.cs" />
+    <Compile Include="Core\BusinessLogic\RepositoryManager\StockRepository.cs" />
     <Compile Include="Core\Models\ObjectInterface\Store.cs" />
     <Compile Include="Services\Bootstrapper\Bootstrapper.cs" />
     <Compile Include="Services\Module\MainModule.cs" />

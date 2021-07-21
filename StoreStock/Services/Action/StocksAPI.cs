@@ -15,14 +15,14 @@ namespace StoreStockWeb.Services {
     SerializableStoreStock _storeData;
     ModelStoreStock _storeModel;
     IFactory _factory;
-    IRepository _repository;
+    IStockRepository _repository;
     SerializableStock _stockData;
     ModelStock _stockModel;
     HttpStatusCode _statusCode;
 
     public StocksAPI(
         IStore store, SerializableStoreStock storeData,
-        ModelStoreStock storeModel, IFactory factory, IRepository repository,
+        ModelStoreStock storeModel, IFactory factory, IStockRepository repository,
         SerializableStock stockData, ModelStock stockModel) {
       _store = store;
       _storeData = storeData;
@@ -41,8 +41,8 @@ namespace StoreStockWeb.Services {
         }
         else {
           _storeData.SetStoreName(_store.GetStoreName());
-          if (_repository.ReadStocksById((int)id) != null) {
-            _stockData.SetStock(_repository.ReadStocksById((int)id));
+          if (_repository.ReadStock((int)id) != null) {
+            _stockData.SetStock(_repository.ReadStock((int)id));
             _statusCode = HttpStatusCode.OK;
           }
           else {
@@ -78,7 +78,7 @@ namespace StoreStockWeb.Services {
         string subCategory = StringToArray["sub-category"];
         string size = StringToArray["size"];
 
-        Stock newStock = _repository.CreateStoreStock(
+        Stock newStock = _repository.CreateStock(
           type, amount, title, price, category, subCategory, size
           );
         if (newStock != null) {
@@ -101,9 +101,9 @@ namespace StoreStockWeb.Services {
         // Parsing query
         int id = request.Query["id"];
         int amount = request.Query["amount"];
-        Stock stock = _repository.ReadStocksById(id);
+        Stock stock = _repository.ReadStock(id);
         if (stock != null) {
-          Stock stockToUpdate = _repository.UpdateStockAmount(id, amount);
+          Stock stockToUpdate = _repository.UpdateStock_Amount(id, amount);
           if (stockToUpdate != null) {
             _stockData.SetStock(stockToUpdate);
             _statusCode = HttpStatusCode.OK;
@@ -126,7 +126,7 @@ namespace StoreStockWeb.Services {
       try {
         // Parsing query
         int id = request.Query["id"];
-        bool res = _repository.DeleteStoreStock(id);
+        bool res = _repository.DeleteStock(id);
         if (res) {
           _statusCode = HttpStatusCode.OK;
         }

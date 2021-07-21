@@ -18,7 +18,7 @@ namespace StoreStockWeb.Services {
       SerializableStoreStock storeData = new SerializableStoreStock();
       ModelStoreStock storeModel = new ModelStoreStock(storeData);
       IFactory factory = new Factory(_store);
-      IRepository repository = new Repository(_store, factory);
+      IStoreRepository repository = new StoreRepository(_store, factory);
 
       SerializableStock stockData = new SerializableStock();
       ModelStock stockModel = new ModelStock(stockData);

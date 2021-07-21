@@ -15,7 +15,7 @@ namespace StoreStock {
       _store = bookStore;
     }
     internal void UseDummyData() {
-      IRepository repo = new Repository(_store, _factory);
+      IStockRepository repo = new StockRepository(_store, _factory);
       GenerateDummyData dummy = new GenerateDummyData(repo);
       dummy.Generate();
     }

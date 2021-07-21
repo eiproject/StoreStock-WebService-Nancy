@@ -7,8 +7,8 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   class GenerateDummyData {
     private string[] _testInput;
-    private IRepository _repository;
-    internal GenerateDummyData(IRepository repository) {
+    private IStockRepository _repository;
+    internal GenerateDummyData(IStockRepository repository) {
       _repository = repository;
     }
     internal void Generate() {

@@ -5,14 +5,14 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   internal class StringInputParser {
-    private IRepository _repository;
+    private IStockRepository _repository;
     private string[] _parsingData;
-    internal StringInputParser(IRepository repository) {
+    internal StringInputParser(IStockRepository repository) {
       _repository = repository;
     }
     internal void Save(string inputText) {
       _parsingData = inputText.Split('#');
-      Stock createdStock = _repository.CreateStoreStock(
+      _repository.CreateStock(
         type: _parsingData[0].ToLower(),
       amount: int.Parse(_parsingData[1]),
       title: _parsingData[3],
