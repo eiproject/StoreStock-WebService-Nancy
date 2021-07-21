@@ -35,11 +35,11 @@ namespace StoreStock.BusinessLogic {
         data => data.Type == type);
       return filteredData.ToList();
     }
-    List<IStock> IRepository.ReadStocksById(int id) {
+    IStock IRepository.ReadStocksById(int id) {
       IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
         data => data.ID == id);
       if (filteredData.Count() > 0) {
-        return filteredData.ToList();
+        return filteredData.First();
       }
       else {
         return null;

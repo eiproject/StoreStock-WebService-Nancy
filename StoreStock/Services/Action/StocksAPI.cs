@@ -41,8 +41,8 @@ namespace StoreStockWeb.Services {
         }
         else {
           _storeData.SetStoreName(_store.GetStoreName());
-          if (_repository.ReadStocksById((int)id).Count > 0) {
-            _storeData.SetStoreData(_repository.ReadStocksById((int)id));
+          if (_repository.ReadStocksById((int)id) != null) {
+            _stockData.SetStock(_repository.ReadStocksById((int)id));
             _statusCode = HttpStatusCode.OK;
           }
           else {
@@ -55,7 +55,7 @@ namespace StoreStockWeb.Services {
         _statusCode = HttpStatusCode.InternalServerError;
       }
 
-      return  response.AsJson(_storeModel.StoreStockData, _statusCode);
+      return response.AsJson(_stockModel.SerializedStock, _statusCode);
     }
 
     internal Response CreateStock(IResponseFormatter response, Request request) {
@@ -101,11 +101,11 @@ namespace StoreStockWeb.Services {
         // Parsing query
         int id = request.Query["id"];
         int amount = request.Query["amount"];
-        List<IStock> listStock = _repository.ReadStocksById(id);
-        if (listStock.Count > 0) {
-          IStock stock = _repository.UpdateStockAmount(id, amount);
-          if (stock != null) {
-            _stockData.SetStock(stock);
+        IStock stock = _repository.ReadStocksById(id);
+        if (stock != null) {
+          IStock stockToUpdate = _repository.UpdateStockAmount(id, amount);
+          if (stockToUpdate != null) {
+            _stockData.SetStock(stockToUpdate);
             _statusCode = HttpStatusCode.OK;
           }
           else {
