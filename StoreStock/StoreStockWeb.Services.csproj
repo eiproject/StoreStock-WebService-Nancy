@@ -126,7 +126,6 @@
     <Compile Include="Services\APILogic\StockAPI.cs" />
     <Compile Include="Services\APILogic\StoreAPI.cs" />
     <Compile Include="Services\Module\StockModule.cs" />
-    <Compile Include="Services\Serializer\SerializableStock.cs" />
     <Compile Include="Services\Module\StoreModule.cs" />
     <Compile Include="Core\DummyData\GenerateDummyData.cs" />
     <Compile Include="Core\Models\Object\Book.cs" />
@@ -139,7 +138,6 @@
     <Compile Include="Services\Module\MainModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Serializer\SerializableStoreStock.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>

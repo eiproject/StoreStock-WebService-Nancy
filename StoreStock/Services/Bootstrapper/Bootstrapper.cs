@@ -20,22 +20,17 @@ using TinyIoC;
 namespace StoreStockWeb.Services {
 	public class Bootstrapper : DefaultNancyBootstrapper
 	{
-    protected override void ConfigureApplicationContainer(TinyIoCContainer container) {
+		protected override void ConfigureApplicationContainer(TinyIoCContainer container) {
 			Store _store = new Store("Nano Store");
 			IFactory factory = new Factory(_store);
 			IStockRepository repository = new StockRepository(_store, factory);
 			IStoreRepository storerepository = new StoreRepository(_store, factory);
-			
-			SerializableStoreStock storeData = new SerializableStoreStock();
-			SerializableStock stockData = new SerializableStock();
 
 			base.ConfigureApplicationContainer(container);
 			container.Register(_store);
-			container.Register(storeData);
 			container.Register(factory);
 			container.Register(repository);
 			container.Register(storerepository);
-			container.Register(stockData);
 		}
 
 		protected override void ApplicationStartup(TinyIoCContainer container,
