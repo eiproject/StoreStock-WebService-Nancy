@@ -54,15 +54,15 @@ namespace StoreStock.BusinessLogic {
 
       return stock;
     }
-    bool IStockRepository.DeleteStock(int stockID) {
+    Stock IStockRepository.DeleteStock(int stockID) {
       Stock stock = _store.StoreData.Find(data => data.ID == stockID);
       if (stock != null) {
         _store.RemoveStock(stock);
-        return true;
+        return stock;
       }
       else {
         Console.WriteLine("Input ID INVALID | DeleteStoreStock");
-        return false;
+        return null;
       }
     }
   }

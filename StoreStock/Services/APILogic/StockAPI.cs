@@ -120,8 +120,9 @@ namespace StoreStockWeb.Services {
       try {
         // Parsing query
         int id = request.Query["id"];
-        bool res = _repository.DeleteStock(id);
-        if (res) {
+        Stock stock = _repository.DeleteStock(id);
+        if (stock != null) {
+          _stockData.SetStock(stock);
           _statusCode = HttpStatusCode.OK;
         }
         else {

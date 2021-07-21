@@ -13,6 +13,6 @@ namespace StoreStock.BusinessLogic {
       string size);
     Stock ReadStock(int id);
     Stock UpdateStock_Amount(int stockID, int amount);
-    bool DeleteStock(int stockID);
+    Stock DeleteStock(int stockID);
   }
 }
