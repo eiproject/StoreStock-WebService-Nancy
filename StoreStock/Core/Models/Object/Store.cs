@@ -28,6 +28,9 @@ namespace StoreStock.Models {
     public void RemoveStock(Stock stock) {
       _storeData.Remove(stock);
     }
+    public void UpdateName(string name) {
+      _storeName = name;
+    }
     internal Store(string storeName) {
       _storeData = new List<Stock>();
       _storeName = storeName;

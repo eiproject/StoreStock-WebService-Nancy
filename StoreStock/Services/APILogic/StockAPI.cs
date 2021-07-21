@@ -51,35 +51,40 @@ namespace StoreStockWeb.Services {
       try {
         RequestStream id = request.Body;
         long length = request.Body.Length;
-        byte[] data = new byte[length];
-        id.Read(data, 0, (int)length);
-        string body = Encoding.Default.GetString(data);
+        if (length != 0) {
+          byte[] data = new byte[length];
+          id.Read(data, 0, (int)length);
+          string body = Encoding.Default.GetString(data);
 
-        Dictionary<string, string> requestDict = body.Split('&')
-      .Select(s => s.Split('='))
-      .ToDictionary(k => k.ElementAt(0).ToLower(), v => HttpUtility.UrlDecode(v.ElementAt(1)));
+          Dictionary<string, string> requestDict = body.Split('&')
+        .Select(s => s.Split('='))
+        .ToDictionary(k => k.ElementAt(0).ToLower(), v => HttpUtility.UrlDecode(v.ElementAt(1)));
 
-        if (requestDict.ContainsKey("type") && 
-          requestDict.ContainsKey("amount") &&
-          requestDict.ContainsKey("title") &&
-          requestDict.ContainsKey("price") &&
-          requestDict.ContainsKey("category") &&
-          requestDict.ContainsKey("sub-category") &&
-          requestDict.ContainsKey("size")) {
-          string type = requestDict["type"];
-          int amount = int.Parse(requestDict["amount"]);
-          string title = requestDict["title"];
-          decimal price = decimal.Parse(requestDict["price"]);
-          string category = requestDict["category"];
-          string subCategory = requestDict["sub-category"];
-          string size = requestDict["size"];
+          if (requestDict.ContainsKey("type") &&
+            requestDict.ContainsKey("amount") &&
+            requestDict.ContainsKey("title") &&
+            requestDict.ContainsKey("price") &&
+            requestDict.ContainsKey("category") &&
+            requestDict.ContainsKey("sub-category") &&
+            requestDict.ContainsKey("size")) {
+            string type = requestDict["type"];
+            int amount = int.Parse(requestDict["amount"]);
+            string title = requestDict["title"];
+            decimal price = decimal.Parse(requestDict["price"]);
+            string category = requestDict["category"];
+            string subCategory = requestDict["sub-category"];
+            string size = requestDict["size"];
 
-          Stock newStock = _repository.CreateStock(
-            type, amount, title, price, category, subCategory, size
-            );
-          if (newStock != null) {
-            _stock = newStock;
-            _statusCode = HttpStatusCode.OK;
+            Stock newStock = _repository.CreateStock(
+              type, amount, title, price, category, subCategory, size
+              );
+            if (newStock != null) {
+              _stock = newStock;
+              _statusCode = HttpStatusCode.OK;
+            }
+            else {
+              _statusCode = HttpStatusCode.BadRequest;
+            }
           }
           else {
             _statusCode = HttpStatusCode.BadRequest;

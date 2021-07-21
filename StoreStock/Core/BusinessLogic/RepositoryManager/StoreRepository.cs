@@ -16,5 +16,8 @@ namespace StoreStock.BusinessLogic {
     List<Stock> IStoreRepository.ReadStoreStock() {
       return _store.StoreData;
     }
+    void IStoreRepository.UpdateStore(string storeName) {
+      _store.UpdateName(storeName);
+    }
   }
 }

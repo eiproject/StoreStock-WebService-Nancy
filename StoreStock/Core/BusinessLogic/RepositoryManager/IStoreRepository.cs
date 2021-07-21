@@ -8,5 +8,6 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   public interface IStoreRepository {
     List<Stock> ReadStoreStock();
+    void UpdateStore(string name);
   }
 }
