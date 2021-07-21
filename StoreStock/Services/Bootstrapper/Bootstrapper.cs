@@ -27,19 +27,15 @@ namespace StoreStockWeb.Services {
 			IStoreRepository storerepository = new StoreRepository(_store, factory);
 			
 			SerializableStoreStock storeData = new SerializableStoreStock();
-			ModelStoreStock storeModel = new ModelStoreStock(storeData);
 			SerializableStock stockData = new SerializableStock();
-			ModelStock stockModel = new ModelStock(stockData);
 
 			base.ConfigureApplicationContainer(container);
 			container.Register(_store);
 			container.Register(storeData);
-			container.Register(storeModel);
 			container.Register(factory);
 			container.Register(repository);
 			container.Register(storerepository);
 			container.Register(stockData);
-			container.Register(stockModel);
 		}
 
 		protected override void ApplicationStartup(TinyIoCContainer container,

@@ -15,17 +15,17 @@ namespace StoreStockWeb.Services {
     private IFactory _factory;
     private IStockRepository _repository;
     private SerializableStock _stockData;
-    private ModelStock _stockModel;
     private HttpStatusCode _statusCode;
 
     public StockAPI(
         Store store, IFactory factory, IStockRepository repository,
-        SerializableStock stockData, ModelStock stockModel) {
+        SerializableStock stockData) {
       _store = store;
       _factory = factory;
       _repository = repository;
       _stockData = stockData;
-      _stockModel = stockModel;
+
+      // _stockData.SetStock(null);
     }
     internal Response ReadStockByID(IResponseFormatter response,Request request) {
       try {
@@ -49,7 +49,7 @@ namespace StoreStockWeb.Services {
         _statusCode = HttpStatusCode.InternalServerError;
       }
 
-      return response.AsJson(_stockModel.SerializedStock, _statusCode);
+      return response.AsJson(_stockData, _statusCode);
     }
 
     internal Response CreateStock(IResponseFormatter response, Request request) {
@@ -87,7 +87,7 @@ namespace StoreStockWeb.Services {
         Console.WriteLine(e);
         _statusCode = HttpStatusCode.InternalServerError;
       }
-      return response.AsJson(_stockModel.SerializedStock, _statusCode);
+      return response.AsJson(_stockData, _statusCode);
     }
 
     internal Response UpdateStockAmount(IResponseFormatter response, Request request) {
@@ -114,7 +114,7 @@ namespace StoreStockWeb.Services {
         _statusCode = HttpStatusCode.InternalServerError;
       }
       // save information
-      return response.AsJson(_stockModel.SerializedStock, _statusCode);
+      return response.AsJson(_stockData, _statusCode);
     }
     internal Response DeleteStockByID(IResponseFormatter response, Request request) {
       try {
@@ -131,7 +131,7 @@ namespace StoreStockWeb.Services {
       catch {
         _statusCode = HttpStatusCode.InternalServerError;
       }
-      return response.AsJson(_stockModel.SerializedStock, _statusCode);
+      return response.AsJson(_stockData, _statusCode);
     }
   }
 }
