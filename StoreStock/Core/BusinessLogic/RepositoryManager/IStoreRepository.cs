@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  interface IStoreRepository {
+  public interface IStoreRepository {
     List<Stock> ReadStoreStock();
   }
 }

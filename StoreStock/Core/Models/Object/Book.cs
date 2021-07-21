@@ -27,7 +27,7 @@ namespace StoreStock.Models {
         void IStock.UpdateStockAmount(int newAmount) {
           _amount += newAmount;
         }*/
-    internal Book(IStore store, int id, int amount, string title,
+    internal Book(Store store, int id, int amount, string title,
           decimal price, string publisher, string genre, string size) : base(store){
       _store = store;
       _type = "book";

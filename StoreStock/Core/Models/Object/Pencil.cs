@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StoreStock.Models {
   class Pencil : Stock { 
-    internal Pencil(IStore store, int id,
+    internal Pencil(Store store, int id,
       int amount,
       string title,
       decimal price,

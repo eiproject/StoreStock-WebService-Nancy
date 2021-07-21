@@ -7,14 +7,14 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class StoreRepository : IStoreRepository {
-    private IStore _store;
+    private Store _store;
     private IFactory _factory;
-    internal StoreRepository(IStore TheStore, IFactory factory) {
+    internal StoreRepository(Store TheStore, IFactory factory) {
       _store = TheStore;
       _factory = factory;
     }
     List<Stock> IStoreRepository.ReadStoreStock() {
-      return _store.GetListOfStoreStock();
+      return _store.StoreData;
     }
   }
 }

@@ -121,12 +121,11 @@
     <Compile Include="Core\DummyData\StringInputParser.cs" />
     <Compile Include="Core\Models\Factory\Factory.cs" />
     <Compile Include="Core\Models\Factory\IFactory.cs" />
-    <Compile Include="Core\Models\ObjectInterface\IStock.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStore.cs" />
     <Compile Include="Core\Models\Object\Stock.cs" />
     <Compile Include="Core\Run.cs" />
-    <Compile Include="Services\Action\StocksAPI.cs" />
-    <Compile Include="Services\Action\StoresAPI.cs" />
+    <Compile Include="Services\Action\StockAPI.cs" />
+    <Compile Include="Services\Action\StoreAPI.cs" />
     <Compile Include="Services\Module\StockModule.cs" />
     <Compile Include="Services\Model\ModelStock.cs" />
     <Compile Include="Services\Model\ModelStoreStock.cs" />

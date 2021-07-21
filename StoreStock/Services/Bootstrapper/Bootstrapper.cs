@@ -21,9 +21,10 @@ namespace StoreStockWeb.Services {
 	public class Bootstrapper : DefaultNancyBootstrapper
 	{
     protected override void ConfigureApplicationContainer(TinyIoCContainer container) {
-			IStore _store = new Store("Nano Store");
+			Store _store = new Store("Nano Store");
 			IFactory factory = new Factory(_store);
 			IStockRepository repository = new StockRepository(_store, factory);
+			IStoreRepository storerepository = new StoreRepository(_store, factory);
 			
 			SerializableStoreStock storeData = new SerializableStoreStock();
 			ModelStoreStock storeModel = new ModelStoreStock(storeData);
@@ -36,6 +37,7 @@ namespace StoreStockWeb.Services {
 			container.Register(storeModel);
 			container.Register(factory);
 			container.Register(repository);
+			container.Register(storerepository);
 			container.Register(stockData);
 			container.Register(stockModel);
 		}
@@ -45,7 +47,7 @@ namespace StoreStockWeb.Services {
 			base.ApplicationStartup(container, pipelines);
 
 			// create dummy data 
-			IStore store = container.Resolve<IStore>();
+			Store store = container.Resolve<Store>();
 			IFactory factory = new Factory(store);
 			//  Start Store Stock Services
 			Run storeStock = new Run(factory);

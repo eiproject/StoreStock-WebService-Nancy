@@ -2,7 +2,7 @@
 
 namespace StoreStock.Models {
   public class Stock {
-    protected IStore _store;
+    protected Store _store;
     protected int _id;
     protected string _title;
     protected int _amount;
@@ -38,7 +38,7 @@ namespace StoreStock.Models {
       _amount += newAmount;
     }
     /*The Constructor*/
-    public Stock(IStore store) {
+    public Stock(Store store) {
       _store = store;
     }
   }

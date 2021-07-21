@@ -4,8 +4,8 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   class Factory : IFactory {
     private Stock _newStock;
-    private IStore _store;
-    internal Factory(IStore store) {
+    private Store _store;
+    internal Factory(Store store) {
       _store = store;
     }
     Stock IFactory.FactoryStoreStock(

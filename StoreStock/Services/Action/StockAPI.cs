@@ -10,23 +10,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace StoreStockWeb.Services {
-  public class StocksAPI {
-    IStore _store;
-    SerializableStoreStock _storeData;
-    ModelStoreStock _storeModel;
-    IFactory _factory;
-    IStockRepository _repository;
-    SerializableStock _stockData;
-    ModelStock _stockModel;
-    HttpStatusCode _statusCode;
+  public class StockAPI {
+    private Store _store;
+    private IFactory _factory;
+    private IStockRepository _repository;
+    private SerializableStock _stockData;
+    private ModelStock _stockModel;
+    private HttpStatusCode _statusCode;
 
-    public StocksAPI(
-        IStore store, SerializableStoreStock storeData,
-        ModelStoreStock storeModel, IFactory factory, IStockRepository repository,
+    public StockAPI(
+        Store store, IFactory factory, IStockRepository repository,
         SerializableStock stockData, ModelStock stockModel) {
       _store = store;
-      _storeData = storeData;
-      _storeModel = storeModel;
       _factory = factory;
       _repository = repository;
       _stockData = stockData;
@@ -40,7 +35,6 @@ namespace StoreStockWeb.Services {
           _statusCode = HttpStatusCode.NotFound;
         }
         else {
-          _storeData.SetStoreName(_store.GetStoreName());
           if (_repository.ReadStock((int)id) != null) {
             _stockData.SetStock(_repository.ReadStock((int)id));
             _statusCode = HttpStatusCode.OK;

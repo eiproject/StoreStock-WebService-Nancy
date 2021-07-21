@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StoreStock.Models {
   class Pen : Stock {
-    internal Pen(IStore store, int id, int amount, string title, decimal price,
+    internal Pen(Store store, int id, int amount, string title, decimal price,
       string brand, string color, string size) : base(store) {
       _store = store;
       _type = "pen";

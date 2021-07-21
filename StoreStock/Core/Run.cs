@@ -4,14 +4,14 @@ using StoreStock.Models;
 
 namespace StoreStock {
   class Run {
-    private IStore _store;
+    private Store _store;
     private IFactory _factory;
-    internal IStore Store { get { return _store; } }
+    internal Store Store { get { return _store; } }
     internal Run(IFactory factory) {
       _factory = factory;
     }
-    internal void Start(IStore bookStore) {
-      // IStore bookStore = new Store("Nano Store");
+    internal void Start(Store bookStore) {
+      // Store bookStore = new Store("Nano Store");
       _store = bookStore;
     }
     internal void UseDummyData() {
