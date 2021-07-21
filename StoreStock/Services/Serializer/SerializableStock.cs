@@ -9,7 +9,7 @@ namespace StoreStockWeb.Services {
   [Serializable]
   public class SerializableStock {
     private Stock _stock;
-    public Stock Stock { get { return _stock; } }
+    public Stock Data { get { return _stock; } }
     internal SerializableStock() { }
     internal void SetStock(Stock newStock) {
       _stock = newStock;

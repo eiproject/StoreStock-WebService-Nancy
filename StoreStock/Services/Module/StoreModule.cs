@@ -12,8 +12,6 @@ using Nancy.IO;
 namespace StoreStockWeb.Services {
   public class StoreModule : NancyModule {
     public StoreModule(StoreAPI storeAPI) : base("/store") {
-
-      // Basic constrcutor end here
       Get["/"] = _ => storeAPI.ReadStore(Response, Request);
     }
   }
