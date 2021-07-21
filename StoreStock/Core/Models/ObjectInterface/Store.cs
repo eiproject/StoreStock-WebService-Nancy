@@ -4,11 +4,11 @@ using System.Text;
 
 namespace StoreStock.Models {
   public class Store : IStore{
-    private List<IStock> _storeData;
+    private List<Stock> _storeData;
     private string _storeName = "no-name";
     private const decimal _maxDiscount = 0.3m; // max discount
     private const decimal _maxAmountThatGetDiscount = 1000m; // max stock that get discount
-    internal Store(List<IStock> list, string storeName) {
+    internal Store(List<Stock> list, string storeName) {
       _storeData = list;
       _storeName = storeName;
     }
@@ -25,14 +25,14 @@ namespace StoreStock.Models {
         return -1;
       }
     }
-    List<IStock> IStore.GetListOfStoreStock() {
+    List<Stock> IStore.GetListOfStoreStock() {
       return _storeData;
     }
-    void IStore.AddStock(IStock newStock) {
+    void IStore.AddStock(Stock newStock) {
       _storeData.Add(newStock);
     }
 
-    void IStore.RemoveStock(IStock stock) {
+    void IStore.RemoveStock(Stock stock) {
       _storeData.Remove(stock);
     }
   }

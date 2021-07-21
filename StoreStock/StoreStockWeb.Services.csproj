@@ -121,6 +121,7 @@
     <Compile Include="Core\Models\Factory\IFactory.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStock.cs" />
     <Compile Include="Core\Models\ObjectInterface\IStore.cs" />
+    <Compile Include="Core\Models\Object\Stock.cs" />
     <Compile Include="Core\Run.cs" />
     <Compile Include="Services\Action\StocksAPI.cs" />
     <Compile Include="Services\Action\StoresAPI.cs" />

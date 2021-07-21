@@ -3,29 +3,23 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class Factory : IFactory {
-    private IStock _newStock;
+    private Stock _newStock;
     private IStore _store;
     internal Factory(IStore store) {
       _store = store;
     }
-    IStock IFactory.FactoryStoreStock(
+    Stock IFactory.FactoryStoreStock(
       string type, int id, int amount, string title, decimal price,
-      string publisher, string genre, string size) {
+      string category, string subCategpry, string size) {
 
       if (type.ToLower() == "book") {
-        _newStock = new Book(_store);
-        _newStock.UpdateStockInformation(
-      type, id, amount, title, price, publisher, genre, size);
+        _newStock = new Book(_store, id, amount, title, price, category, subCategpry, size);
       }
       else if (type.ToLower() == "pen") {
-        _newStock = new Pen(_store);
-        _newStock.UpdateStockInformation(
-      type, id, amount, title, price, publisher, genre, size);
+        _newStock = new Pen(_store, id, amount, title, price, category, subCategpry, size);
       }
       else if (type.ToLower() == "pencil") {
-        _newStock = new Pencil(_store);
-        _newStock.UpdateStockInformation(
-      type, id, amount, title, price, publisher, genre, size);
+        _newStock = new Pencil(_store, id, amount, title, price, category, subCategpry, size);
       }
       else {
         Console.WriteLine("Type UNVALID");

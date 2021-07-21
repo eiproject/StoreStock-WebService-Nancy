@@ -4,17 +4,17 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   public interface IRepository {
-    IStock CreateStoreStock(string type,
+    Stock CreateStoreStock(string type,
       int amount,
       string title,
       decimal price,
       string category,
       string subcategory,
       string size);
-    List<IStock> ReadStoreStock();
-    List<IStock> ReadStocksByType(string type);
-    IStock ReadStocksById(int id);
-    IStock UpdateStockAmount(int stockID, int amount);
+    List<Stock> ReadStoreStock();
+    List<Stock> ReadStocksByType(string type);
+    Stock ReadStocksById(int id);
+    Stock UpdateStockAmount(int stockID, int amount);
     bool DeleteStoreStock(int stockID);
   }
 }

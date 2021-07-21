@@ -12,7 +12,7 @@ namespace StoreStock.BusinessLogic {
     }
     internal void Save(string inputText) {
       _parsingData = inputText.Split('#');
-      IStock createdStock = _repository.CreateStoreStock(
+      Stock createdStock = _repository.CreateStoreStock(
         type: _parsingData[0].ToLower(),
       amount: int.Parse(_parsingData[1]),
       title: _parsingData[3],

@@ -78,7 +78,7 @@ namespace StoreStockWeb.Services {
         string subCategory = StringToArray["sub-category"];
         string size = StringToArray["size"];
 
-        IStock newStock = _repository.CreateStoreStock(
+        Stock newStock = _repository.CreateStoreStock(
           type, amount, title, price, category, subCategory, size
           );
         if (newStock != null) {
@@ -101,9 +101,9 @@ namespace StoreStockWeb.Services {
         // Parsing query
         int id = request.Query["id"];
         int amount = request.Query["amount"];
-        IStock stock = _repository.ReadStocksById(id);
+        Stock stock = _repository.ReadStocksById(id);
         if (stock != null) {
-          IStock stockToUpdate = _repository.UpdateStockAmount(id, amount);
+          Stock stockToUpdate = _repository.UpdateStockAmount(id, amount);
           if (stockToUpdate != null) {
             _stockData.SetStock(stockToUpdate);
             _statusCode = HttpStatusCode.OK;

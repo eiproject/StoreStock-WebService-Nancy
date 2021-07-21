@@ -15,7 +15,7 @@ namespace StoreStock.BusinessLogic {
     }
 
     // Method of the repository start here
-    IStock IRepository.CreateStoreStock(string type,
+    Stock IRepository.CreateStoreStock(string type,
       int amount,
       string title,
       decimal price,
@@ -23,20 +23,20 @@ namespace StoreStock.BusinessLogic {
       string genre,
       string size) {
       int id = _store.GetLastId() + 1;
-      IStock stock = _factory.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
+      Stock stock = _factory.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
       _store.AddStock(stock);
       return stock;
     }
-    List<IStock> IRepository.ReadStoreStock() {
+    List<Stock> IRepository.ReadStoreStock() {
       return _store.GetListOfStoreStock();
     }
-    List<IStock> IRepository.ReadStocksByType(string type) {
-      IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
+    List<Stock> IRepository.ReadStocksByType(string type) {
+      IEnumerable<Stock> filteredData = _store.GetListOfStoreStock().Where(
         data => data.Type == type);
       return filteredData.ToList();
     }
-    IStock IRepository.ReadStocksById(int id) {
-      IEnumerable<IStock> filteredData = _store.GetListOfStoreStock().Where(
+    Stock IRepository.ReadStocksById(int id) {
+      IEnumerable<Stock> filteredData = _store.GetListOfStoreStock().Where(
         data => data.ID == id);
       if (filteredData.Count() > 0) {
         return filteredData.First();
@@ -46,8 +46,8 @@ namespace StoreStock.BusinessLogic {
       }
     }
 
-    IStock IRepository.UpdateStockAmount(int stockID, int amountDifference) {
-      IStock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
+    Stock IRepository.UpdateStockAmount(int stockID, int amountDifference) {
+      Stock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
       if (stock != null) {
         if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {
           Console.WriteLine("Input amount INVALID | UpdateStoreStock");
@@ -65,7 +65,7 @@ namespace StoreStock.BusinessLogic {
     }
 
     bool IRepository.DeleteStoreStock(int stockID) {
-      IStock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
+      Stock stock = _store.GetListOfStoreStock().Find(data => data.ID == stockID);
       if (stock != null) {
         _store.RemoveStock(stock);
         return true;

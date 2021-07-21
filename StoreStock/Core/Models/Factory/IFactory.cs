@@ -2,7 +2,7 @@
 
 namespace StoreStock.BusinessLogic {
   public interface IFactory {
-    IStock FactoryStoreStock(string type,
+    Stock FactoryStoreStock(string type,
   int id,
   int amount,
   string title,

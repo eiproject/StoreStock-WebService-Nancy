@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace StoreStockWeb.Services {
   [Serializable]
   public class SerializableStock {
-    private IStock _stock;
-    public IStock Stock { get { return _stock; } }
+    private Stock _stock;
+    public Stock Stock { get { return _stock; } }
     internal SerializableStock() { }
-    internal void SetStock(IStock newStock) {
+    internal void SetStock(Stock newStock) {
       _stock = newStock;
     }
   }
