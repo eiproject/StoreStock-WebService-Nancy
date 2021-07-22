@@ -13,10 +13,10 @@ namespace StoreStock.BusinessLogic {
     private IState _shuttingDown;
 
     private IState _state;
-    internal SStockRepository(Store store, IFactory factory) {
-      _init = new InitState(store, factory);
-      _running = new RunningState(store, factory);
-      _shuttingDown = new ShuttingDownState(store, factory);
+    internal SStockRepository(IFactory factory) {
+      _init = new InitState(factory);
+      _running = new RunningState(factory);
+      _shuttingDown = new ShuttingDownState(factory);
       
       _state = _init;
     }

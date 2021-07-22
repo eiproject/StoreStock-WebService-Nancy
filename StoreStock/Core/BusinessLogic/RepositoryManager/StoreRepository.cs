@@ -9,8 +9,8 @@ namespace StoreStock.BusinessLogic {
   class StoreRepository : IStoreRepository {
     private Store _store;
     private IFactory _factory;
-    internal StoreRepository(Store theStore, IFactory factory) {
-      _store = theStore;
+    internal StoreRepository(IFactory factory) {
+      _store = factory.GetStore();
       _factory = factory;
     }
     List<Stock> IStoreRepository.ReadStoreStock() {

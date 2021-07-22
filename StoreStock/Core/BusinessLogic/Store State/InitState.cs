@@ -9,15 +9,15 @@ namespace StoreStock.BusinessLogic {
   class InitState : IState {
     private Store _store;
     private IFactory _factory;
-    internal InitState(Store theStore, IFactory factory) {
-      _store = theStore;
+    internal InitState(IFactory factory) {
       _factory = factory;
+      _store = factory.GetStore();
 
-      GenerateDummyData(theStore, factory);
+      GenerateDummyData(factory);
     }
-    void GenerateDummyData(Store store, IFactory factory) {
+    void GenerateDummyData(IFactory factory) {
       Run storeStock = new Run(factory);
-      storeStock.Start(store);
+      storeStock.Start(_store);
       storeStock.UseDummyData();
     }
     // Method of the repository start here

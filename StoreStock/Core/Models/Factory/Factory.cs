@@ -26,5 +26,9 @@ namespace StoreStock.BusinessLogic {
       }
       return _newStock;
     }
+
+    Store IFactory.GetStore() {
+      return _store;
+    }
   }
 }

@@ -9,9 +9,9 @@ namespace StoreStock.BusinessLogic {
   class RunningState : IState {
     private Store _store;
     private IFactory _factory;
-    internal RunningState(Store theStore, IFactory factory) {
-      _store = theStore;
+    internal RunningState(IFactory factory) {
       _factory = factory;
+      _store = factory.GetStore();
     }
     // Method of the repository start here
     Stock IState.CreateStock(string type,
