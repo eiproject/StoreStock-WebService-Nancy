@@ -21,8 +21,8 @@ namespace StoreStockWeb.Services {
 			Store _store = new Store("Nano Store");
 			IFactory factory = new Factory(_store);
 			IStockRepository repository = new SStockRepository(factory);
-			IStoreRepository storerepository = new StoreRepository(factory);
-			StateControl stateControl = new StateControl(repository);
+			IStoreRepository storerepository = new SStoreRepository(factory);
+			StateControl stateControl = new StateControl(repository, storerepository);
 
 			base.ConfigureApplicationContainer(container);
 			container.Register(_store);
@@ -35,7 +35,6 @@ namespace StoreStockWeb.Services {
 		protected override void ApplicationStartup(TinyIoCContainer container,
 			IPipelines pipelines) {
 			base.ApplicationStartup(container, pipelines);
-			new StateControl(container.Resolve<IStockRepository>());
 			CookieBasedSessions.Enable(pipelines);
 		}
 	}

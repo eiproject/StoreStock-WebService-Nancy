@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StoreStock.Models;
+﻿using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class SStockRepository : IStockRepository{
@@ -16,7 +11,7 @@ namespace StoreStock.BusinessLogic {
     private IState _state;
     internal SStockRepository(IFactory factory) {
       _factory = factory;
-      _state = _init;
+      // _state = _init;
     }
 
     Stock IStockRepository.CreateStock(string type,
