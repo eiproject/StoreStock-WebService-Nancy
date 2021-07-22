@@ -17,31 +17,34 @@ namespace StoreStockWeb.Services {
       NancyHost host = new NancyHost(new Uri(_hostUri), bootstrapper);
 
       var something = TinyIoC.TinyIoCContainer.Current;
-      host.Start(); // start hosting
 
+      // TinyIoC.TinyIoCContainer container = TinyIoC.TinyIoCContainer.Current;
+      // container.Register<IStockRepository, SStockRepository>();
+      // container.Resolve<Store>();
+
+      host.Start(); // start hosting
       Console.WriteLine($"Host started on { _hostUri }");
 
       Console.WriteLine("\nPress any key to initialize data.");
       Console.ReadKey();
-      Console.WriteLine("\nInitializing data...");
+      Console.WriteLine("Initializing data...");
       StateControl.Init();
       Console.WriteLine("Initializing, OK.");
 
       Console.WriteLine("\nPress any key to start.");
       Console.ReadKey();
-      Console.WriteLine("\nStarting...");
+      Console.WriteLine("Starting...");
       StateControl.Run();
       Console.WriteLine("Starting, OK.");
       
       Console.WriteLine("\nPress any key to shutting down.");
       Console.ReadKey();
-      Console.WriteLine("\nShutting down...");
+      Console.WriteLine("Shutting down...");
       StateControl.Stop();
       Console.WriteLine("Shutting down, OK.");
 
       Console.WriteLine("Please any key to exit.");
       Console.ReadKey();
-
       host.Stop();  // stop hosting
     }
   }

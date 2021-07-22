@@ -26,19 +26,18 @@ namespace StoreStockWeb.Services {
 			// IStockRepository repository = new StockRepository(factory);
 			IStockRepository repository = new SStockRepository(factory);
 			IStoreRepository storerepository = new StoreRepository(factory);
-			StateControl stateControl = new StateControl(repository);
 
 			base.ConfigureApplicationContainer(container);
 			container.Register(_store);
 			container.Register(factory);
 			container.Register(repository);
 			container.Register(storerepository);
-			container.Register(stateControl);
 		}
 
 		protected override void ApplicationStartup(TinyIoCContainer container,
 			IPipelines pipelines) {
 			base.ApplicationStartup(container, pipelines);
+			new StateControl(container.Resolve<IStockRepository>());
 			CookieBasedSessions.Enable(pipelines);
 		}
 	}

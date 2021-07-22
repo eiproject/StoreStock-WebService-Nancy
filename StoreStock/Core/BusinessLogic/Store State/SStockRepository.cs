@@ -11,8 +11,8 @@ namespace StoreStock.BusinessLogic {
     private IState _init;
     private IState _running;
     private IState _shuttingDown;
+
     private IState _state;
-    private bool _isInit = false;
     internal SStockRepository(IFactory factory) {
       _factory = factory;
     }
@@ -40,9 +40,8 @@ namespace StoreStock.BusinessLogic {
     }
 
     void IStockRepository.Init() {
-      if (_init == null && !_isInit) {
+      if (_init == null) {
         _init = new InitState(_factory);
-        _isInit = true;
       }
       _state = _init;
     }
