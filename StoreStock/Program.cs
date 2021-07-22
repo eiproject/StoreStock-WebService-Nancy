@@ -17,11 +17,6 @@ namespace StoreStockWeb.Services {
       NancyHost host = new NancyHost(new Uri(_hostUri), bootstrapper);
 
       var something = TinyIoC.TinyIoCContainer.Current;
-
-      // TinyIoC.TinyIoCContainer container = TinyIoC.TinyIoCContainer.Current;
-      // container.Register<IStockRepository, SStockRepository>();
-      // container.Resolve<Store>();
-
       host.Start(); // start hosting
       Console.WriteLine($"Host started on { _hostUri }");
 

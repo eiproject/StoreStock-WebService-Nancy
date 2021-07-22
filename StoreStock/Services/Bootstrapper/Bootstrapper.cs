@@ -23,7 +23,6 @@ namespace StoreStockWeb.Services {
 		protected override void ConfigureApplicationContainer(TinyIoCContainer container) {
 			Store _store = new Store("Nano Store");
 			IFactory factory = new Factory(_store);
-			// IStockRepository repository = new StockRepository(factory);
 			IStockRepository repository = new SStockRepository(factory);
 			IStoreRepository storerepository = new StoreRepository(factory);
 
