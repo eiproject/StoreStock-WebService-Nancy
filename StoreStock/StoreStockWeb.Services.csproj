@@ -138,6 +138,10 @@
     <Compile Include="Services\Module\MainModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\BusinessLogic\State\RunningState.cs" />
+    <Compile Include="Core\BusinessLogic\State\InitState.cs" />
+    <Compile Include="Core\BusinessLogic\State\IState.cs" />
+    <Compile Include="Core\BusinessLogic\State\ShuttingDownState.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>

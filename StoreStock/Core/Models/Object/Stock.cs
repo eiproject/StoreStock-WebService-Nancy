@@ -26,7 +26,7 @@ namespace StoreStock.Models {
     
     /*Method*/
     protected abstract decimal GetDiscount();
-    protected abstract void UpdateStockAmount(int newAmount);
+    internal abstract void UpdateStockAmount(int newAmount);
 
     /*The Constructor*/
     public Stock(Store store) {

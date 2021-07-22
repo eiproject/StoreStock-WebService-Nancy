@@ -13,7 +13,7 @@ namespace StoreStock.Models {
       return decimal.Multiply(percentage, _price);
     }
 
-    protected override void UpdateStockAmount(int newAmount) {
+    internal override void UpdateStockAmount(int newAmount) {
       _amount += newAmount;
     }
     internal Pen(Store store, int id, int amount, string title, decimal price,
