@@ -1,10 +1,13 @@
 ﻿using Nancy.Hosting.Self;
 using System;
+using StoreStock.BusinessLogic;
 
 namespace StoreStockWeb.Services {
   class Program {
     static string _hostUri = "http://127.0.0.1:5000";
-    Program() { }
+    Program() {
+
+    }
     static void Main(string[] args) {
       NancyHost host = new NancyHost(new Uri(_hostUri), new Bootstrapper());
       host.Start(); // start hosting
