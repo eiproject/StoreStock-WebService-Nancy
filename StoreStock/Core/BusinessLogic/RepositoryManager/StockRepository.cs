@@ -65,5 +65,17 @@ namespace StoreStock.BusinessLogic {
         return null;
       }
     }
+
+    void IStockRepository.Init() {
+      throw new NotImplementedException();
+    }
+
+    void IStockRepository.Run() {
+      throw new NotImplementedException();
+    }
+
+    void IStockRepository.Stop() {
+      throw new NotImplementedException();
+    }
   }
 }

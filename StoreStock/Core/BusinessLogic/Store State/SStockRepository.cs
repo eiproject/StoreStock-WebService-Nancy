@@ -7,18 +7,14 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class SStockRepository : IStockRepository{
-
+    IFactory _factory;
     private IState _init;
     private IState _running;
     private IState _shuttingDown;
-
     private IState _state;
+    private bool _isInit = false;
     internal SStockRepository(IFactory factory) {
-      _init = new InitState(factory);
-      _running = new RunningState(factory);
-      _shuttingDown = new ShuttingDownState(factory);
-      
-      _state = _init;
+      _factory = factory;
     }
 
     Stock IStockRepository.CreateStock(string type,
@@ -43,8 +39,24 @@ namespace StoreStock.BusinessLogic {
       return _state.DeleteStock(stockID);
     }
 
-    internal void SetState(IState state) {
-      _state = state;
+    void IStockRepository.Init() {
+      if (_init == null && !_isInit) {
+        _init = new InitState(_factory);
+        _isInit = true;
+      }
+      _state = _init;
+    }
+    void IStockRepository.Run() {
+      if (_running == null) {
+        _running = new RunningState(_factory);
+      }
+      _state = _running;
+    }
+    void IStockRepository.Stop() {
+      if (_shuttingDown == null) {
+        _shuttingDown = new ShuttingDownState(_factory);
+      }
+      _state = _shuttingDown;
     }
 
     internal IState GetInitState() {
