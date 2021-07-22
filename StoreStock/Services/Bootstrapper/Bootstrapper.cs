@@ -13,10 +13,7 @@ using StoreStock.Models;
 using StoreStock.BusinessLogic;
 using StoreStock;
 using System.Collections.Generic;
-/*
-using Nancy.ViewEngines;
-using TinyIoC;
-*/
+
 namespace StoreStockWeb.Services {
 	public class Bootstrapper : DefaultNancyBootstrapper
 	{
