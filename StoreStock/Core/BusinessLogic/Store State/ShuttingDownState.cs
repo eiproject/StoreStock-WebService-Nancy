@@ -9,8 +9,8 @@ namespace StoreStock.BusinessLogic {
   class ShuttingDownState : IState {
     private Store _store;
     private IFactory _factory;
-    internal ShuttingDownState(Store TheStore, IFactory factory) {
-      _store = TheStore;
+    internal ShuttingDownState(Store theStore, IFactory factory) {
+      _store = theStore;
       _factory = factory;
     }
     // Method of the repository start here

@@ -9,8 +9,8 @@ namespace StoreStock.BusinessLogic {
   class StockRepository : IStockRepository {
     private Store _store;
     private IFactory _factory;
-    internal StockRepository(Store TheStore, IFactory factory) {
-      _store = TheStore;
+    internal StockRepository(Store theStore, IFactory factory) {
+      _store = theStore;
       _factory = factory;
     }
     // Method of the repository start here

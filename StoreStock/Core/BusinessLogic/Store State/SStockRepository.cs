@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class SStoreRepository {
+  class SStockRepository : IStockRepository{
 
     private IState _init;
     private IState _running;
     private IState _shuttingDown;
 
     private IState _state;
-    internal SStoreRepository(Store store, IFactory factory) {
+    internal SStockRepository(Store store, IFactory factory) {
       _init = new InitState(store, factory);
       _running = new RunningState(store, factory);
       _shuttingDown = new ShuttingDownState(store, factory);
+      
+      _state = _init;
     }
 
-    internal Stock CreateStock(string type,
+    Stock IStockRepository.CreateStock(string type,
       int amount,
       string title,
       decimal price,
@@ -29,16 +31,30 @@ namespace StoreStock.BusinessLogic {
       return _state.CreateStock(type, amount, title, price, publisher, genre, size);
     }
 
-    internal Stock ReadStock(int id) {
+    Stock IStockRepository.ReadStock(int id) {
       return _state.ReadStock(id);
     }
 
-    internal Stock UpdateStock_Amount(int stockID, int amountDifference) {
+    Stock IStockRepository.UpdateStock_Amount(int stockID, int amountDifference) {
       return _state.UpdateStock_Amount(stockID, amountDifference);
     }
 
-    internal Stock DeleteStock(int stockID) {
-      return DeleteStock(stockID);
+    Stock IStockRepository.DeleteStock(int stockID) {
+      return _state.DeleteStock(stockID);
+    }
+
+    internal void SetState(IState state) {
+      _state = state;
+    }
+
+    internal IState GetInitState() {
+      return _init;
+    }
+    internal IState GetRunState() {
+      return _running;
+    }
+    internal IState GetShutDownState() {
+      return _shuttingDown;
     }
   }
 }

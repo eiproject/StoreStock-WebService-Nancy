@@ -118,7 +118,7 @@
   <ItemGroup>
     <Compile Include="Core\BusinessLogic\RepositoryManager\IStoreRepository.cs" />
     <Compile Include="Core\BusinessLogic\RepositoryManager\StoreRepository.cs" />
-    <Compile Include="Core\BusinessLogic\Store State\SStoreRepository.cs" />
+    <Compile Include="Core\BusinessLogic\Store State\SStockRepository.cs" />
     <Compile Include="Core\DummyData\StringInputParser.cs" />
     <Compile Include="Core\Models\Factory\Factory.cs" />
     <Compile Include="Core\Models\Factory\IFactory.cs" />

@@ -23,7 +23,8 @@ namespace StoreStockWeb.Services {
 		protected override void ConfigureApplicationContainer(TinyIoCContainer container) {
 			Store _store = new Store("Nano Store");
 			IFactory factory = new Factory(_store);
-			IStockRepository repository = new StockRepository(_store, factory);
+			// IStockRepository repository = new StockRepository(_store, factory);
+			IStockRepository repository = new SStockRepository(_store, factory);
 			IStoreRepository storerepository = new StoreRepository(_store, factory);
 
 			base.ConfigureApplicationContainer(container);
@@ -36,14 +37,6 @@ namespace StoreStockWeb.Services {
 		protected override void ApplicationStartup(TinyIoCContainer container,
 			IPipelines pipelines) {
 			base.ApplicationStartup(container, pipelines);
-
-			// create dummy data 
-			Store store = container.Resolve<Store>();
-			IFactory factory = new Factory(store);
-			//  Start Store Stock Services
-			Run storeStock = new Run(factory);
-			storeStock.Start(store);
-			storeStock.UseDummyData();
 
 			CookieBasedSessions.Enable(pipelines);
 		}
