@@ -13,7 +13,10 @@ using StoreStock.Models;
 using StoreStock.BusinessLogic;
 using StoreStock;
 using System.Collections.Generic;
-
+/*
+using Nancy.ViewEngines;
+using TinyIoC;
+*/
 namespace StoreStockWeb.Services {
 	public class Bootstrapper : DefaultNancyBootstrapper
 	{
@@ -22,14 +25,12 @@ namespace StoreStockWeb.Services {
 			IFactory factory = new Factory(_store);
 			IStockRepository repository = new SStockRepository(factory);
 			IStoreRepository storerepository = new StoreRepository(factory);
-			StateControl stateControl = new StateControl(repository);
 
 			base.ConfigureApplicationContainer(container);
 			container.Register(_store);
 			container.Register(factory);
 			container.Register(repository);
 			container.Register(storerepository);
-			container.Register(stateControl);
 		}
 
 		protected override void ApplicationStartup(TinyIoCContainer container,

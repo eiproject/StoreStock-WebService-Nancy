@@ -118,7 +118,7 @@
   <ItemGroup>
     <Compile Include="Core\BusinessLogic\RepositoryManager\IStoreRepository.cs" />
     <Compile Include="Core\BusinessLogic\RepositoryManager\StoreRepository.cs" />
-    <Compile Include="Core\BusinessLogic\Stock State\SStockRepository.cs" />
+    <Compile Include="Core\BusinessLogic\Store State\SStockRepository.cs" />
     <Compile Include="Core\DummyData\StringInputParser.cs" />
     <Compile Include="Core\Models\Factory\Factory.cs" />
     <Compile Include="Core\Models\Factory\IFactory.cs" />
@@ -139,10 +139,10 @@
     <Compile Include="Services\Module\MainModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\BusinessLogic\Stock State\RunningState.cs" />
-    <Compile Include="Core\BusinessLogic\Stock State\InitState.cs" />
-    <Compile Include="Core\BusinessLogic\Stock State\IState.cs" />
-    <Compile Include="Core\BusinessLogic\Stock State\ShuttingDownState.cs" />
+    <Compile Include="Core\BusinessLogic\Store State\RunningState.cs" />
+    <Compile Include="Core\BusinessLogic\Store State\InitState.cs" />
+    <Compile Include="Core\BusinessLogic\Store State\IState.cs" />
+    <Compile Include="Core\BusinessLogic\Store State\ShuttingDownState.cs" />
     <Compile Include="StateControl.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
