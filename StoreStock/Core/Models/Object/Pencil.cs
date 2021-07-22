@@ -3,7 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace StoreStock.Models {
-  class Pencil : Stock { 
+  class Pencil : Stock {
+    protected override decimal GetDiscount() {
+      int _counter = _amount;
+      decimal percentage;
+      percentage = Math.Min(
+        decimal.Multiply(
+          _store.MaxDiscount, _counter / _store.MaxAmountThatGetDiscount), _store.MaxDiscount);
+      return decimal.Multiply(percentage, _price);
+    }
+
+    protected override void UpdateStockAmount(int newAmount) {
+      _amount += newAmount;
+    }
     internal Pencil(Store store, int id,
       int amount,
       string title,
