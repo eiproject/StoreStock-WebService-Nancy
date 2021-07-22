@@ -32,12 +32,14 @@ namespace StoreStockWeb.Services {
 			container.Register(factory);
 			container.Register(repository);
 			container.Register(storerepository);
+
+			// repository.Init();
 		}
 
 		protected override void ApplicationStartup(TinyIoCContainer container,
 			IPipelines pipelines) {
 			base.ApplicationStartup(container, pipelines);
-
+			new StateControl(container.Resolve<IStockRepository>());
 			CookieBasedSessions.Enable(pipelines);
 		}
 	}

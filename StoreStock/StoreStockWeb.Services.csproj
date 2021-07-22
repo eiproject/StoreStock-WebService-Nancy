@@ -143,6 +143,7 @@
     <Compile Include="Core\BusinessLogic\Store State\InitState.cs" />
     <Compile Include="Core\BusinessLogic\Store State\IState.cs" />
     <Compile Include="Core\BusinessLogic\Store State\ShuttingDownState.cs" />
+    <Compile Include="StateControl.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>

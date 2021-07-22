@@ -12,11 +12,11 @@ namespace StoreStock.BusinessLogic {
     internal InitState(IFactory factory) {
       _factory = factory;
       _store = factory.GetStore();
-
-      GenerateDummyData(factory);
+      
+      GenerateDummyData();
     }
-    void GenerateDummyData(IFactory factory) {
-      Run storeStock = new Run(factory);
+    void GenerateDummyData() {
+      Run storeStock = new Run(_factory);
       storeStock.Start(_store);
       storeStock.UseDummyData();
     }
