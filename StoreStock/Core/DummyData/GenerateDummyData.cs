@@ -7,9 +7,10 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   class GenerateDummyData {
     private string[] _testInput;
-    private IStockRepository _repository;
-    internal GenerateDummyData(IStockRepository repository) {
-      _repository = repository;
+    private StringInputParser _parser;
+
+    internal GenerateDummyData(StringInputParser parser) {
+      _parser = parser;
     }
     internal void Generate() {
       _testInput = new string[] {
@@ -21,8 +22,7 @@ namespace StoreStock.BusinessLogic {
       };
 
       foreach (string t in _testInput) {
-        StringInputParser parser = new StringInputParser(_repository);
-        parser.Save(t);
+        _parser.Save(t);
       }
     }
   }

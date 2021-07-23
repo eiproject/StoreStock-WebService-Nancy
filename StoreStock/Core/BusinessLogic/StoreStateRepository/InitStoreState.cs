@@ -13,13 +13,16 @@ namespace StoreStock.BusinessLogic {
     internal InitStoreState(IFactory factory, IStockRepository repository) {
       _factory = factory;
       _store = factory.GetStore();
-
+      _repository = repository;
       GenerateDummyData();
     }
     void GenerateDummyData() {
-      Run storeStock = new Run(_factory);
-      storeStock.Start(_store);
-      storeStock.UseDummyData(_repository);
+      Console.WriteLine("--- Generating dummy data");
+      StringInputParser inputParse = new StringInputParser(_factory);
+      GenerateDummyData dummy = new GenerateDummyData(inputParse);
+      dummy.Generate();
+
+      Console.WriteLine("--- Generating dummy data (OK)");
     }
     // Method of the repository start here
     Store IStoreState.ReadStore() {

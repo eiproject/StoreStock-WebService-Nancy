@@ -18,11 +18,11 @@ namespace StoreStock.BusinessLogic {
       int amount,
       string title,
       decimal price,
-      string publisher,
-      string genre,
+      string category,
+      string subCategory,
       string size) {
       int id = _store.LastID + 1;
-      Stock stock = _factory.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
+      Stock stock = _factory.FactoryStoreStock(type, id, amount, title, price, category, subCategory, size);
       _store.AddStock(stock);
       return stock;
     }

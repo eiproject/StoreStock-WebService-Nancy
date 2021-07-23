@@ -22,19 +22,19 @@ namespace StoreStockWeb.Services {
 
       Console.WriteLine("\nPress any key to initialize data.");
       Console.ReadKey();
-      Console.WriteLine("Initializing data...");
+      Console.WriteLine("\nInitializing data...");
       StateControl.Init();
       Console.WriteLine("Initializing, OK.");
 
       Console.WriteLine("\nPress any key to start.");
       Console.ReadKey();
-      Console.WriteLine("Starting...");
+      Console.WriteLine("\nStarting...");
       StateControl.Run();
       Console.WriteLine("Starting, OK.");
       
       Console.WriteLine("\nPress any key to shutting down.");
       Console.ReadKey();
-      Console.WriteLine("Shutting down...");
+      Console.WriteLine("\nShutting down...");
       StateControl.Stop();
       Console.WriteLine("Shutting down, OK.");
 

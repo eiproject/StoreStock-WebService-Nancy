@@ -6,32 +6,42 @@ using System.Threading.Tasks;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class SStoreRepository : IStoreRepository{
+  class StoreRepository : IStoreRepository{
     private IFactory _factory;
     private IStockRepository _repository;
     private IStoreState _init;
     private IStoreState _running;
     private IStoreState _shuttingDown;
-    private bool _isInit = false;
+    private bool _isInitialized = false;
     private IStoreState _state;
-    internal SStoreRepository(IFactory factory, IStockRepository repository) {
+    internal StoreRepository(IFactory factory, IStockRepository repository) {
       _factory = factory;
       _repository = repository;
       // _state = _init;
     }
 
     Store IStoreRepository.ReadStore() {
-      return _state.ReadStore();
+      if (_state != null) {
+        return _state.ReadStore();
+      }
+      else {
+        return null;
+      }
     }
 
     void IStoreRepository.UpdateStore(string name) {
-      _state.UpdateStore(name);
+      if (_state!= null) {
+        _state.UpdateStore(name);
+      }
+      else {
+
+      }
     }
 
     void IStoreRepository.Init() {
-      if (_init == null && !_isInit) {
+      if (_init == null && !_isInitialized) {
         _init = new InitStoreState(_factory, _repository);
-        _isInit = true;
+        _isInitialized = true;
       }
       _state = _init;
     }

@@ -1,15 +1,15 @@
 ﻿using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class SStockRepository : IStockRepository{
+  class StockRepository : IStockRepository{
     IFactory _factory;
     private IState _init;
     private IState _running;
     private IState _shuttingDown;
 
-    private bool _isInit = false;
+    private bool _isInitialized = false;
     private IState _state;
-    internal SStockRepository(IFactory factory) {
+    internal StockRepository(IFactory factory) {
       _factory = factory;
       // _state = _init;
     }
@@ -25,21 +25,24 @@ namespace StoreStock.BusinessLogic {
     }
 
     Stock IStockRepository.ReadStock(int id) {
+      if (_state == null) { return null; }
       return _state.ReadStock(id);
     }
 
     Stock IStockRepository.UpdateStock_Amount(int stockID, int amountDifference) {
+      if (_state == null) { return null; }
       return _state.UpdateStock_Amount(stockID, amountDifference);
     }
 
     Stock IStockRepository.DeleteStock(int stockID) {
+      if (_state == null) { return null; }
       return _state.DeleteStock(stockID);
     }
 
     void IStockRepository.Init() {
-      if (_init == null && !_isInit) {
+      if (_init == null && !_isInitialized) {
         _init = new InitState(_factory);
-        _isInit = true;
+        _isInitialized = true;
       }
       _state = _init;
     }

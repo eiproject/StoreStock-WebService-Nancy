@@ -118,12 +118,12 @@
   <ItemGroup>
     <Compile Include="Core\BusinessLogic\RepositoryManager\IStockRepository.cs" />
     <Compile Include="Core\BusinessLogic\RepositoryManager\IStoreRepository.cs" />
-    <Compile Include="Core\BusinessLogic\StockStateRepository\SStockRepository.cs" />
+    <Compile Include="Core\BusinessLogic\StockStateRepository\StockRepository.cs" />
     <Compile Include="Core\BusinessLogic\StoreStateRepository\InitStoreState.cs" />
     <Compile Include="Core\BusinessLogic\StoreStateRepository\IStoreState.cs" />
     <Compile Include="Core\BusinessLogic\StoreStateRepository\RunningStoreState.cs" />
     <Compile Include="Core\BusinessLogic\StoreStateRepository\ShuttingDownStoreState.cs" />
-    <Compile Include="Core\BusinessLogic\StoreStateRepository\SStoreRepository.cs" />
+    <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreRepository.cs" />
     <Compile Include="Core\DummyData\StringInputParser.cs" />
     <Compile Include="Core\Models\Factory\Factory.cs" />
     <Compile Include="Core\Models\Factory\IFactory.cs" />

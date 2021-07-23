@@ -19,15 +19,24 @@ namespace StoreStockWeb.Services {
       _repository = repository;
     }
     internal Response ReadStore(IResponseFormatter response, Request request) {
+      Store store;
       try {
-        _statusCode = HttpStatusCode.OK;
+        store = _repository.ReadStore();
+        if (store != null) {
+          _statusCode = HttpStatusCode.OK;
+        }
+        else {
+          _statusCode = HttpStatusCode.NotFound;
+        }
+        
       }
       catch (Exception e) {
         Console.WriteLine(e);
+        store = null;
         _statusCode = HttpStatusCode.InternalServerError;
       }
 
-      return response.AsJson(_store, _statusCode);
+      return response.AsJson(store, _statusCode);
     }
     internal Response UpdateStore(IResponseFormatter response, Request request) {
       try {

@@ -16,8 +16,8 @@ namespace StoreStock {
     }
     internal void UseDummyData(IStockRepository repo) {
       // IStockRepository repo = new SStockRepository(_factory);
-      GenerateDummyData dummy = new GenerateDummyData(repo);
-      dummy.Generate();
+      // GenerateDummyData dummy = new GenerateDummyData(repo);
+      // dummy.Generate();
     }
   }
 }
