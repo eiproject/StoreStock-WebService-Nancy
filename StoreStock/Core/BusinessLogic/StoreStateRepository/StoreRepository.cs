@@ -10,8 +10,8 @@ namespace StoreStock.BusinessLogic {
     private IFactory _factory;
     private IStockRepository _repository;
     private IStoreState _init;
-    private IStoreState _running;
-    private IStoreState _shuttingDown;
+    private IStoreState _run;
+    private IStoreState _stop;
     private bool _isInitialized = false;
     private IStoreState _state;
     internal StoreRepository(IFactory factory, IStockRepository repository) {
@@ -37,34 +37,33 @@ namespace StoreStock.BusinessLogic {
 
       }
     }
-
-    void IStoreRepository.Init() {
+    bool IStoreRepository.Init() {
       if (_init == null && !_isInitialized) {
         _init = new StoreRepository_Init(_factory, _repository);
         _isInitialized = true;
       }
       _state = _init;
     }
-    void IStoreRepository.Run() {
-      if (_running == null) {
-        _running = new StoreRepository_Run(_factory, _repository);
+    bool IStoreRepository.Run() {
+      if (_run == null) {
+        _run = new StoreRepository_Run(_factory, _repository);
       }
-      _state = _running;
+      _state = _run;
     }
-    void IStoreRepository.Stop() {
-      if (_shuttingDown == null) {
-        _shuttingDown = new StoreRepository_Stop(_factory, _repository);
+    bool IStoreRepository.Stop() {
+      if (_stop == null) {
+        _stop = new StoreRepository_Stop(_factory, _repository);
       }
-      _state = _shuttingDown;
+      _state = _stop;
     }
     internal IStoreState GetInitState() {
       return _init;
     }
     internal IStoreState GetRunState() {
-      return _running;
+      return _run;
     }
     internal IStoreState GetShutDownState() {
-      return _shuttingDown;
+      return _stop;
     }
   }
 }

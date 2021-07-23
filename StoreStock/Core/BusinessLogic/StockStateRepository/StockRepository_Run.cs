@@ -8,10 +8,36 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   class StockRepository_Run : IState {
     private Store _store;
-    private IFactory _factory;
+    private IFactory _factory; 
+    private bool _isSuccess;
+    bool IState.IsSuccess { get { return _isSuccess; } }
     internal StockRepository_Run(IFactory factory) {
-      _factory = factory;
-      _store = factory.GetStore();
+      _isSuccess = LoadFactory(factory);
+      _isSuccess = LoadStore(factory.GetStore()) && _isSuccess;
+    }
+    bool LoadFactory(IFactory factory) {
+      Console.WriteLine("... Loading factory");
+      if (factory != null) {
+        _factory = factory;
+        Console.WriteLine("+++ Load Factory, OK");
+        return true;
+      }
+      else {
+        Console.WriteLine("--- Load Factory, FAILED");
+        return false;
+      }
+    }
+    bool LoadStore(Store store) {
+      Console.WriteLine("... Loading store");
+      if (store != null) {
+        _store = store;
+        Console.WriteLine("+++ Store, OK");
+        return true;
+      }
+      else {
+        Console.WriteLine("--- Store, FAILED");
+        return false;
+      }
     }
     // Method of the repository start here
     Stock IState.CreateStock(string type,

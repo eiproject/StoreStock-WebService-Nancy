@@ -4,8 +4,8 @@ namespace StoreStock.BusinessLogic {
   class StockRepository : IStockRepository{
     IFactory _factory;
     private IState _init;
-    private IState _running;
-    private IState _shuttingDown;
+    private IState _run;
+    private IState _stop;
 
     private bool _isInitialized = false;
     private IState _state;
@@ -39,33 +39,36 @@ namespace StoreStock.BusinessLogic {
       return _state.DeleteStock(stockID);
     }
 
-    void IStockRepository.Init() {
+    bool IStockRepository.Init() {
       if (_init == null && !_isInitialized) {
         _init = new StockRepository_Init(_factory);
         _isInitialized = true;
       }
       _state = _init;
+      return _init.IsSuccess;
     }
-    void IStockRepository.Run() {
-      if (_running == null) {
-        _running = new StockRepository_Run(_factory);
+    bool IStockRepository.Run() {
+      if (_run == null) {
+        _run = new StockRepository_Run(_factory);
       }
-      _state = _running;
+      _state = _run;
+      return _run.IsSuccess;
     }
-    void IStockRepository.Stop() {
-      if (_shuttingDown == null) {
-        _shuttingDown = new StockRepository_Stop(_factory);
+    bool IStockRepository.Stop() {
+      if (_stop == null) {
+        _stop = new StockRepository_Stop(_factory);
       }
-      _state = _shuttingDown;
+      _state = _stop;
+      return _stop.IsSuccess;
     }
     internal IState GetInitState() {
       return _init;
     }
     internal IState GetRunState() {
-      return _running;
+      return _run;
     }
     internal IState GetShutDownState() {
-      return _shuttingDown;
+      return _stop;
     }
   }
 }

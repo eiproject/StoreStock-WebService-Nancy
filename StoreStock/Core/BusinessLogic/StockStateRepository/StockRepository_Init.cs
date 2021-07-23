@@ -9,29 +9,36 @@ namespace StoreStock.BusinessLogic {
   class StockRepository_Init : IState {
     private Store _store;
     private IFactory _factory;
+    private bool _isSuccess;
+    bool IState.IsSuccess { get { return _isSuccess; } }
+
     internal StockRepository_Init(IFactory factory) {
-      CheckingFactory(factory);
-      CheckingStore(factory.GetStore());
+      _isSuccess = CheckingFactory(factory);
+      _isSuccess = CheckingStore(factory.GetStore()) && _isSuccess;
     }
 
-    void CheckingStore(Store store) {
+    bool CheckingStore(Store store) {
       Console.WriteLine("... Checking Store Object");
       if (store != null) {
         Console.WriteLine("+++ Store, OK");
         _store = store;
+        return true;
       }
       else {
         Console.WriteLine("--- Store, NULL");
+        return false;
       }
     }
-    void CheckingFactory(IFactory factory) {
+    bool CheckingFactory(IFactory factory) {
       Console.WriteLine("... Checking Factory Object");
       if (factory != null) {
         Console.WriteLine("+++ Factory, OK");
         _factory = factory;
+        return true;
       }
       else {
         Console.WriteLine("--- Factory, NULL");
+        return false;
       }
     }
 
