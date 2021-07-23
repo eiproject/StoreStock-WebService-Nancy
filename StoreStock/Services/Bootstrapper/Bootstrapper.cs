@@ -21,7 +21,7 @@ namespace StoreStockWeb.Services {
 			Store _store = new Store("Nano Store");
 			IFactory factory = new Factory(_store);
 			IStockRepository repository = new SStockRepository(factory);
-			IStoreRepository storerepository = new SStoreRepository(factory);
+			IStoreRepository storerepository = new SStoreRepository(factory, repository);
 			StateControl stateControl = new StateControl(repository, storerepository);
 
 			base.ConfigureApplicationContainer(container);

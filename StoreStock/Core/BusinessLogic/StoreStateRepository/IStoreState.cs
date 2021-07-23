@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StoreStock.BusinessLogic {
   public interface IStoreState {
-    List<Stock> ReadStoreStock();
+    Store ReadStore();
     void UpdateStore(string name);
   }
 }

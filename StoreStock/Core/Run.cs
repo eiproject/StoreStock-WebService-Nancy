@@ -14,8 +14,8 @@ namespace StoreStock {
       // Store bookStore = new Store("Nano Store");
       _store = bookStore;
     }
-    internal void UseDummyData() {
-      IStockRepository repo = new SStockRepository(_factory);
+    internal void UseDummyData(IStockRepository repo) {
+      // IStockRepository repo = new SStockRepository(_factory);
       GenerateDummyData dummy = new GenerateDummyData(repo);
       dummy.Generate();
     }

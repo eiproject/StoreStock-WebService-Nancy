@@ -7,7 +7,7 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   public interface IStoreRepository {
-    List<Stock> ReadStoreStock();
+    Store ReadStore();
     void UpdateStore(string name);
     void Init();
     void Run();

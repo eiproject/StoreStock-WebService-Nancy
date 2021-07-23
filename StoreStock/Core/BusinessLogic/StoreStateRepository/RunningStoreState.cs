@@ -8,12 +8,12 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   class RunningStoreState : IStoreState {
     private Store _store;
-    internal RunningStoreState(IFactory factory) {
+    internal RunningStoreState(IFactory factory, IStockRepository repository) {
       _store = factory.GetStore();
     }
 
-    List<Stock> IStoreState.ReadStoreStock() {
-      return _store.StoreData;
+    Store IStoreState.ReadStore() {
+      return _store;
     }
 
     void IStoreState.UpdateStore(string name) {

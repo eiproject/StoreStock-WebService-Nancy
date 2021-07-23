@@ -8,10 +8,10 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   class ShuttingDownStoreState : IStoreState {
     private Store _store;
-    internal ShuttingDownStoreState(IFactory factory) {
+    internal ShuttingDownStoreState(IFactory factory, IStockRepository repository) {
       _store = factory.GetStore();
     }
-    List<Stock> IStoreState.ReadStoreStock() {
+    Store IStoreState.ReadStore() {
       return null;
     }
 

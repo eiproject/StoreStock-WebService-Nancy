@@ -7,20 +7,21 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class SStoreRepository : IStoreRepository{
-    IFactory _factory;
+    private IFactory _factory;
+    private IStockRepository _repository;
     private IStoreState _init;
     private IStoreState _running;
     private IStoreState _shuttingDown;
-
     private bool _isInit = false;
     private IStoreState _state;
-    internal SStoreRepository(IFactory factory) {
+    internal SStoreRepository(IFactory factory, IStockRepository repository) {
       _factory = factory;
+      _repository = repository;
       // _state = _init;
     }
 
-    List<Stock> IStoreRepository.ReadStoreStock() {
-      return _state.ReadStoreStock();
+    Store IStoreRepository.ReadStore() {
+      return _state.ReadStore();
     }
 
     void IStoreRepository.UpdateStore(string name) {
@@ -29,20 +30,20 @@ namespace StoreStock.BusinessLogic {
 
     void IStoreRepository.Init() {
       if (_init == null && !_isInit) {
-        _init = new InitStoreState(_factory);
+        _init = new InitStoreState(_factory, _repository);
         _isInit = true;
       }
       _state = _init;
     }
     void IStoreRepository.Run() {
       if (_running == null) {
-        _running = new RunningStoreState(_factory);
+        _running = new RunningStoreState(_factory, _repository);
       }
       _state = _running;
     }
     void IStoreRepository.Stop() {
       if (_shuttingDown == null) {
-        _shuttingDown = new ShuttingDownStoreState(_factory);
+        _shuttingDown = new ShuttingDownStoreState(_factory, _repository);
       }
       _state = _shuttingDown;
     }
