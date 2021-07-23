@@ -6,18 +6,17 @@ using System.Text.Json;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class RunningStoreState : IStoreState {
+  class StoreRepository_Stop : IStoreState {
     private Store _store;
-    internal RunningStoreState(IFactory factory, IStockRepository repository) {
+    internal StoreRepository_Stop(IFactory factory, IStockRepository repository) {
       _store = factory.GetStore();
     }
-
     Store IStoreState.ReadStore() {
-      return _store;
+      return null;
     }
 
     void IStoreState.UpdateStore(string name) {
-      _store.UpdateName(name);
+
     }
   }
 }

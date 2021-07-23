@@ -6,12 +6,33 @@ using System.Text.Json;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class InitState : IState {
+  class StockRepository_Init : IState {
     private Store _store;
     private IFactory _factory;
-    internal InitState(IFactory factory) {
-      _factory = factory;
-      _store = factory.GetStore();
+    internal StockRepository_Init(IFactory factory) {
+      CheckingFactory(factory);
+      CheckingStore(factory.GetStore());
+    }
+
+    void CheckingStore(Store store) {
+      Console.WriteLine("... Checking Store Object");
+      if (store != null) {
+        Console.WriteLine("+++ Store, OK");
+        _store = store;
+      }
+      else {
+        Console.WriteLine("--- Store, NULL");
+      }
+    }
+    void CheckingFactory(IFactory factory) {
+      Console.WriteLine("... Checking Factory Object");
+      if (factory != null) {
+        Console.WriteLine("+++ Factory, OK");
+        _factory = factory;
+      }
+      else {
+        Console.WriteLine("--- Factory, NULL");
+      }
     }
 
     Stock IState.CreateStock(string type,

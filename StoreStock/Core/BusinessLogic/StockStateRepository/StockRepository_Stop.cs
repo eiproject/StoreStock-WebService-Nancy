@@ -6,10 +6,10 @@ using System.Text.Json;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class ShuttingDownState : IState {
+  class StockRepository_Stop : IState {
     private Store _store;
     private IFactory _factory;
-    internal ShuttingDownState(IFactory factory) {
+    internal StockRepository_Stop(IFactory factory) {
       _store = factory.GetStore();
       _factory = factory;
     }

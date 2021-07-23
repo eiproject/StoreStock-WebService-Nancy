@@ -6,10 +6,10 @@ using System.Text.Json;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class RunningState : IState {
+  class StockRepository_Run : IState {
     private Store _store;
     private IFactory _factory;
-    internal RunningState(IFactory factory) {
+    internal StockRepository_Run(IFactory factory) {
       _factory = factory;
       _store = factory.GetStore();
     }

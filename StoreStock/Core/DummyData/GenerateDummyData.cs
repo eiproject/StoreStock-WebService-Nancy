@@ -5,6 +5,12 @@ using StoreStock.BusinessLogic;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
+  enum GenerateCondition {
+    OK,
+    SomeDataMissing,
+    DataOverload,
+    NothingSaved
+  }
   class GenerateDummyData {
     private string[] _testInput;
     private StringInputParser _parser;
@@ -12,7 +18,8 @@ namespace StoreStock.BusinessLogic {
     internal GenerateDummyData(StringInputParser parser) {
       _parser = parser;
     }
-    internal void Generate() {
+    internal GenerateCondition Generate() {
+      int savedData = 0;
       _testInput = new string[] {
         "Book#100#895000#Magic Tree House Boxed Set, Books 1-4#Dongeng# #A5",
         "PENcil#210#49800#Conte Pieree Noire#Conte# #3B",
@@ -22,7 +29,23 @@ namespace StoreStock.BusinessLogic {
       };
 
       foreach (string t in _testInput) {
-        _parser.Save(t);
+        bool isSaved = _parser.Save(t);
+        if (isSaved) { savedData++; }
+      }
+      if (savedData == _testInput.Length) {
+        return GenerateCondition.OK;
+      }
+      else if (savedData < _testInput.Length) {
+        return GenerateCondition.SomeDataMissing;
+      }
+      else if (savedData > _testInput.Length) {
+        return GenerateCondition.DataOverload;
+      }
+      else if (savedData == 0) {
+        return GenerateCondition.NothingSaved;
+      }
+      else {
+        return GenerateCondition.NothingSaved;
       }
     }
   }
