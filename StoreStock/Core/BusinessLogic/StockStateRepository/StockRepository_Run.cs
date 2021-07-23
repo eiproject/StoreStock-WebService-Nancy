@@ -7,11 +7,11 @@ using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StockRepository_Run : IState {
+  class StockRepository_Run : IStockState {
     private Store _store;
     private IFactory _factory; 
     private bool _isSuccess;
-    bool IState.IsSuccess { get { return _isSuccess; } }
+    bool IStockState.IsSuccess { get { return _isSuccess; } }
     internal StockRepository_Run(IFactory factory) { 
       _isSuccess = LoadFactory(factory); 
       _isSuccess = LoadStocks(factory.GetStore()) && _isSuccess; 
@@ -43,7 +43,7 @@ namespace StoreStock.BusinessLogic {
       }
     }
     // Method of the repository start here
-    Stock IState.CreateStock(string type,
+    Stock IStockState.CreateStock(string type,
       int amount,
       string title,
       decimal price,
@@ -56,7 +56,7 @@ namespace StoreStock.BusinessLogic {
       return stock;
     }
 
-    Stock IState.ReadStock(int id) {
+    Stock IStockState.ReadStock(int id) {
       IEnumerable<Stock> filteredData = _store.StoreData.Where(
         data => data.ID == id);
       if (filteredData.Count() > 0) {
@@ -66,7 +66,7 @@ namespace StoreStock.BusinessLogic {
         return null;
       }
     }
-    Stock IState.UpdateStock_Amount(int stockID, int amountDifference) {
+    Stock IStockState.UpdateStock_Amount(int stockID, int amountDifference) {
       Stock stock = _store.StoreData.Find(data => data.ID == stockID);
       if (stock != null) {
         if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {
@@ -83,7 +83,7 @@ namespace StoreStock.BusinessLogic {
 
       return stock;
     }
-    Stock IState.DeleteStock(int stockID) {
+    Stock IStockState.DeleteStock(int stockID) {
       Stock stock = _store.StoreData.Find(data => data.ID == stockID);
       if (stock != null) {
         _store.RemoveStock(stock);

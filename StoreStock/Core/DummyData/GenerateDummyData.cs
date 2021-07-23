@@ -6,12 +6,6 @@ using StoreStock.BusinessLogic;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  enum GenerateCondition {
-    OK,
-    SomeDataMissing,
-    DataOverload,
-    NothingSaved
-  }
   class GenerateDummyData {
     private string[] _testInput;
     private StringInputParser _parser;

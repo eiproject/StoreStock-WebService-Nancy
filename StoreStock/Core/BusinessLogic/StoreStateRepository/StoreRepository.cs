@@ -29,13 +29,15 @@ namespace StoreStock.BusinessLogic {
       }
     }
 
-    void IStoreRepository.UpdateStore(string name) {
+    Store IStoreRepository.UpdateStore(string name) {
       if (_state!= null) {
         _state.UpdateStore(name);
+        return _state.ReadStore();
       }
       else {
-
+        return null;
       }
+
     }
     bool IStoreRepository.Init() {
       if (_init == null && !_isInitialized) {

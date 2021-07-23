@@ -16,15 +16,27 @@ namespace StoreStock.BusinessLogic {
     }
 
     internal static void Init() {
+      Console.WriteLine("\nInitializing...");
       _initStore = _storeRepo.Init();
       _initStock = _stockRepo.Init();
+      if (_initStore && _initStock) {
+        Console.WriteLine("Initializing, OK.");
+      }
+      else {
+        Stop();
+        Console.WriteLine("Initializing. Failed, check log.");
+      }
     }
     internal static void Run() {
+      Console.WriteLine("\nRunning...");
       if (_initStock && _initStore) {
         _runStore = _storeRepo.Run();
         _runStock = _stockRepo.Run();
 
-        if (_runStore != _runStock) {
+        if (_runStore && _runStock) {
+          Console.WriteLine("Run. OK.");
+        }
+        else {
           Stop();
           Console.WriteLine("!!! Cannot Running, check run log!");
         }
@@ -34,8 +46,10 @@ namespace StoreStock.BusinessLogic {
       }
     }
     internal static void Stop() {
+      Console.WriteLine("\nShutting down...");
       _stopStore = _storeRepo.Stop();
       _stopStock = _stockRepo.Stop();
+      Console.WriteLine("Shutting down, OK.");
     }
   }
 }

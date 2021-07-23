@@ -3,12 +3,12 @@
 namespace StoreStock.BusinessLogic {
   class StockRepository : IStockRepository{
     IFactory _factory;
-    private IState _init;
-    private IState _run;
-    private IState _stop;
+    private IStockState _init;
+    private IStockState _run;
+    private IStockState _stop;
 
     private bool _isInitialized = false;
-    private IState _state;
+    private IStockState _state;
     internal StockRepository(IFactory factory) {
       _factory = factory;
       // _state = _init;
@@ -21,6 +21,7 @@ namespace StoreStock.BusinessLogic {
       string publisher,
       string genre,
       string size) {
+      if (_state == null) { return null; }
       return _state.CreateStock(type, amount, title, price, publisher, genre, size);
     }
 
@@ -61,13 +62,13 @@ namespace StoreStock.BusinessLogic {
       _state = _stop;
       return _stop.IsSuccess;
     }
-    internal IState GetInitState() {
+    internal IStockState GetInitState() {
       return _init;
     }
-    internal IState GetRunState() {
+    internal IStockState GetRunState() {
       return _run;
     }
-    internal IState GetShutDownState() {
+    internal IStockState GetShutDownState() {
       return _stop;
     }
   }

@@ -1,6 +1,7 @@
 ﻿using Nancy;
 using Nancy.Helpers;
 using Nancy.IO;
+using Nancy.ModelBinding;
 using StoreStock.BusinessLogic;
 using StoreStock.Models;
 using System;
@@ -28,7 +29,7 @@ namespace StoreStockWeb.Services {
         else {
           _statusCode = HttpStatusCode.NotFound;
         }
-        
+
       }
       catch (Exception e) {
         Console.WriteLine(e);
@@ -38,28 +39,15 @@ namespace StoreStockWeb.Services {
 
       return response.AsJson(store, _statusCode);
     }
-    internal Response UpdateStore(IResponseFormatter response, Request request) {
+    internal Response UpdateStore(IResponseFormatter response, Request request, StoreModule module) {
       try {
-        _statusCode = HttpStatusCode.OK;
-
-        RequestStream id = request.Body;
-        long length = request.Body.Length;
-        if (length != 0) {
-          byte[] data = new byte[length];
-          id.Read(data, 0, (int)length);
-          string body = Encoding.Default.GetString(data);
-
-          Dictionary<string, string> requestDict = body.Split('&')
-        .Select(s => s.Split('='))
-        .ToDictionary(k => k.ElementAt(0).ToLower(), v => HttpUtility.UrlDecode(v.ElementAt(1)));
-          if (requestDict.ContainsKey("store-name")) {
-            _repository.UpdateStore(requestDict["store-name"]);
+        RequestStore model = module.Bind<RequestStore>();
+        if (model.Name != null) {
+          _store = _repository.UpdateStore(model.Name);
+          if (_store != null) {
             _statusCode = HttpStatusCode.OK;
           }
-          else {
-            _statusCode = HttpStatusCode.BadRequest;
-            _store = null;
-          }
+          _statusCode = HttpStatusCode.NotFound;
         }
         else {
           _statusCode = HttpStatusCode.BadRequest;

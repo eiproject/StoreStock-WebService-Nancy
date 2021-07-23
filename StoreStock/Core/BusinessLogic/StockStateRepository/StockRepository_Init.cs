@@ -7,11 +7,11 @@ using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StockRepository_Init : IState {
+  class StockRepository_Init : IStockState {
     private Store _store;
     private IFactory _factory;
     private bool _isSuccess;
-    bool IState.IsSuccess { get { return _isSuccess; } }
+    bool IStockState.IsSuccess { get { return _isSuccess; } }
 
     internal StockRepository_Init(IFactory factory) { 
       _isSuccess = CheckingFactory(factory); 
@@ -45,7 +45,7 @@ namespace StoreStock.BusinessLogic {
       }
     }
 
-    Stock IState.CreateStock(string type,
+    Stock IStockState.CreateStock(string type,
       int amount,
       string title,
       decimal price,
@@ -56,15 +56,15 @@ namespace StoreStock.BusinessLogic {
       return null;
     }
 
-    Stock IState.ReadStock(int id) {
+    Stock IStockState.ReadStock(int id) {
       Console.WriteLine("Initializing Stock...");
       return null;
     }
-    Stock IState.UpdateStock_Amount(int stockID, int amountDifference) {
+    Stock IStockState.UpdateStock_Amount(int stockID, int amountDifference) {
       Console.WriteLine("Initializing Stock...");
       return null;
     }
-    Stock IState.DeleteStock(int stockID) {
+    Stock IStockState.DeleteStock(int stockID) {
       Console.WriteLine("Initializing Stock...");
       return null;
     }
