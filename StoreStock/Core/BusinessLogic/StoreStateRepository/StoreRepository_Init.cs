@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
@@ -7,13 +8,14 @@ namespace StoreStock.BusinessLogic {
     private IStockRepository _repository;
     private bool _isSuccess;
     bool IStoreState.IsSuccess { get { return _isSuccess; } }
-    internal StoreRepository_Init(IFactory factory, IStockRepository repository) {
+    internal StoreRepository_Init(IFactory factory, IStockRepository repository) { 
       _factory = factory;
-      _isSuccess = CheckingStockRepository(repository);
-      _isSuccess = GenerateDummyData() && _isSuccess;
+      _isSuccess = CheckingStockRepository(repository); 
+      _isSuccess = GenerateDummyData() && _isSuccess; 
     }
     bool CheckingStockRepository(IStockRepository repository) {
       Console.WriteLine("... Checking Stock Repository");
+      Thread.Sleep(1500);
       if (repository != null) {
         Console.WriteLine("+++ Stock Repository, OK");
         _repository = repository;
@@ -26,6 +28,7 @@ namespace StoreStock.BusinessLogic {
     }
     bool GenerateDummyData() {
       Console.WriteLine("... Generating dummy data");
+      Thread.Sleep(1500);
       StringInputParser inputParse = new StringInputParser(_factory);
       GenerateDummyData dummy = new GenerateDummyData(inputParse);
       GenerateCondition condition = dummy.Generate();

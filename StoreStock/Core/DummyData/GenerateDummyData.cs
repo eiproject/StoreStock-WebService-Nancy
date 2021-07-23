@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using StoreStock.BusinessLogic;
 using StoreStock.Models;
 
@@ -30,8 +31,14 @@ namespace StoreStock.BusinessLogic {
 
       foreach (string t in _testInput) {
         bool isSaved = _parser.Save(t);
-        if (isSaved) { savedData++; }
+        if (isSaved) {
+          Console.Write(" .");
+          Thread.Sleep(500);
+          savedData++; 
+        }
       }
+      Console.Write("\n");
+
       if (savedData == _testInput.Length) {
         return GenerateCondition.OK;
       }

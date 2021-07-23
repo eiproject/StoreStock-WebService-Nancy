@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
@@ -11,12 +12,13 @@ namespace StoreStock.BusinessLogic {
     private IFactory _factory; 
     private bool _isSuccess;
     bool IState.IsSuccess { get { return _isSuccess; } }
-    internal StockRepository_Run(IFactory factory) {
-      _isSuccess = LoadFactory(factory);
-      _isSuccess = LoadStocks(factory.GetStore()) && _isSuccess;
+    internal StockRepository_Run(IFactory factory) { 
+      _isSuccess = LoadFactory(factory); 
+      _isSuccess = LoadStocks(factory.GetStore()) && _isSuccess; 
     }
     bool LoadFactory(IFactory factory) {
       Console.WriteLine("... Loading factory");
+      Thread.Sleep(1500);
       if (factory != null) {
         _factory = factory;
         Console.WriteLine("+++ Load Factory, OK");
@@ -29,6 +31,7 @@ namespace StoreStock.BusinessLogic {
     }
     bool LoadStocks(Store store) {
       Console.WriteLine("... Loading stocks");
+      Thread.Sleep(1500);
       if (store.StoreData != null) {
         _store = store;
         Console.WriteLine("+++ Stocks, OK");

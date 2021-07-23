@@ -26,8 +26,8 @@ namespace StoreStockWeb.Services {
       StateControl.Init();
       Console.WriteLine("Initializing, OK.");
 
-      Console.WriteLine("\nPress any key to start.");
-      Console.ReadKey();
+/*      Console.WriteLine("\nPress any key to start.");
+      Console.ReadKey();*/
       Console.WriteLine("\nStarting...");
       StateControl.Run();
       Console.WriteLine("Starting, OK.");

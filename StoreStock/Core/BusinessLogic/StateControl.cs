@@ -23,6 +23,11 @@ namespace StoreStock.BusinessLogic {
       if (_initStock && _initStore) {
         _runStore = _storeRepo.Run();
         _runStock = _stockRepo.Run();
+
+        if (_runStore != _runStock) {
+          Stop();
+          Console.WriteLine("!!! Cannot Running, check run log!");
+        }
       } 
       else {
         Console.WriteLine("!!! Cannot Running, check init log!");
