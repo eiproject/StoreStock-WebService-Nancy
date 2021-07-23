@@ -1,45 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class StoreRepository_Init : IStoreState {
     private IFactory _factory;
     private IStockRepository _repository;
+    private bool _isSuccess;
+    bool IStoreState.IsSuccess { get { return _isSuccess; } }
     internal StoreRepository_Init(IFactory factory, IStockRepository repository) {
       _factory = factory;
-      CheckingStockRepository(repository);
-      GenerateDummyData();
+      _isSuccess = CheckingStockRepository(repository);
+      _isSuccess = GenerateDummyData() && _isSuccess;
     }
-    void CheckingStockRepository(IStockRepository repository) {
+    bool CheckingStockRepository(IStockRepository repository) {
       Console.WriteLine("... Checking Stock Repository");
       if (repository != null) {
         Console.WriteLine("+++ Stock Repository, OK");
         _repository = repository;
+        return true;
       }
       else {
         Console.WriteLine("--- Stock Repository, NULL");
+        return false;
       }
     }
-    void GenerateDummyData() {
+    bool GenerateDummyData() {
       Console.WriteLine("... Generating dummy data");
       StringInputParser inputParse = new StringInputParser(_factory);
       GenerateDummyData dummy = new GenerateDummyData(inputParse);
       GenerateCondition condition = dummy.Generate();
       if (condition == GenerateCondition.OK) {
         Console.WriteLine("+++ Dummy Data, OK");
+        return true;
       }
       else if (condition == GenerateCondition.SomeDataMissing) {
         Console.WriteLine("??? Dummy Data, Some Data Missing (suggestion: Check it)");
+        return true;
       }
       else if (condition == GenerateCondition.DataOverload) {
         Console.WriteLine("??? Dummy Data, Data Overload (suggestion: Check it)");
+        return true;
       }
       else {
         Console.WriteLine("--- Dummy Data, Failed");
+        return false;
       }
 
     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using StoreStock.Models;
+﻿using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class StockRepository_Stop : IState {
@@ -14,6 +9,7 @@ namespace StoreStock.BusinessLogic {
     internal StockRepository_Stop(IFactory factory) {
       _store = factory.GetStore();
       _factory = factory;
+      _isSuccess = true;
     }
     // Method of the repository start here
     Stock IState.CreateStock(string type,

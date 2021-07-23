@@ -13,7 +13,7 @@ namespace StoreStock.BusinessLogic {
     bool IState.IsSuccess { get { return _isSuccess; } }
     internal StockRepository_Run(IFactory factory) {
       _isSuccess = LoadFactory(factory);
-      _isSuccess = LoadStore(factory.GetStore()) && _isSuccess;
+      _isSuccess = LoadStocks(factory.GetStore()) && _isSuccess;
     }
     bool LoadFactory(IFactory factory) {
       Console.WriteLine("... Loading factory");
@@ -27,15 +27,15 @@ namespace StoreStock.BusinessLogic {
         return false;
       }
     }
-    bool LoadStore(Store store) {
-      Console.WriteLine("... Loading store");
-      if (store != null) {
+    bool LoadStocks(Store store) {
+      Console.WriteLine("... Loading stocks");
+      if (store.StoreData != null) {
         _store = store;
-        Console.WriteLine("+++ Store, OK");
+        Console.WriteLine("+++ Stocks, OK");
         return true;
       }
       else {
-        Console.WriteLine("--- Store, FAILED");
+        Console.WriteLine("--- Stocks, FAILED");
         return false;
       }
     }

@@ -22,7 +22,7 @@ namespace StoreStockWeb.Services {
 			IFactory factory = new Factory(_store);
 			IStockRepository repository = new StockRepository(factory);
 			IStoreRepository storerepository = new StoreRepository(factory, repository);
-			StateControl stateControl = new StateControl(repository, storerepository);
+			StateControl stateControl = new StateControl(storerepository, repository);
 
 			base.ConfigureApplicationContainer(container);
 			container.Register(_store);

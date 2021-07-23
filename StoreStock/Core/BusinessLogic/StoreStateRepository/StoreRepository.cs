@@ -43,18 +43,21 @@ namespace StoreStock.BusinessLogic {
         _isInitialized = true;
       }
       _state = _init;
+      return _init.IsSuccess;
     }
     bool IStoreRepository.Run() {
       if (_run == null) {
         _run = new StoreRepository_Run(_factory, _repository);
       }
       _state = _run;
+      return _run.IsSuccess;
     }
     bool IStoreRepository.Stop() {
       if (_stop == null) {
         _stop = new StoreRepository_Stop(_factory, _repository);
       }
       _state = _stop;
+      return _stop.IsSuccess;
     }
     internal IStoreState GetInitState() {
       return _init;
