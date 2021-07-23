@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
-using StoreStock.BusinessLogic;
-using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class GenerateDummyData {

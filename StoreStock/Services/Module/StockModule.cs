@@ -1,6 +1,4 @@
 ﻿using Nancy;
-using Nancy.ModelBinding;
-using System;
 
 namespace StoreStockWeb.Services {
   public class StockModule : NancyModule {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StoreStockWeb.Services {
+﻿namespace StoreStockWeb.Services {
   class RequestStock {
     public string Type { get; set; }
     public int Amount { get; set; }

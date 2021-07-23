@@ -1,14 +1,8 @@
 ﻿using Nancy;
-using Nancy.Helpers;
-using Nancy.IO;
 using Nancy.ModelBinding;
 using StoreStock.BusinessLogic;
 using StoreStock.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreStockWeb.Services {
   public class StoreAPI {

@@ -1,9 +1,6 @@
 ﻿using Nancy.Hosting.Self;
 using System;
 using StoreStock.BusinessLogic;
-using StoreStock.Models;
-using TinyIoC;
-using Nancy.TinyIoc;
 
 namespace StoreStockWeb.Services {
   class Program {

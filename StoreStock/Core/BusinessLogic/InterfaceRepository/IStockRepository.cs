@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using StoreStock.Models;
+﻿using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   public interface IStockRepository {

@@ -129,7 +129,6 @@
     <Compile Include="Core\Models\Factory\Factory.cs" />
     <Compile Include="Core\Models\Factory\IFactory.cs" />
     <Compile Include="Core\Models\Object\Stock.cs" />
-    <Compile Include="Core\Run.cs" />
     <Compile Include="Services\APILogic\StockAPI.cs" />
     <Compile Include="Services\APILogic\StoreAPI.cs" />
     <Compile Include="Services\Module\StockModule.cs" />

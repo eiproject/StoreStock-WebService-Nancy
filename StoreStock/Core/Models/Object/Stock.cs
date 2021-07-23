@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StoreStock.Models {
+﻿namespace StoreStock.Models {
   public abstract class Stock {
     protected Store _store;
     protected int _id;
