@@ -41,7 +41,9 @@ namespace StoreStockWeb.Services {
           if (_store != null) {
             _statusCode = HttpStatusCode.OK;
           }
-          _statusCode = HttpStatusCode.NotFound;
+          else {
+            _statusCode = HttpStatusCode.NotFound;
+          }
         }
         else {
           _statusCode = HttpStatusCode.BadRequest;
