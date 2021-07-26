@@ -26,6 +26,8 @@ namespace StoreStock.Models {
       _category = publisher;
       _subCategory = genre;
       _size = size;
+
+      _sku = $"book-{_category.ToLower()}-{_id}";
     }
   }
 }

@@ -30,6 +30,8 @@ namespace StoreStock.Models {
       _category = brand;
       _subCategory = color;
       _size = size;
+
+      _sku = $"pencil-{_category.ToLower()}-{_id}";
     }
   }
 }
