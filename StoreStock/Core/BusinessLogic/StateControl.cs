@@ -47,8 +47,8 @@ namespace StoreStock.BusinessLogic {
     }
     internal static void Stop() {
       Console.WriteLine("\nShutting down...");
-      _stopStore = _storeRepo.Stop();
       _stopStock = _stockRepo.Stop();
+      _stopStore = _storeRepo.Stop();
       Console.WriteLine("Shutting down, OK.");
     }
   }

@@ -36,7 +36,7 @@ namespace StoreStock.BusinessLogic {
     }
     bool IStoreRepository.Init() {
       if (_init == null && !_isInitialized) {
-        _init = new StoreRepository_Init(_factory, _repository);
+        _init = new StoreRepositoryInitState(_factory, _repository);
         _isInitialized = true;
       }
       _state = _init;
@@ -44,14 +44,14 @@ namespace StoreStock.BusinessLogic {
     }
     bool IStoreRepository.Run() {
       if (_run == null) {
-        _run = new StoreRepository_Run(_factory, _repository);
+        _run = new StoreRepositoryRun(_factory, _repository);
       }
       _state = _run;
       return _run.IsSuccess;
     }
     bool IStoreRepository.Stop() {
       if (_stop == null) {
-        _stop = new StoreRepository_Stop(_factory, _repository);
+        _stop = new StoreRepositoryStop(_factory, _repository);
       }
       _state = _stop;
       return _stop.IsSuccess;

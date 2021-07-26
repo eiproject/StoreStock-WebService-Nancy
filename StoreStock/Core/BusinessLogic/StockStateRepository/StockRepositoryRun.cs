@@ -5,12 +5,12 @@ using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StockRepository_Run : IStockState {
+  class StockRepositoryRun : IStockState {
     private Store _store;
     private IFactory _factory; 
     private bool _isSuccess;
     bool IStockState.IsSuccess { get { return _isSuccess; } }
-    internal StockRepository_Run(IFactory factory) { 
+    internal StockRepositoryRun(IFactory factory) { 
       _isSuccess = LoadFactory(factory); 
       _isSuccess = LoadStocks(factory.GetStore()) && _isSuccess; 
     }

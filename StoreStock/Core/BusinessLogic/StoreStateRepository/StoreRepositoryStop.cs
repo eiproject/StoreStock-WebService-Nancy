@@ -1,11 +1,11 @@
 ﻿using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StoreRepository_Stop : IStoreState {
+  class StoreRepositoryStop : IStoreState {
     private Store _store;
     private bool _isSuccess;
     bool IStoreState.IsSuccess { get { return _isSuccess; } }
-    internal StoreRepository_Stop(IFactory factory, IStockRepository repository) {
+    internal StoreRepositoryStop(IFactory factory, IStockRepository repository) {
       _store = factory.GetStore();
 
       // cleaning store data

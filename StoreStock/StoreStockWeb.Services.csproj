@@ -119,10 +119,10 @@
     <Compile Include="Core\BusinessLogic\InterfaceRepository\IStockRepository.cs" />
     <Compile Include="Core\BusinessLogic\InterfaceRepository\IStoreRepository.cs" />
     <Compile Include="Core\BusinessLogic\StockStateRepository\StockRepository.cs" />
-    <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreRepository_Init.cs" />
+    <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreRepositoryInitState.cs" />
     <Compile Include="Core\BusinessLogic\StoreStateRepository\IStoreState.cs" />
-    <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreRepository_Run.cs" />
-    <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreRepository_Stop.cs" />
+    <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreRepositoryRun.cs" />
+    <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreRepositoryStop.cs" />
     <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreRepository.cs" />
     <Compile Include="Core\DummyData\GenerateCondition.cs" />
     <Compile Include="Core\DummyData\StringInputParser.cs" />
@@ -142,10 +142,10 @@
     <Compile Include="Services\Module\MainModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\BusinessLogic\StockStateRepository\StockRepository_Run.cs" />
-    <Compile Include="Core\BusinessLogic\StockStateRepository\StockRepository_Init.cs" />
+    <Compile Include="Core\BusinessLogic\StockStateRepository\StockRepositoryRun.cs" />
+    <Compile Include="Core\BusinessLogic\StockStateRepository\StockRepositoryInit.cs" />
     <Compile Include="Core\BusinessLogic\StockStateRepository\IStockState.cs" />
-    <Compile Include="Core\BusinessLogic\StockStateRepository\StockRepository_Stop.cs" />
+    <Compile Include="Core\BusinessLogic\StockStateRepository\StockRepositoryStop.cs" />
     <Compile Include="Core\BusinessLogic\StateControl.cs" />
     <Compile Include="Services\RequestModel\RequestStockAmount.cs" />
     <Compile Include="Services\RequestModel\RequestStore.cs" />

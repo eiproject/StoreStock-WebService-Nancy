@@ -3,15 +3,17 @@ using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StoreRepository_Init : IStoreState {
+  class StoreRepositoryInitState : IStoreState {
     private IFactory _factory;
     private IStockRepository _repository;
     private bool _isSuccess;
     bool IStoreState.IsSuccess { get { return _isSuccess; } }
-    internal StoreRepository_Init(IFactory factory, IStockRepository repository) { 
+    internal StoreRepositoryInitState(IFactory factory, IStockRepository repository) { 
       _factory = factory;
       _isSuccess = CheckingStockRepository(repository); 
-      _isSuccess = GenerateDummyData() && _isSuccess; 
+      _isSuccess = GenerateDummyData() && _isSuccess;
+
+      _repository = repository ?? throw new ArgumentNullException();
     }
     bool CheckingStockRepository(IStockRepository repository) {
       Console.WriteLine("... Checking Stock Repository");
@@ -56,7 +58,8 @@ namespace StoreStock.BusinessLogic {
     }
 
     void IStoreState.UpdateStore(string name) {
-     
+      // Exception handler
+      throw new NotImplementedException();
     }
   }
 }

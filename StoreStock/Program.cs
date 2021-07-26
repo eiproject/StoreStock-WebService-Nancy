@@ -24,6 +24,8 @@ namespace StoreStockWeb.Services {
       
       Console.WriteLine("\nPress any key to shutting down.");
       Console.ReadKey();
+
+      // Application state manager
       StateControl.Stop();
 
       Console.WriteLine("Please any key to exit.");

@@ -3,11 +3,11 @@ using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StoreRepository_Run : IStoreState {
+  class StoreRepositoryRun : IStoreState {
     private Store _store;
     private bool _isSuccess;
     bool IStoreState.IsSuccess { get { return _isSuccess; } }
-    internal StoreRepository_Run(IFactory factory, IStockRepository repository) { 
+    internal StoreRepositoryRun(IFactory factory, IStockRepository repository) { 
       _isSuccess = LoadStore(factory.GetStore()); 
     }
     bool LoadStore(Store store) {

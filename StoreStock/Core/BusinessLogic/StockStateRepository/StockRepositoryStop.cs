@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 
 namespace StoreStock.BusinessLogic {
-  class StockRepository_Stop : IStockState {
+  class StockRepositoryStop : IStockState {
     private Store _store;
     private IFactory _factory;
     private bool _isSuccess;
     bool IStockState.IsSuccess { get { return _isSuccess; } }
-    internal StockRepository_Stop(IFactory factory) {
+    internal StockRepositoryStop(IFactory factory) {
       _store = factory.GetStore();
       _factory = factory;
       CleanAllStocks(_store.StoreData); ;
