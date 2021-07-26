@@ -1,4 +1,5 @@
 ﻿using StoreStock.Models;
+using System.Collections.Generic;
 
 namespace StoreStock.BusinessLogic {
   class StockRepository_Stop : IStockState {
@@ -9,7 +10,13 @@ namespace StoreStock.BusinessLogic {
     internal StockRepository_Stop(IFactory factory) {
       _store = factory.GetStore();
       _factory = factory;
+      CleanAllStocks(_store.StoreData); ;
       _isSuccess = true;
+    }
+    void CleanAllStocks(List<Stock> stocks) {
+      for (int i = 0; i < stocks.Count; i++) {
+        _store.RemoveStock(stocks[i]);
+      }
     }
     // Method of the repository start here
     Stock IStockState.CreateStock(string type,

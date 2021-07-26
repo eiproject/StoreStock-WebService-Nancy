@@ -7,6 +7,10 @@ namespace StoreStock.BusinessLogic {
     bool IStoreState.IsSuccess { get { return _isSuccess; } }
     internal StoreRepository_Stop(IFactory factory, IStockRepository repository) {
       _store = factory.GetStore();
+
+      // cleaning store data
+      _store = null;
+
       _isSuccess = true;
     }
     Store IStoreState.ReadStore() {
