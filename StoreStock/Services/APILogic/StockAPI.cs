@@ -91,7 +91,7 @@ namespace StoreStockWeb.Services {
           int amount = model.Amount;
           Stock stock = _repository.ReadStock(id);
           if (stock != null) {
-            Stock stockToUpdate = _repository.UpdateStock_Amount(id, amount);
+            Stock stockToUpdate = _repository.UpdateStockAmount(id, amount);
             if (stockToUpdate != null) {
               _stock = stockToUpdate;
               _statusCode = HttpStatusCode.OK;

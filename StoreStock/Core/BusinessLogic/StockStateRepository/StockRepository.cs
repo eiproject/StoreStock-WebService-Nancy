@@ -30,7 +30,7 @@ namespace StoreStock.BusinessLogic {
       return _state.ReadStock(id);
     }
 
-    Stock IStockRepository.UpdateStock_Amount(int stockID, int amountDifference) {
+    Stock IStockRepository.UpdateStockAmount(int stockID, int amountDifference) {
       if (_state == null) { return null; }
       return _state.UpdateStock_Amount(stockID, amountDifference);
     }
