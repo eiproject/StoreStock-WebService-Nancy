@@ -1,22 +1,19 @@
 ﻿using StoreStock.Models;
+using System;
 using System.Collections.Generic;
 
 namespace StoreStock.BusinessLogic {
   class StockRepositoryStop : IStockState {
     private Store _store;
     private IFactory _factory;
-    private bool _isSuccess;
-    bool IStockState.IsSuccess { get { return _isSuccess; } }
     internal StockRepositoryStop(IFactory factory) {
-      _store = factory.GetStore();
-      _factory = factory;
-      CleanAllStocks(_store.StoreData); ;
-      _isSuccess = true;
+      _factory = factory ?? throw new NullReferenceException("--- Stock stop - Factory reference null");
+      _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock stop - Store reference null");
+      CleanAllStocks(_store);
+      if (_store.StoreData.Count == 0) { } else { throw new InvalidOperationException("Store Data is still exist after deletion."); }
     }
-    void CleanAllStocks(List<Stock> stocks) {
-      for (int i = 0; i < stocks.Count; i++) {
-        _store.RemoveStock(stocks[i]);
-      }
+    void CleanAllStocks(Store store) {
+      store.CleanStock();
     }
     // Method of the repository start here
     Stock IStockState.CreateStock(string type,

@@ -4,24 +4,13 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class StoreRepositoryRun : IStoreState {
+    private IFactory _factory;
+    private IStockRepository _repository;
     private Store _store;
-    private bool _isSuccess;
-    bool IStoreState.IsSuccess { get { return _isSuccess; } }
-    internal StoreRepositoryRun(IFactory factory, IStockRepository repository) { 
-      _isSuccess = LoadStore(factory.GetStore()); 
-    }
-    bool LoadStore(Store store) {
-      Console.WriteLine("... Loading store");
-      Thread.Sleep(1500);
-      if (store != null) {
-        _store = store;
-        Console.WriteLine("+++ Store, OK");
-        return true;
-      }
-      else {
-        Console.WriteLine("--- Store, FAILED");
-        return false;
-      }
+    internal StoreRepositoryRun(IFactory factory, IStockRepository repository) {
+      _factory = factory ?? throw new NullReferenceException("--- Store run - Factory reference null");
+      _store = factory.GetStore() ?? throw new NullReferenceException("--- Store run - Store reference null");
+      _repository = repository ?? throw new NullReferenceException("--- Store run - Repository reference null");
     }
 
     Store IStoreState.ReadStore() {

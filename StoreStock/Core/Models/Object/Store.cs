@@ -26,6 +26,9 @@ namespace StoreStock.Models {
     public void RemoveStock(Stock stock) {
       _storeData.Remove(stock);
     }
+    public void CleanStock() {
+      _storeData.Clear();
+    }
     public void UpdateName(string name) {
       _storeName = name;
     }

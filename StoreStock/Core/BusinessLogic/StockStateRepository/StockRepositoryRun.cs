@@ -8,37 +8,9 @@ namespace StoreStock.BusinessLogic {
   class StockRepositoryRun : IStockState {
     private Store _store;
     private IFactory _factory; 
-    private bool _isSuccess;
-    bool IStockState.IsSuccess { get { return _isSuccess; } }
-    internal StockRepositoryRun(IFactory factory) { 
-      _isSuccess = LoadFactory(factory); 
-      _isSuccess = LoadStocks(factory.GetStore()) && _isSuccess; 
-    }
-    bool LoadFactory(IFactory factory) {
-      Console.WriteLine("... Loading factory");
-      Thread.Sleep(1500);
-      if (factory != null) {
-        _factory = factory;
-        Console.WriteLine("+++ Load Factory, OK");
-        return true;
-      }
-      else {
-        Console.WriteLine("--- Load Factory, FAILED");
-        return false;
-      }
-    }
-    bool LoadStocks(Store store) {
-      Console.WriteLine("... Loading stocks");
-      Thread.Sleep(1500);
-      if (store.StoreData != null) {
-        _store = store;
-        Console.WriteLine("+++ Stocks, OK");
-        return true;
-      }
-      else {
-        Console.WriteLine("--- Stocks, FAILED");
-        return false;
-      }
+    internal StockRepositoryRun(IFactory factory) {
+      _factory = factory ?? throw new NullReferenceException("--- Stock run - Factory reference null");
+      _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock run - Store reference null");
     }
     // Method of the repository start here
     Stock IStockState.CreateStock(string type,
