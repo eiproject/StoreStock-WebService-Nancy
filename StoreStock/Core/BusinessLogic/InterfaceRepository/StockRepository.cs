@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using StoreStock.Models;
+﻿using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StockRepository : IStockRepository {
-    private Store _store;
-    private IFactory _factory;
-    internal StockRepository(Store theStore, IFactory factory) {
-      _store = theStore;
+  class StockRepository : IStockRepository{
+    IFactory _factory;
+    private IStockState _init;
+    private IStockState _run;
+    private IStockState _stop;
+
+    private bool _isInitialized = false;
+    private IStockState _state;
+    internal StockRepository(IFactory factory) {
       _factory = factory;
+      // _state = _init;
     }
-    // Method of the repository start here
+
     Stock IStockRepository.CreateStock(string type,
       int amount,
       string title,
@@ -21,61 +21,52 @@ namespace StoreStock.BusinessLogic {
       string publisher,
       string genre,
       string size) {
-      int id = _store.LastID + 1;
-      Stock stock = _factory.FactoryStoreStock(type, id, amount, title, price, publisher, genre, size);
-      _store.AddStock(stock);
-      return stock;
+      if (_state == null) { return null; }
+      return _state.CreateStock(type, amount, title, price, publisher, genre, size);
     }
 
     Stock IStockRepository.ReadStock(int id) {
-      IEnumerable<Stock> filteredData = _store.StoreData.Where(
-        data => data.ID == id);
-      if (filteredData.Count() > 0) {
-        return filteredData.First();
-      }
-      else {
-        return null;
-      }
+      if (_state == null) { return null; }
+      return _state.ReadStock(id);
     }
-    Stock IStockRepository.UpdateStock_Amount(int stockID, int amountDifference) {
-      Stock stock = _store.StoreData.Find(data => data.ID == stockID);
-      if (stock != null) {
-        if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {
-          Console.WriteLine("Input amount INVALID | UpdateStoreStock");
-          return null;
-        }
-        else {
-          stock.UpdateStockAmount(amountDifference);
-        }
-      }
-      else {
-        Console.WriteLine("Input ID INVALID | UpdateStoreStock");
-      }
 
-      return stock;
+    Stock IStockRepository.UpdateStockAmount(int stockID, int amountDifference) {
+      if (_state == null) { return null; }
+      return _state.UpdateStock_Amount(stockID, amountDifference);
     }
+
     Stock IStockRepository.DeleteStock(int stockID) {
-      Stock stock = _store.StoreData.Find(data => data.ID == stockID);
-      if (stock != null) {
-        _store.RemoveStock(stock);
-        return stock;
-      }
-      else {
-        Console.WriteLine("Input ID INVALID | DeleteStoreStock");
-        return null;
-      }
+      if (_state == null) { return null; }
+      return _state.DeleteStock(stockID);
     }
 
     void IStockRepository.Init() {
-      throw new NotImplementedException();
+      if (_init == null && !_isInitialized) {
+        _init = new StockRepositoryInit(_factory);
+        _isInitialized = true;
+      }
+      _state = _init;
     }
-
     void IStockRepository.Run() {
-      throw new NotImplementedException();
+      if (_run == null) {
+        _run = new StockRepositoryRun(_factory);
+      }
+      _state = _run;
     }
-
     void IStockRepository.Stop() {
-      throw new NotImplementedException();
+      if (_stop == null) {
+        _stop = new StockRepositoryStop(_factory);
+      }
+      _state = _stop;
+    }
+    internal IStockState GetInitState() {
+      return _init;
+    }
+    internal IStockState GetRunState() {
+      return _run;
+    }
+    internal IStockState GetShutDownState() {
+      return _stop;
     }
   }
 }
