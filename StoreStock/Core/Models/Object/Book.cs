@@ -11,10 +11,6 @@ namespace StoreStock.Models {
       return decimal.Multiply(percentage, _price);
     }
 
-    internal override void UpdateStockAmount(int newAmount) {
-      _amount += newAmount;
-    }
-
     internal Book(Store store, int id, int amount, string title,
           decimal price, string publisher, string genre, string size) : base(store){
       _store = store;

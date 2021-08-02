@@ -11,9 +11,6 @@ namespace StoreStock.Models {
       return decimal.Multiply(percentage, _price);
     }
 
-    internal override void UpdateStockAmount(int newAmount) {
-      _amount += newAmount;
-    }
     internal Pencil(Store store, int id,
       int amount,
       string title,

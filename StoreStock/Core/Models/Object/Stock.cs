@@ -26,7 +26,10 @@
     
     /*Method*/
     protected abstract decimal GetDiscount();
-    internal abstract void UpdateStockAmount(int newAmount);
+    public static Stock operator + (Stock stock, int amount) {
+      stock._amount += amount;
+      return stock;
+    }
 
     /*The Constructor*/
     public Stock(Store store) {

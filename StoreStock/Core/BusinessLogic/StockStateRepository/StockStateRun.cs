@@ -44,7 +44,7 @@ namespace StoreStock.BusinessLogic {
           return null;
         }
         else {
-          stock.UpdateStockAmount(amountDifference);
+          stock += amountDifference;
         }
       }
       else {
