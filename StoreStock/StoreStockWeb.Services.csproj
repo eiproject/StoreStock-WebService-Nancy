@@ -146,7 +146,7 @@
     <Compile Include="Core\BusinessLogic\StockStateRepository\StockStateInit.cs" />
     <Compile Include="Core\BusinessLogic\StockStateRepository\IStockState.cs" />
     <Compile Include="Core\BusinessLogic\StockStateRepository\StockStateStop.cs" />
-    <Compile Include="Core\BusinessLogic\StateControl.cs" />
+    <Compile Include="Core\BusinessLogic\StateManager.cs" />
     <Compile Include="Services\RequestModel\RequestStockAmount.cs" />
     <Compile Include="Services\RequestModel\RequestStore.cs" />
     <Compile Include="Services\RequestModel\RequestStock.cs" />

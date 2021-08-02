@@ -1,10 +1,10 @@
 ﻿using System;
 
 namespace StoreStock.BusinessLogic {
-  class StateControl {
+  class StateManager {
     private static IStoreRepository _storeRepo;
     private static IStockRepository _stockRepo;
-    internal StateControl(IStoreRepository storeRepo, IStockRepository stockRepo) {
+    internal StateManager(IStoreRepository storeRepo, IStockRepository stockRepo) {
       _storeRepo = storeRepo;
       _stockRepo = stockRepo;
     }
