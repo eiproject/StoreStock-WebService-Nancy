@@ -2,6 +2,15 @@
 using System.Threading;
 
 namespace StoreStock.BusinessLogic {
+  internal static class DummyDataInputQuery {
+    internal static string StockTypeToLower(this string query) {
+      string[] querySplitted = query.Split('#');
+      querySplitted[0].ToLower();
+      string result = String.Join("#", querySplitted);
+      return result;
+    }
+  }
+
   class GenerateDummyData {
     private string[] _testInput;
     private StringInputParser _parser;
@@ -19,8 +28,8 @@ namespace StoreStock.BusinessLogic {
         "PEN#2120#51000#Pilot Pen Mr 2 Metropolitan#Pilot#Black#0.5"
       };
 
-      foreach (string t in _testInput) {
-        bool isSaved = _parser.Save(t);
+      foreach (string query in _testInput) {
+        bool isSaved = _parser.Save(query.StockTypeToLower()); // Extension Methods
         if (isSaved) {
           Console.Write(" .");
           Thread.Sleep(500);
