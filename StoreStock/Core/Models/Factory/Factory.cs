@@ -8,7 +8,7 @@ namespace StoreStock.BusinessLogic {
     internal Factory(Store store) {
       _store = store;
     }
-    Stock IFactory.FactoryStoreStock(
+    Stock IFactory.StockFactory(
       string type, int id, int amount, string title, decimal price,
       string category, string subCategpry, string size) {
 

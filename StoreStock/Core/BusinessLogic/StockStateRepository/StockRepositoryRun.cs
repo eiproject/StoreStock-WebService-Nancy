@@ -21,7 +21,7 @@ namespace StoreStock.BusinessLogic {
       string subCategory,
       string size) {
       int id = _store.LastID + 1;
-      Stock stock = _factory.FactoryStoreStock(type, id, amount, title, price, category, subCategory, size);
+      Stock stock = _factory.StockFactory(type, id, amount, title, price, category, subCategory, size);
       _store.AddStock(stock);
       return stock;
     }

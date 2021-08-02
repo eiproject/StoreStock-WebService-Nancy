@@ -14,7 +14,7 @@ namespace StoreStock.BusinessLogic {
     internal bool Save(string inputText) {
       try {
         _parsingData = inputText.Split('#');
-        Stock stock = _factory.FactoryStoreStock(
+        Stock stock = _factory.StockFactory(
           type: _parsingData[0].ToLower(),
           id: _factory.GetStore().LastID + 1,
         amount: int.Parse(_parsingData[1]),
