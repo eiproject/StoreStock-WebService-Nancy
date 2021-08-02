@@ -3,6 +3,6 @@
 namespace StoreStock.BusinessLogic {
   public interface IStoreState {
     Store ReadStore();
-    void UpdateStore(string name);
+    void UpdateStoreName(string name);
   }
 }

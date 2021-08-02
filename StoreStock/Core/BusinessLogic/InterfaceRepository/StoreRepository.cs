@@ -26,7 +26,7 @@ namespace StoreStock.BusinessLogic {
 
     Store IStoreRepository.UpdateStore(string name) {
       if (_state!= null) {
-        _state.UpdateStore(name);
+        _state.UpdateStoreName(name);
         return _state.ReadStore();
       }
       else {
