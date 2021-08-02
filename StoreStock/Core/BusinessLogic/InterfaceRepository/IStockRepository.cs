@@ -12,8 +12,8 @@ namespace StoreStock.BusinessLogic {
     Stock ReadStock(int id);
     Stock UpdateStockAmount(int stockID, int amount);
     Stock DeleteStock(int stockID);
-    void Init();
-    void Run();
-    void Stop();
+    void StateToInit();
+    void StateToRun();
+    void StateToStop();
   }
 }

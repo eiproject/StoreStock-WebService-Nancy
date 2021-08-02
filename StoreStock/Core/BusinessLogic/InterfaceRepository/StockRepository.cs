@@ -40,20 +40,20 @@ namespace StoreStock.BusinessLogic {
       return _state.DeleteStock(stockID);
     }
 
-    void IStockRepository.Init() {
+    void IStockRepository.StateToInit() {
       if (_init == null && !_isInitialized) {
         _init = new StockStateInit(_factory);
         _isInitialized = true;
       }
       _state = _init;
     }
-    void IStockRepository.Run() {
+    void IStockRepository.StateToRun() {
       if (_run == null) {
         _run = new StockStateRun(_factory);
       }
       _state = _run;
     }
-    void IStockRepository.Stop() {
+    void IStockRepository.StateToStop() {
       if (_stop == null) {
         _stop = new StockStateStop(_factory);
       }
