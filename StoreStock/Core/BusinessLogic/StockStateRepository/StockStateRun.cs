@@ -36,7 +36,7 @@ namespace StoreStock.BusinessLogic {
         return null;
       }
     }
-    Stock IStockState.UpdateStock_Amount(int stockID, int amountDifference) {
+    Stock IStockState.UpdateStockAmount(int stockID, int amountDifference) {
       Stock stock = _store.StoreData.Find(data => data.ID == stockID);
       if (stock != null) {
         if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {

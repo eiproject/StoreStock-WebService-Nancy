@@ -2,14 +2,7 @@
 using System.Threading;
 
 namespace StoreStock.BusinessLogic {
-  internal static class DummyDataInputQuery {
-    internal static string StockTypeToLower(this string query) {
-      string[] querySplitted = query.Split('#');
-      querySplitted[0].ToLower();
-      string result = String.Join("#", querySplitted);
-      return result;
-    }
-  }
+
 
   class GenerateDummyData {
     private string[] _testInput;

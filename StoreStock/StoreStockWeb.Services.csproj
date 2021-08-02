@@ -124,6 +124,7 @@
     <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreStateRun.cs" />
     <Compile Include="Core\BusinessLogic\StoreStateRepository\StoreStateStop.cs" />
     <Compile Include="Core\BusinessLogic\InterfaceRepository\StoreRepository.cs" />
+    <Compile Include="Core\DummyData\DummyDataInputQuery.cs" />
     <Compile Include="Core\DummyData\GenerateCondition.cs" />
     <Compile Include="Core\DummyData\StringInputParser.cs" />
     <Compile Include="Core\Models\Factory\Factory.cs" />

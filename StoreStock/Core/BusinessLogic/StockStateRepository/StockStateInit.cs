@@ -27,7 +27,7 @@ namespace StoreStock.BusinessLogic {
       Console.WriteLine("Initializing Stock...");
       return null;
     }
-    Stock IStockState.UpdateStock_Amount(int stockID, int amountDifference) {
+    Stock IStockState.UpdateStockAmount(int stockID, int amountDifference) {
       Console.WriteLine("Initializing Stock...");
       return null;
     }

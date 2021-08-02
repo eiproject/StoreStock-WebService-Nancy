@@ -32,7 +32,7 @@ namespace StoreStock.BusinessLogic {
 
     Stock IStockRepository.UpdateStockAmount(int stockID, int amountDifference) {
       if (_state == null) { return null; }
-      return _state.UpdateStock_Amount(stockID, amountDifference);
+      return _state.UpdateStockAmount(stockID, amountDifference);
     }
 
     Stock IStockRepository.DeleteStock(int stockID) {
