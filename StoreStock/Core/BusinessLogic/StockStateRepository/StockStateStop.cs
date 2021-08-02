@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 
 namespace StoreStock.BusinessLogic {
-  class StockRepositoryStop : IStockState {
+  class StockStateStop : IStockState {
     private Store _store;
     private IFactory _factory;
-    internal StockRepositoryStop(IFactory factory) {
+    internal StockStateStop(IFactory factory) {
       _factory = factory ?? throw new NullReferenceException("--- Stock stop - Factory reference null");
       _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock stop - Store reference null");
       CleanAllStocks(_store);

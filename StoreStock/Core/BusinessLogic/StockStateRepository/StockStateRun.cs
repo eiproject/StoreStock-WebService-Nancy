@@ -5,10 +5,10 @@ using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StockRepositoryRun : IStockState {
+  class StockStateRun : IStockState {
     private Store _store;
     private IFactory _factory; 
-    internal StockRepositoryRun(IFactory factory) {
+    internal StockStateRun(IFactory factory) {
       _factory = factory ?? throw new NullReferenceException("--- Stock run - Factory reference null");
       _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock run - Store reference null");
     }

@@ -3,11 +3,11 @@ using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StockRepositoryInit : IStockState {
+  class StockStateInit : IStockState {
     private Store _store;
     private IFactory _factory;
 
-    internal StockRepositoryInit(IFactory factory) {
+    internal StockStateInit(IFactory factory) {
       _factory = factory ?? throw new NullReferenceException("--- Stock init - Factory reference null");
       _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock init - Store reference null");
     }

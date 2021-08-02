@@ -36,20 +36,20 @@ namespace StoreStock.BusinessLogic {
     }
     void IStoreRepository.Init() {
       if (_init == null && !_isInitialized) {
-        _init = new StoreRepositoryInitState(_factory, _repository);
+        _init = new StoreStateInit(_factory, _repository);
         _isInitialized = true;
       }
       _state = _init;
     }
     void IStoreRepository.Run() {
       if (_run == null) {
-        _run = new StoreRepositoryRun(_factory, _repository);
+        _run = new StoreStateRun(_factory, _repository);
       }
       _state = _run;
     }
     void IStoreRepository.Stop() {
       if (_stop == null) {
-        _stop = new StoreRepositoryStop(_factory, _repository);
+        _stop = new StoreStateStop(_factory, _repository);
       }
       _state = _stop;
     }

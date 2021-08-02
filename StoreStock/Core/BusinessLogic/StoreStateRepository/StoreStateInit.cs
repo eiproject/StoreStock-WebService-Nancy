@@ -3,10 +3,10 @@ using System.Threading;
 using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StoreRepositoryInitState : IStoreState {
+  class StoreStateInit : IStoreState {
     private IFactory _factory;
     private IStockRepository _repository;
-    internal StoreRepositoryInitState(IFactory factory, IStockRepository repository) {
+    internal StoreStateInit(IFactory factory, IStockRepository repository) {
       _factory = factory ?? throw new NullReferenceException("--- Store init - Factory reference null");
       _repository = repository ?? throw new NullReferenceException("--- Store init - Repository reference null");
       GenerateDummyData();
