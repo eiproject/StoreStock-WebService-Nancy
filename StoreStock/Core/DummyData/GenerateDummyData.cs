@@ -12,7 +12,7 @@ namespace StoreStock.BusinessLogic {
       _parser = parser;
     }
     internal GenerateCondition Generate() {
-      int savedData = 0;
+      int numberOfSavedData = 0;
       _testInput = new string[] {
         "Book#100#895000#Magic Tree House Boxed Set, Books 1-4#Dongeng# #A5",
         "PENcil#210#49800#Conte Pieree Noire#Conte# #3B",
@@ -26,21 +26,21 @@ namespace StoreStock.BusinessLogic {
         if (isSaved) {
           Console.Write(" .");
           Thread.Sleep(500);
-          savedData++; 
+          numberOfSavedData++; 
         }
       }
       Console.Write("\n");
 
-      if (savedData == _testInput.Length) {
+      if (numberOfSavedData == _testInput.Length) {
         return GenerateCondition.OK;
       }
-      else if (savedData < _testInput.Length) {
+      else if (numberOfSavedData < _testInput.Length) {
         return GenerateCondition.SomeDataMissing;
       }
-      else if (savedData > _testInput.Length) {
+      else if (numberOfSavedData > _testInput.Length) {
         return GenerateCondition.DataOverload;
       }
-      else if (savedData == 0) {
+      else if (numberOfSavedData == 0) {
         return GenerateCondition.NothingSaved;
       }
       else {

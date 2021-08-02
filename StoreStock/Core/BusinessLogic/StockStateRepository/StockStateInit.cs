@@ -19,21 +19,17 @@ namespace StoreStock.BusinessLogic {
       string publisher,
       string genre,
       string size) {
-      Console.WriteLine("Initializing Stock...");
-      return null;
+      throw new NotImplementedException("Create not implemented in init state");
     }
 
     Stock IStockState.ReadStock(int id) {
-      Console.WriteLine("Initializing Stock...");
-      return null;
+      throw new NotImplementedException("Read not implemented in init state");
     }
     Stock IStockState.UpdateStockAmount(int stockID, int amountDifference) {
-      Console.WriteLine("Initializing Stock...");
-      return null;
+      throw new NotImplementedException("Update not implemented in init state");
     }
     Stock IStockState.DeleteStock(int stockID) {
-      Console.WriteLine("Initializing Stock...");
-      return null;
+      throw new NotImplementedException("Delete not implemented in init state");
     }
   }
 }

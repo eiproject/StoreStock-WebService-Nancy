@@ -3,6 +3,7 @@ using Nancy.ModelBinding;
 using StoreStock.BusinessLogic;
 using StoreStock.Models;
 using System;
+using System.Net.Http;
 
 namespace StoreStockWeb.Services {
   public class StockAPI {
@@ -35,8 +36,8 @@ namespace StoreStockWeb.Services {
           }
         }
       }
-      catch (Exception e) {
-        Console.WriteLine(e);
+      catch (Exception readError) {
+        Console.WriteLine(readError.Message);
         _statusCode = HttpStatusCode.InternalServerError;
       }
       return response.AsJson(_stock, _statusCode);
@@ -69,8 +70,8 @@ namespace StoreStockWeb.Services {
           _statusCode = HttpStatusCode.BadRequest;
         }
       }
-      catch (Exception e) {
-        Console.WriteLine(e);
+      catch (Exception createError) {
+        Console.WriteLine(createError.Message);
         _statusCode = HttpStatusCode.InternalServerError;
       }
       return response.AsJson(_stock, _statusCode);
@@ -83,30 +84,24 @@ namespace StoreStockWeb.Services {
         string strId = model.Id;
         int? nullableId = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
 
-        if (nullableId == null || model.Amount == 0) {
-          _statusCode = HttpStatusCode.BadRequest;
-        }
-        else {
+        if (nullableId != null || model.Amount != 0) {
           int id = (int)nullableId;
           int amount = model.Amount;
-          Stock stock = _repository.ReadStock(id);
-          if (stock != null) {
-            Stock stockToUpdate = _repository.UpdateStockAmount(id, amount);
-            if (stockToUpdate != null) {
-              _stock = stockToUpdate;
-              _statusCode = HttpStatusCode.OK;
-            }
-            else {
-              _statusCode = HttpStatusCode.BadRequest;
-            }
+          Stock stockToUpdate = _repository.UpdateStockAmount(id, amount);
+          if (stockToUpdate != null) {
+            _stock = stockToUpdate;
+            _statusCode = HttpStatusCode.OK;
           }
-          else { // Not Found
+          else {
             _statusCode = HttpStatusCode.NotFound;
           }
         }
-
+        else {
+          _statusCode = HttpStatusCode.BadRequest;
+        }
       }
-      catch {
+      catch (Exception updateError){
+        Console.WriteLine(updateError.Message);
         _statusCode = HttpStatusCode.InternalServerError;
       }
       // save information
@@ -125,7 +120,8 @@ namespace StoreStockWeb.Services {
           _statusCode = HttpStatusCode.NotFound;
         }
       }
-      catch {
+      catch (Exception deleteError) {
+        Console.WriteLine(deleteError.Message);
         _statusCode = HttpStatusCode.InternalServerError;
       }
       return response.AsJson(_stock, _statusCode);

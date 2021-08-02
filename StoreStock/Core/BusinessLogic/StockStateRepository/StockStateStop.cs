@@ -23,17 +23,17 @@ namespace StoreStock.BusinessLogic {
       string publisher,
       string genre,
       string size) {
-      return null;
+      throw new NotImplementedException("Create not implemented in stop state");
     }
 
     Stock IStockState.ReadStock(int id) {
-      return null;
+      throw new NotImplementedException("Read not implemented in stop state");
     }
     Stock IStockState.UpdateStockAmount(int stockID, int amountDifference) {
-      return null;
+      throw new NotImplementedException("Update not implemented in stop state");
     }
     Stock IStockState.DeleteStock(int stockID) {
-      return null;
+      throw new NotImplementedException("Delete not implemented in stop state");
     }
   }
 }
