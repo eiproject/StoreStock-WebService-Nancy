@@ -53,14 +53,5 @@ namespace StoreStock.BusinessLogic {
       }
       _state = _stop;
     }
-    internal IStoreState GetInitState() {
-      return _init;
-    }
-    internal IStoreState GetRunState() {
-      return _run;
-    }
-    internal IStoreState GetShutDownState() {
-      return _stop;
-    }
   }
 }
