@@ -13,7 +13,7 @@ namespace StoreStock.BusinessLogic {
 
       _store = null;
     }
-    Store IStoreState.ReadStore() {
+    Store IStoreState.ReadStoreObject() {
       throw new NotImplementedException("Read Store not implemented in init state");
     }
 

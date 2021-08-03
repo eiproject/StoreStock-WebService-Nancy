@@ -32,7 +32,7 @@ namespace StoreStock.BusinessLogic {
       }
     }
     // Method of the repository start here
-    Store IStoreState.ReadStore() {
+    Store IStoreState.ReadStoreObject() {
       throw new NotImplementedException("Read Store not implemented in init state");
     }
 

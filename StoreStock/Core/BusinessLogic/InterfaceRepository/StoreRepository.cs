@@ -17,7 +17,7 @@ namespace StoreStock.BusinessLogic {
 
     Store IStoreRepository.ReadStore() {
       if (_state != null) {
-        return _state.ReadStore();
+        return _state.ReadStoreObject();
       }
       else {
         return null;
@@ -27,7 +27,7 @@ namespace StoreStock.BusinessLogic {
     Store IStoreRepository.UpdateStore(string name) {
       if (_state!= null) {
         _state.UpdateStoreName(name);
-        return _state.ReadStore();
+        return _state.ReadStoreObject();
       }
       else {
         return null;

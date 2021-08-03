@@ -13,7 +13,7 @@ namespace StoreStock.BusinessLogic {
       _repository = repository ?? throw new NullReferenceException("--- Store run - Repository reference null");
     }
 
-    Store IStoreState.ReadStore() {
+    Store IStoreState.ReadStoreObject() {
       return _store;
     }
 
