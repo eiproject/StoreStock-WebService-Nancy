@@ -16,7 +16,7 @@ namespace StoreStock.BusinessLogic {
       store.CleanStock();
     }
     // Method of the repository start here
-    Stock IStockState.CreateStock(string type,
+    Stock IStockState.CreateOneStock(string type,
       int amount,
       string title,
       decimal price,

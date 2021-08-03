@@ -12,7 +12,7 @@ namespace StoreStock.BusinessLogic {
       _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock init - Store reference null");
     }
 
-    Stock IStockState.CreateStock(string type,
+    Stock IStockState.CreateOneStock(string type,
       int amount,
       string title,
       decimal price,

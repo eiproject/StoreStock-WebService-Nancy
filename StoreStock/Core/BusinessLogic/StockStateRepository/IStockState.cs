@@ -2,7 +2,7 @@
 
 namespace StoreStock.BusinessLogic {
   public interface IStockState {
-    Stock CreateStock(string type,
+    Stock CreateOneStock(string type,
   int amount,
   string title,
   decimal price,

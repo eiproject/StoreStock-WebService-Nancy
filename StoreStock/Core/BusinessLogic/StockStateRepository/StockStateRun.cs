@@ -13,7 +13,7 @@ namespace StoreStock.BusinessLogic {
       _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock run - Store reference null");
     }
     // Method of the repository start here
-    Stock IStockState.CreateStock(string type,
+    Stock IStockState.CreateOneStock(string type,
       int amount,
       string title,
       decimal price,

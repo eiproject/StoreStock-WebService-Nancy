@@ -22,7 +22,7 @@ namespace StoreStock.BusinessLogic {
       string genre,
       string size) {
       if (_state == null) { return null; }
-      return _state.CreateStock(type, amount, title, price, publisher, genre, size);
+      return _state.CreateOneStock(type, amount, title, price, publisher, genre, size);
     }
 
     Stock IStockRepository.ReadStock(int id) {
