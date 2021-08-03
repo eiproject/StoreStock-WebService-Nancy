@@ -7,7 +7,7 @@ using System;
 namespace StoreStockWeb.Services {
   public partial class StoreAPI {
     internal Response ReadStore(IResponseFormatter response, Request request) {
-      Store store;
+      Store store = null;
       try {
         store = _repository.ReadStore();
         if (store != null) {
@@ -20,6 +20,7 @@ namespace StoreStockWeb.Services {
       }
       catch (Exception e) {
         Console.WriteLine(e.Message);
+        store = null;
         _statusCode = HttpStatusCode.InternalServerError;
       }
 

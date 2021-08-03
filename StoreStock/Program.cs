@@ -19,15 +19,15 @@ namespace StoreStockWeb.Services {
       Console.WriteLine("\nPress any key to initialize data.");
       Console.ReadKey();
       
-      StateManager.InitStockStore();
+      StateManager.InitStockAndStore();
       Console.ReadKey();
-      StateManager.RunStockStore();
+      StateManager.RunStockAndStore();
       
       Console.WriteLine("\nPress any key to shutting down.");
       Console.ReadKey();
 
       // Application state manager
-      StateManager.StopStockStore();
+      StateManager.StopStockAndStore();
 
       Console.WriteLine("Please any key to exit.");
       Console.ReadKey();
