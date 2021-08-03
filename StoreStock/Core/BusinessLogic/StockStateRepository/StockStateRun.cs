@@ -40,15 +40,14 @@ namespace StoreStock.BusinessLogic {
       Stock stock = _store.Stocks.Find(data => data.ID == stockID);
       if (stock != null) {
         if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {
-          Console.WriteLine("Input amount INVALID | UpdateStoreStock");
-          return null;
+          throw new ArgumentNullException("Stock amount is zero, IStockState.UpdateStockAmountById");
         }
         else {
           stock += amountDifference;
         }
       }
       else {
-        Console.WriteLine("Input ID INVALID | UpdateStoreStock");
+        throw new NullReferenceException("Stock in IStockState.UpdateStockAmountById, null");
       }
 
       return stock;
