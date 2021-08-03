@@ -27,7 +27,7 @@ namespace StoreStock.BusinessLogic {
     }
 
     Stock IStockState.ReadOneStockById(int id) {
-      IEnumerable<Stock> filteredData = _store.StoreData.Where(
+      IEnumerable<Stock> filteredData = _store.Stocks.Where(
         data => data.ID == id);
       if (filteredData.Count() > 0) {
         return filteredData.First();
@@ -37,7 +37,7 @@ namespace StoreStock.BusinessLogic {
       }
     }
     Stock IStockState.UpdateStockAmountById(int stockID, int amountDifference) {
-      Stock stock = _store.StoreData.Find(data => data.ID == stockID);
+      Stock stock = _store.Stocks.Find(data => data.ID == stockID);
       if (stock != null) {
         if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {
           Console.WriteLine("Input amount INVALID | UpdateStoreStock");
@@ -54,7 +54,7 @@ namespace StoreStock.BusinessLogic {
       return stock;
     }
     Stock IStockState.DeleteOneStockById(int stockID) {
-      Stock stock = _store.StoreData.Find(data => data.ID == stockID);
+      Stock stock = _store.Stocks.Find(data => data.ID == stockID);
       if (stock != null) {
         _store.RemoveStock(stock);
         return stock;

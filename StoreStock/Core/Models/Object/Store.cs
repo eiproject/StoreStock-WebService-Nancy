@@ -9,7 +9,7 @@ namespace StoreStock.Models {
     public string StoreName { get { return _storeName; } }
     public decimal MaxDiscountPrice { get { return _maxDiscountPrice; } }
     public decimal MaxAmountThatGetDiscount { get { return _maxAmountThatGetDiscount; } }
-    public List<Stock> StoreData { get { return _stocks; } }
+    public List<Stock> Stocks { get { return _stocks; } }
     public int LastID {
       get {
         if (_stocks.Count > 0) {

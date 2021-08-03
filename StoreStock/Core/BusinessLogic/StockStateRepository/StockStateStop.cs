@@ -10,7 +10,7 @@ namespace StoreStock.BusinessLogic {
       _factory = factory ?? throw new NullReferenceException("--- Stock stop - Factory reference null");
       _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock stop - Store reference null");
       CleanAllStocks(_store);
-      if (_store.StoreData.Count == 0) { } else { throw new InvalidOperationException("Store Data is still exist after deletion."); }
+      if (_store.Stocks.Count == 0) { } else { throw new InvalidOperationException("Store Data is still exist after deletion."); }
     }
     void CleanAllStocks(Store store) {
       store.CleanStock();
