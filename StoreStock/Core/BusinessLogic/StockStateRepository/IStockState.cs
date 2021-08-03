@@ -9,7 +9,7 @@ namespace StoreStock.BusinessLogic {
   string category,
   string subcategory,
   string size);
-    Stock ReadStock(int id);
+    Stock ReadOneStock(int id);
     Stock UpdateStockAmount(int stockID, int amount);
     Stock DeleteStock(int stockID);
   }

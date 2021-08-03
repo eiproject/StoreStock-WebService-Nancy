@@ -26,7 +26,7 @@ namespace StoreStock.BusinessLogic {
       return stock;
     }
 
-    Stock IStockState.ReadStock(int id) {
+    Stock IStockState.ReadOneStock(int id) {
       IEnumerable<Stock> filteredData = _store.StoreData.Where(
         data => data.ID == id);
       if (filteredData.Count() > 0) {

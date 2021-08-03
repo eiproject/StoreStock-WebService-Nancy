@@ -22,7 +22,7 @@ namespace StoreStock.BusinessLogic {
       throw new NotImplementedException("Create not implemented in init state");
     }
 
-    Stock IStockState.ReadStock(int id) {
+    Stock IStockState.ReadOneStock(int id) {
       throw new NotImplementedException("Read not implemented in init state");
     }
     Stock IStockState.UpdateStockAmount(int stockID, int amountDifference) {
