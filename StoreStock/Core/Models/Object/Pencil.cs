@@ -7,7 +7,7 @@ namespace StoreStock.Models {
       decimal percentage;
       percentage = Math.Min(
         decimal.Multiply(
-          _store.MaxDiscount, _counter / _store.MaxAmountThatGetDiscount), _store.MaxDiscount);
+          _store.MaxDiscountPrice, _counter / _store.MaxAmountThatGetDiscount), _store.MaxDiscountPrice);
       return decimal.Multiply(percentage, _price);
     }
 
