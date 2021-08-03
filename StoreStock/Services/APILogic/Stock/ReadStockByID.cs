@@ -15,8 +15,8 @@ namespace StoreStockWeb.Services {
           _statusCode = HttpStatusCode.NotFound;
         }
         else {
-          if (_repository.ReadStock((int)id) != null) {
-            _stock = _repository.ReadStock((int)id);
+          if (_repository.ReadOneStockByIdUsingState((int)id) != null) {
+            _stock = _repository.ReadOneStockByIdUsingState((int)id);
             _statusCode = HttpStatusCode.OK;
           }
           else {

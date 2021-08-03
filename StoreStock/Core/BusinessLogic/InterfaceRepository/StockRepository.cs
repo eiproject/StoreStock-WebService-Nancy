@@ -14,7 +14,7 @@ namespace StoreStock.BusinessLogic {
       // _state = _init;
     }
 
-    Stock IStockRepository.CreateStock(string type,
+    Stock IStockRepository.CreateOneStockUsingState(string type,
       int amount,
       string title,
       decimal price,
@@ -25,35 +25,35 @@ namespace StoreStock.BusinessLogic {
       return _state.CreateOneStock(type, amount, title, price, publisher, genre, size);
     }
 
-    Stock IStockRepository.ReadStock(int id) {
+    Stock IStockRepository.ReadOneStockByIdUsingState(int id) {
       if (_state == null) { return null; }
       return _state.ReadOneStockById(id);
     }
 
-    Stock IStockRepository.UpdateStockAmount(int stockID, int amountDifference) {
+    Stock IStockRepository.UpdateStockAmountByIdUsingState(int stockID, int amountDifference) {
       if (_state == null) { return null; }
       return _state.UpdateStockAmountById(stockID, amountDifference);
     }
 
-    Stock IStockRepository.DeleteStock(int stockID) {
+    Stock IStockRepository.DeleteOneStockByIdUsingState(int stockID) {
       if (_state == null) { return null; }
       return _state.DeleteOneStockById(stockID);
     }
 
-    void IStockRepository.StateToInit() {
+    void IStockRepository.ChangeStateToInit() {
       if (_init == null && !_isInitialized) {
         _init = new StockStateInit(_factory);
         _isInitialized = true;
       }
       _state = _init;
     }
-    void IStockRepository.StateToRun() {
+    void IStockRepository.ChangeStateToRun() {
       if (_run == null) {
         _run = new StockStateRun(_factory);
       }
       _state = _run;
     }
-    void IStockRepository.StateToStop() {
+    void IStockRepository.ChangeStateToStop() {
       if (_stop == null) {
         _stop = new StockStateStop(_factory);
       }

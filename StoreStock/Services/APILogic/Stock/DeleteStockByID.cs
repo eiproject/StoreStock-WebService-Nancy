@@ -11,7 +11,7 @@ namespace StoreStockWeb.Services {
       try {
         // Parsing query
         int id = request.Query["id"];
-        Stock stock = _repository.DeleteStock(id);
+        Stock stock = _repository.DeleteOneStockByIdUsingState(id);
         if (stock != null) {
           _stock = stock;
           _statusCode = HttpStatusCode.OK;

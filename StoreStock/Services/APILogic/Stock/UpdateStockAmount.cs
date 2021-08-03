@@ -17,7 +17,7 @@ namespace StoreStockWeb.Services {
         if (nullableId != null || model.Amount != 0) {
           int id = (int)nullableId;
           int amount = model.Amount;
-          Stock stockToUpdate = _repository.UpdateStockAmount(id, amount);
+          Stock stockToUpdate = _repository.UpdateStockAmountByIdUsingState(id, amount);
           if (stockToUpdate != null) {
             _stock = stockToUpdate;
             _statusCode = HttpStatusCode.OK;

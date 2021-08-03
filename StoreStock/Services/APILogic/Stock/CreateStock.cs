@@ -19,7 +19,7 @@ namespace StoreStockWeb.Services {
           string subCategory = model.SubCategory;
           string size = model.Size;
 
-          Stock newStock = _repository.CreateStock(
+          Stock newStock = _repository.CreateOneStockUsingState(
             type, amount, title, price, category, subCategory, size
             );
           if (newStock != null) {
