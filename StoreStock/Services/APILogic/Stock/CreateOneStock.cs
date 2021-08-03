@@ -7,7 +7,7 @@ using System.Net.Http;
 
 namespace StoreStockWeb.Services {
   public partial class StockAPI {
-    internal Response CreateStock(IResponseFormatter response, Request request, StockModule module) {
+    internal Response CreateOneStock(IResponseFormatter response, Request request, StockModule module) {
       try {
         RequestStock model = module.Bind<RequestStock>();
         if (model != null && model.Type != null) {

@@ -7,7 +7,7 @@ using System.Net.Http;
 
 namespace StoreStockWeb.Services {
   public partial class StockAPI {
-    internal Response DeleteStockByID(IResponseFormatter response, Request request) {
+    internal Response DeleteStockById(IResponseFormatter response, Request request) {
       try {
         // Parsing query
         int id = request.Query["id"];

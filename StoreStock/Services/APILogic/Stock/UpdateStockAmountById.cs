@@ -7,7 +7,7 @@ using System.Net.Http;
 
 namespace StoreStockWeb.Services {
   public partial class StockAPI {
-    internal Response UpdateStockAmount(IResponseFormatter response, Request request, StockModule module) {
+    internal Response UpdateStockAmountById(IResponseFormatter response, Request request, StockModule module) {
       try {
         RequestStockAmount model = module.Bind<RequestStockAmount>();
         // Parsing query

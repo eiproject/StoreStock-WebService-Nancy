@@ -7,7 +7,7 @@ using System.Net.Http;
 
 namespace StoreStockWeb.Services {
   public partial class StockAPI {
-    internal Response ReadStockByID(IResponseFormatter response, Request request) {
+    internal Response ReadStockById(IResponseFormatter response, Request request) {
       try {
         string strId = request.Query["id"];
         int? id = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
