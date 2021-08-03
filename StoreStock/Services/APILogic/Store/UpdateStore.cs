@@ -10,7 +10,7 @@ namespace StoreStockWeb.Services {
       try {
         RequestStore model = module.Bind<RequestStore>();
         if (model.Name != null) {
-          _store = _repository.UpdateStore(model.Name);
+          _store = _repository.UpdateStoreName(model.Name);
           if (_store != null) {
             _statusCode = HttpStatusCode.OK;
           }

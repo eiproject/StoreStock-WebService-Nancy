@@ -9,7 +9,7 @@ namespace StoreStockWeb.Services {
     internal Response ReadStore(IResponseFormatter response, Request request) {
       Store store = null;
       try {
-        store = _repository.ReadStore();
+        store = _repository.ReadStoreObject();
         if (store != null) {
           _statusCode = HttpStatusCode.OK;
         }

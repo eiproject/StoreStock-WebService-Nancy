@@ -15,7 +15,7 @@ namespace StoreStock.BusinessLogic {
       // _state = _init;
     }
 
-    Store IStoreRepository.ReadStore() {
+    Store IStoreRepository.ReadStoreObject() {
       if (_state != null) {
         return _state.ReadStoreObject();
       }
@@ -24,7 +24,7 @@ namespace StoreStock.BusinessLogic {
       }
     }
 
-    Store IStoreRepository.UpdateStore(string name) {
+    Store IStoreRepository.UpdateStoreName(string name) {
       if (_state!= null) {
         _state.UpdateStoreName(name);
         return _state.ReadStoreObject();
@@ -34,20 +34,20 @@ namespace StoreStock.BusinessLogic {
       }
 
     }
-    void IStoreRepository.StateToInit() {
+    void IStoreRepository.ChangeStateToInit() {
       if (_init == null && !_isInitialized) {
         _init = new StoreStateInit(_factory, _repository);
         _isInitialized = true;
       }
       _state = _init;
     }
-    void IStoreRepository.StateToRun() {
+    void IStoreRepository.ChangeStateToRun() {
       if (_run == null) {
         _run = new StoreStateRun(_factory, _repository);
       }
       _state = _run;
     }
-    void IStoreRepository.StateToStop() {
+    void IStoreRepository.ChangeStateToStop() {
       if (_stop == null) {
         _stop = new StoreStateStop(_factory, _repository);
       }

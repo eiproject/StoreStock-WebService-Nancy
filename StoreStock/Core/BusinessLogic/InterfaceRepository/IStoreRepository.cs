@@ -2,10 +2,10 @@
 
 namespace StoreStock.BusinessLogic {
   public interface IStoreRepository {
-    Store ReadStore();
-    Store UpdateStore(string name);
-    void StateToInit();
-    void StateToRun();
-    void StateToStop();
+    Store ReadStoreObject();
+    Store UpdateStoreName(string name);
+    void ChangeStateToInit();
+    void ChangeStateToRun();
+    void ChangeStateToStop();
   }
 }

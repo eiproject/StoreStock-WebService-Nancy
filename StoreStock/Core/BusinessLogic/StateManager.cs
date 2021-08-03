@@ -11,20 +11,20 @@ namespace StoreStock.BusinessLogic {
 
     internal static void InitStockAndStore() {
       Console.WriteLine("\nInitializing...");
-      _storeRepo.StateToInit();
+      _storeRepo.ChangeStateToInit();
       _stockRepo.StateToInit();
       Console.WriteLine("Initializing, OK.");
     }
     internal static void RunStockAndStore() {
       Console.WriteLine("\nRunning...");
-      _storeRepo.StateToRun();
+      _storeRepo.ChangeStateToRun();
       _stockRepo.StateToRun();
       Console.WriteLine("Run. OK.");
     }
     internal static void StopStockAndStore() {
       Console.WriteLine("\nShutting down...");
       _stockRepo.StateToStop();
-      _storeRepo.StateToStop();
+      _storeRepo.ChangeStateToStop();
       Console.WriteLine("Shutting down, OK.");
     }
   }
