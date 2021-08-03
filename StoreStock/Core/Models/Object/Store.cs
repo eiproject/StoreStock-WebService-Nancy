@@ -20,16 +20,16 @@ namespace StoreStock.Models {
         }
       }
     }
-    public void AddStock(Stock newStock) {
+    public void AppendStocksByStock(Stock newStock) {
       _stocks.Add(newStock);
     }
-    public void RemoveStock(Stock stock) {
+    public void RemoveStockInStocks(Stock stock) {
       _stocks.Remove(stock);
     }
-    public void CleanStock() {
+    public void CleanStocks() {
       _stocks.Clear();
     }
-    public void UpdateName(string name) {
+    public void UpdateStoreName(string name) {
       _storeName = name;
     }
     internal Store(string storeName) {

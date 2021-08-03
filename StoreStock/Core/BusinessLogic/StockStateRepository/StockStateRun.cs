@@ -22,7 +22,7 @@ namespace StoreStock.BusinessLogic {
       string size) {
       int id = _store.LastID + 1;
       Stock stock = _factory.FactoryOneStock(type, id, amount, title, price, category, subCategory, size);
-      _store.AddStock(stock);
+      _store.AppendStocksByStock(stock);
       return stock;
     }
 
@@ -56,7 +56,7 @@ namespace StoreStock.BusinessLogic {
     Stock IStockState.DeleteOneStockById(int stockID) {
       Stock stock = _store.Stocks.Find(data => data.ID == stockID);
       if (stock != null) {
-        _store.RemoveStock(stock);
+        _store.RemoveStockInStocks(stock);
         return stock;
       }
       else {

@@ -13,7 +13,7 @@ namespace StoreStock.BusinessLogic {
       if (_store.Stocks.Count == 0) { } else { throw new InvalidOperationException("Store Data is still exist after deletion."); }
     }
     void CleanAllStocks(Store store) {
-      store.CleanStock();
+      store.CleanStocks();
     }
     // Method of the repository start here
     Stock IStockState.CreateOneStock(string type,

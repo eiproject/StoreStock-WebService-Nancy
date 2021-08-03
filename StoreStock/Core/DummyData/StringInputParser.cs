@@ -24,7 +24,7 @@ namespace StoreStock.BusinessLogic {
         subCategory: _parsingData[5],
         size: _parsingData[6]
           );
-        _factory.GetStore().AddStock(stock);
+        _factory.GetStore().AppendStocksByStock(stock);
         
         return true;
       }

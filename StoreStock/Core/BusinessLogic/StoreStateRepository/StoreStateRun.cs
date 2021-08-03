@@ -18,7 +18,7 @@ namespace StoreStock.BusinessLogic {
     }
 
     void IStoreState.UpdateStoreName(string name) {
-      _store.UpdateName(name);
+      _store.UpdateStoreName(name);
     }
   }
 }
