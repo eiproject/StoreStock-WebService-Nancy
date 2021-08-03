@@ -26,13 +26,13 @@ namespace StoreStock.BusinessLogic {
       throw new NotImplementedException("Create not implemented in stop state");
     }
 
-    Stock IStockState.ReadOneStock(int id) {
+    Stock IStockState.ReadOneStockById(int id) {
       throw new NotImplementedException("Read not implemented in stop state");
     }
-    Stock IStockState.UpdateStockAmount(int stockID, int amountDifference) {
+    Stock IStockState.UpdateStockAmountById(int stockID, int amountDifference) {
       throw new NotImplementedException("Update not implemented in stop state");
     }
-    Stock IStockState.DeleteStock(int stockID) {
+    Stock IStockState.DeleteOneStockById(int stockID) {
       throw new NotImplementedException("Delete not implemented in stop state");
     }
   }

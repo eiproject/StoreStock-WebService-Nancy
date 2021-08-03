@@ -27,17 +27,17 @@ namespace StoreStock.BusinessLogic {
 
     Stock IStockRepository.ReadStock(int id) {
       if (_state == null) { return null; }
-      return _state.ReadOneStock(id);
+      return _state.ReadOneStockById(id);
     }
 
     Stock IStockRepository.UpdateStockAmount(int stockID, int amountDifference) {
       if (_state == null) { return null; }
-      return _state.UpdateStockAmount(stockID, amountDifference);
+      return _state.UpdateStockAmountById(stockID, amountDifference);
     }
 
     Stock IStockRepository.DeleteStock(int stockID) {
       if (_state == null) { return null; }
-      return _state.DeleteStock(stockID);
+      return _state.DeleteOneStockById(stockID);
     }
 
     void IStockRepository.StateToInit() {
