@@ -6,7 +6,7 @@ using System;
 
 namespace StoreStockWeb.Services {
   public partial class StoreAPI {
-    internal Response UpdateStore(IResponseFormatter response, Request request, StoreModule module) {
+    internal Response UpdateStoreAPI(IResponseFormatter response, Request request, StoreModule module) {
       try {
         RequestStore model = module.Bind<RequestStore>();
         if (model.Name != null) {

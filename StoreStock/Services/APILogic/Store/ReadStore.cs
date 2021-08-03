@@ -6,7 +6,7 @@ using System;
 
 namespace StoreStockWeb.Services {
   public partial class StoreAPI {
-    internal Response ReadStore(IResponseFormatter response, Request request) {
+    internal Response ReadStoreAPI(IResponseFormatter response, Request request) {
       Store store = null;
       try {
         store = _repository.ReadStoreObjectUsingState();
