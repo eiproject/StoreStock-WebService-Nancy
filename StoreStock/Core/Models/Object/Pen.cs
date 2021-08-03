@@ -2,7 +2,7 @@
 
 namespace StoreStock.Models {
   class Pen : Stock {
-    protected override decimal GetDiscount() {
+    protected override decimal GetDiscountPrice() {
       int _counter = _amount;
       decimal percentage;
       percentage = Math.Min(

@@ -21,11 +21,11 @@
     public string Category => _category;
     public string SubCategory => _subCategory;
     public string Size => _size;
-    public decimal Discount => GetDiscount();
+    public decimal Discount => GetDiscountPrice();
     public decimal Price => _price;
     
     /*Method*/
-    protected abstract decimal GetDiscount();
+    protected abstract decimal GetDiscountPrice();
     public static Stock operator + (Stock stock, int amount) {
       stock._amount += amount;
       return stock;
