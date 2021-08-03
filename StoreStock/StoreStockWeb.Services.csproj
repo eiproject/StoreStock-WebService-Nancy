@@ -130,8 +130,12 @@
     <Compile Include="Core\Models\Factory\Factory.cs" />
     <Compile Include="Core\Models\Factory\IFactory.cs" />
     <Compile Include="Core\Models\Object\Stock.cs" />
-    <Compile Include="Services\APILogic\StockAPI.cs" />
-    <Compile Include="Services\APILogic\StoreAPI.cs" />
+    <Compile Include="Services\APILogic\Stock\CreateStock.cs" />
+    <Compile Include="Services\APILogic\Stock\DeleteStockByID.cs" />
+    <Compile Include="Services\APILogic\Stock\ReadStockByID.cs" />
+    <Compile Include="Services\APILogic\Stock\StockAPI.cs" />
+    <Compile Include="Services\APILogic\Stock\UpdateStockAmount.cs" />
+    <Compile Include="Services\APILogic\Store\StoreAPI.cs" />
     <Compile Include="Services\Module\StockModule.cs" />
     <Compile Include="Services\Module\StoreModule.cs" />
     <Compile Include="Core\DummyData\GenerateDummyData.cs" />
