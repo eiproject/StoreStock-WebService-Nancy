@@ -4,18 +4,10 @@ using System.Collections.Generic;
 
 namespace StoreStock.BusinessLogic {
   class StockStateStop : IStockState {
-    private Store _store;
     private IFactory _factory;
     internal StockStateStop(IFactory factory) {
-      _factory = factory ?? throw new NullReferenceException("--- Stock stop - Factory reference null");
-      _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock stop - Store reference null");
-      CleanAllStocks(_store);
-      if (_store.Stocks.Count == 0) { } else { throw new InvalidOperationException("Store Data is still exist after deletion."); }
+      _factory = factory ?? throw new NullReferenceException("Stock stop - Factory reference null");
     }
-    void CleanAllStocks(Store store) {
-      store.CleanStocks();
-    }
-    // Method of the repository start here
     Stock IStockState.CreateOneStock(string type,
       int amount,
       string title,
@@ -23,17 +15,17 @@ namespace StoreStock.BusinessLogic {
       string publisher,
       string genre,
       string size) {
-      throw new NotImplementedException("Create not implemented in stop state");
+      throw new NotImplementedException("Create Stock not implemented in stop state");
     }
 
     Stock IStockState.ReadOneStockById(int id) {
-      throw new NotImplementedException("Read not implemented in stop state");
+      throw new NotImplementedException("Read Stock not implemented in stop state");
     }
     Stock IStockState.UpdateStockAmountById(int stockID, int amountDifference) {
-      throw new NotImplementedException("Update not implemented in stop state");
+      throw new NotImplementedException("Update Stock not implemented in stop state");
     }
     Stock IStockState.DeleteOneStockById(int stockID) {
-      throw new NotImplementedException("Delete not implemented in stop state");
+      throw new NotImplementedException("Delete Stock not implemented in stop state");
     }
   }
 }

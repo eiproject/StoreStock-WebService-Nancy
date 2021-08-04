@@ -3,9 +3,11 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   internal class StringInputParser {
+    Store _store;
     private IFactory _factory;
     private string[] _parsingData;
-    internal StringInputParser(IFactory factory) {
+    internal StringInputParser(Store store, IFactory factory) {
+      _store = store;
       _factory = factory;
     }
     internal IFactory GetRpository() {
@@ -16,7 +18,7 @@ namespace StoreStock.BusinessLogic {
         _parsingData = inputText.Split('#');
         Stock stock = _factory.FactoryStock(
           type: _parsingData[0],
-          id: _factory.GetStore().LastIdInStocks + 1,
+          id: _store.LastIdInStocks + 1,
         amount: int.Parse(_parsingData[1]),
         title: _parsingData[3],
         price: decimal.Parse(_parsingData[2]),
@@ -24,7 +26,7 @@ namespace StoreStock.BusinessLogic {
         subCategory: _parsingData[5],
         size: _parsingData[6]
           );
-        _factory.GetStore().AppendStocksByStock(stock);
+        _store.AppendStocksByStock(stock);
         
         return true;
       }

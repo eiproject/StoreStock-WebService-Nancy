@@ -8,9 +8,9 @@ namespace StoreStock.BusinessLogic {
   class StockStateRun : IStockState {
     private Store _store;
     private IFactory _factory; 
-    internal StockStateRun(IFactory factory) {
-      _factory = factory ?? throw new NullReferenceException("--- Stock run - Factory reference null");
-      _store = factory.GetStore() ?? throw new NullReferenceException("--- Stock run - Store reference null");
+    internal StockStateRun(Store store, IFactory factory) {
+      _factory = factory ?? throw new NullReferenceException("Stock run - Factory reference null");
+      _store = store ?? throw new NullReferenceException("Stock run - Store reference null");
     }
     // Method of the repository start here
     Stock IStockState.CreateOneStock(string type,

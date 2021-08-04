@@ -4,6 +4,7 @@ using StoreStock.Models;
 namespace StoreStock.BusinessLogic {
   class StockRepository : IStockRepository {
     Stock _stock;
+    Store _store;
     IFactory _factory;
     private IStockState _init;
     private IStockState _run;
@@ -11,7 +12,8 @@ namespace StoreStock.BusinessLogic {
 
     private bool _isInitialized = false;
     private IStockState _state;
-    internal StockRepository(IFactory factory) {
+    internal StockRepository(Store store, IFactory factory) {
+      _store = store;
       _factory = factory;
     }
 
@@ -55,7 +57,7 @@ namespace StoreStock.BusinessLogic {
       _state = _init;
     }
     void IStockRepository.ChangeStateToRun() {
-      if (_run == null) _run = new StockStateRun(_factory);
+      if (_run == null) _run = new StockStateRun(_store, _factory);
       _state = _run;
     }
     void IStockRepository.ChangeStateToStop() {

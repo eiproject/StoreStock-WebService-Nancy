@@ -4,18 +4,18 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class StoreStateInit : IStoreState {
+    private Store _store;
     private IFactory _factory;
-    private IStockRepository _repository;
-    internal StoreStateInit(IFactory factory, IStockRepository repository) {
-      _factory = factory ?? throw new NullReferenceException("--- Store init - Factory reference null");
-      _repository = repository ?? throw new NullReferenceException("--- Store init - Repository reference null");
+    internal StoreStateInit(Store store, IFactory factory) {
+      _store = store ?? throw new NullReferenceException("Store init - Store reference null");
+      _factory = factory ?? throw new NullReferenceException("Store init - Factory reference null");
       GenerateDummyData();
     }
 
     void GenerateDummyData() {
       Console.WriteLine("... Generating dummy data");
       Thread.Sleep(1500);
-      StringInputParser inputParse = new StringInputParser(_factory);
+      StringInputParser inputParse = new StringInputParser(_store, _factory);
       GenerateDummyData dummy = new GenerateDummyData(inputParse);
       GenerateCondition condition = dummy.Generate();
       if (condition == GenerateCondition.OK) {
