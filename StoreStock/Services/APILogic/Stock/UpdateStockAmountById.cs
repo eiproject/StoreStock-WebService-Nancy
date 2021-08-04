@@ -10,11 +10,10 @@ namespace StoreStockWeb.Services {
         RequestStockAmount model = module.Bind<RequestStockAmount>();
         int? nullableId = ParseStringToNullableInteger(model.Id) ?? throw new NullReferenceException("Invalid ID");
         _stock = _repository.UpdateStockAmountByIdUsingState((int)nullableId, model.Amount);
-        if (_stock == null) _statusCode = HttpStatusCode.NotFound;
+        if (_stock == null) ChangeStatusToNotFound("Stock Not Found");
       }
       catch (Exception updateError) {
-        _message = updateError.Message;
-        _statusCode = HttpStatusCode.InternalServerError;
+        ChangeStatusToInternalServerError(updateError.Message);
       }
       var responseObject = new { Data = _stock, StatusCode = _statusCode, Message = _message };
       return response.AsJson(responseObject, _statusCode);

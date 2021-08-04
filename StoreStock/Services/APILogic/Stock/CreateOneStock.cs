@@ -8,11 +8,10 @@ namespace StoreStockWeb.Services {
       try {
         RequestStock model = module.Bind<RequestStock>();
         _stock = _repository.CreateOneStockUsingState(model.Type, model.Amount, model.Title, model.Price, model.Category, model.SubCategory, model.Size);
-        if (_stock == null) _statusCode = HttpStatusCode.BadRequest;
+        if (_stock == null) ChangeStatusToBadRequest("Create Stock Bad Request");
       }
       catch (Exception createError) {
-        _message = createError.Message;
-        _statusCode = HttpStatusCode.InternalServerError;
+        ChangeStatusToInternalServerError(createError.Message);
       }
 
       var responseObject = new { Data = _stock, StatusCode = _statusCode, Message = _message };

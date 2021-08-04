@@ -8,11 +8,10 @@ namespace StoreStockWeb.Services {
       try {
         RequestStore model = module.Bind<RequestStore>();
         _store = _repository.UpdateStoreNameUsingState(model.Name);
-        if (_store == null) _statusCode = HttpStatusCode.NotFound;
+        if (_store == null) ChangeStatusToNotFound("Store Not Found");
       }
       catch (Exception updateStoreNameError) {
-        _message = updateStoreNameError.Message;
-        _statusCode = HttpStatusCode.InternalServerError;
+        ChangeStatusToInternalServerError(updateStoreNameError.Message);
       }
       var responseObject = new { Data = _store, StatusCode = _statusCode, Message = _message };
       return response.AsJson(responseObject, _statusCode);
