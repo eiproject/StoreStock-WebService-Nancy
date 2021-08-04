@@ -7,7 +7,7 @@ namespace StoreStockWeb.Services {
 
     internal Response UpdateStockAmountById(IResponseFormatter response, Request request, StockModule module) {
       try {
-        RequestStockAmount model = module.Bind<RequestStockAmount>();
+        dynamic model = module.Bind<RequestStockAmount>();
         int? nullableId = ParseStringToNullableInteger(model.Id) ?? throw new NullReferenceException("Invalid ID");
         _stock = _repository.UpdateStockAmountByIdUsingState((int)nullableId, model.Amount);
         if (_stock == null) ChangeStatusToNotFound("Stock Not Found");

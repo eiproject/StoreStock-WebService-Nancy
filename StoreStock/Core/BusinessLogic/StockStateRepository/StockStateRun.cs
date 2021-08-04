@@ -6,6 +6,7 @@ using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class StockStateRun : IStockState {
+    Stock _stock;
     private Store _store;
     private IFactory _factory; 
     internal StockStateRun(Store store, IFactory factory) {
@@ -21,47 +22,31 @@ namespace StoreStock.BusinessLogic {
       string subCategory,
       string size) {
       int id = _store.LastIdInStocks + 1;
-      Stock stock = _factory.FactoryStock(type, id, amount, title, price, category, subCategory, size);
-      _store.AppendStocksByStock(stock);
-      return stock;
+      _stock = _factory.FactoryStock(type, id, amount, title, price, category, subCategory, size);
+      _store.AppendStocksByStock(_stock);
+      return _stock;
     }
 
     Stock IStockState.ReadOneStockById(int id) {
-      IEnumerable<Stock> filteredData = _store.Stocks.Where(
-        data => data.ID == id);
-      Stock result = null;
-      if (filteredData.Count() > 0) {
-        result = filteredData.First();
-      }
-      return result;
+      _stock = _store.Stocks.Find(data => data.ID == id);
+      return _stock;
     }
-    Stock IStockState.UpdateStockAmountById(int stockID, int amountDifference) {
-      Stock stock = _store.Stocks.Find(data => data.ID == stockID);
-      if (stock != null) {
-        if (stock.Amount == 0 || stock.Amount + amountDifference < 0) {
-          // throw new ArgumentNullException("Stock amount is zero, IStockState.UpdateStockAmountById");
-          stock = null;
+    Stock IStockState.UpdateStockAmountById(int id, int amount) {
+      _stock = _store.Stocks.Find(data => data.ID == id);
+      if (_stock != null) {
+        if (_stock.Amount != 0 || _stock.Amount + amount >= 0) {
+          _stock += amount;
         }
-        else {
-          stock += amountDifference;
-        }
-      }
-      else {
-        // throw new ArgumentException("Invalid ID in IStockState.UpdateStockAmountById");
-        stock = null;
       }
 
-      return stock;
+      return _stock;
     }
     Stock IStockState.DeleteOneStockById(int stockID) {
-      Stock stock = _store.Stocks.Find(data => data.ID == stockID);
-      if (stock != null) {
-        _store.RemoveStockInStocks(stock);
-        return stock;
+      _stock = _store.Stocks.Find(data => data.ID == stockID);
+      if (_stock != null) {
+        _store.RemoveStockInStocks(_stock);
       }
-      else {
-        throw new ArgumentException("Stock in IStockState.DeleteOneStockById, null");
-      }
+      return _stock;
     }
   }
 }

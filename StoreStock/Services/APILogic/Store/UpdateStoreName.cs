@@ -6,7 +6,7 @@ namespace StoreStockWeb.Services {
   public partial class StoreAPI {
     internal Response UpdateStoreName(IResponseFormatter response, Request request, StoreModule module) {
       try {
-        RequestStore model = module.Bind<RequestStore>();
+        dynamic model = module.Bind<RequestStore>();
         _store = _repository.UpdateStoreNameUsingState(model.Name);
         if (_store == null) ChangeStatusToNotFound("Store Not Found");
       }
