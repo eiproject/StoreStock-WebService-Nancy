@@ -63,7 +63,7 @@ namespace StoreStock.BusinessLogic {
       _state = _stop;
     }
     private void CheckState() {
-      _state = _state ?? throw new NullReferenceException("State not yet defined");
+      _state = _state ?? throw new NullReferenceException("Host is up. But the State not yet defined");
     }
   }
 }
