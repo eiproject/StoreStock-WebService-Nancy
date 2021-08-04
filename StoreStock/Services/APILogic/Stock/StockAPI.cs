@@ -11,7 +11,8 @@ namespace StoreStockWeb.Services {
     private Store _store;
     private IFactory _factory;
     private IStockRepository _repository;
-    private HttpStatusCode _statusCode;
+    private HttpStatusCode _statusCode = HttpStatusCode.OK;
+    private string _message;
 
     public StockAPI(
         Store store, IFactory factory, IStockRepository repository) {
@@ -19,5 +20,11 @@ namespace StoreStockWeb.Services {
       _factory = factory;
       _repository = repository;
     }
+
+    private int? ParseStringToNullableInteger(string input) {
+      int? nullableInteger = int.TryParse(input, out var temp) ? int.Parse(input) : (int?)null;
+      return nullableInteger;
+    }
+
   }
 }

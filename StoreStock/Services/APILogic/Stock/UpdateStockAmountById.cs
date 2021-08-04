@@ -7,35 +7,20 @@ using System.Net.Http;
 
 namespace StoreStockWeb.Services {
   public partial class StockAPI {
+
     internal Response UpdateStockAmountById(IResponseFormatter response, Request request, StockModule module) {
       try {
         RequestStockAmount model = module.Bind<RequestStockAmount>();
-        // Parsing query
-        string strId = model.Id;
-        int? nullableId = int.TryParse(strId, out var tempId) ? int.Parse(strId) : (int?)null;
-
-        if (nullableId != null || model.Amount != 0) {
-          int id = (int)nullableId;
-          int amount = model.Amount;
-          Stock stockToUpdate = _repository.UpdateStockAmountByIdUsingState(id, amount);
-          if (stockToUpdate != null) {
-            _stock = stockToUpdate;
-            _statusCode = HttpStatusCode.OK;
-          }
-          else {
-            _statusCode = HttpStatusCode.NotFound;
-          }
-        }
-        else {
-          _statusCode = HttpStatusCode.BadRequest;
-        }
+        int? nullableId = ParseStringToNullableInteger(model.Id) ?? throw new NullReferenceException("Invalid ID");
+        _stock = _repository.UpdateStockAmountByIdUsingState((int)nullableId, model.Amount);
+        if (_stock == null) _statusCode = HttpStatusCode.NotFound;
       }
       catch (Exception updateError) {
-        Console.WriteLine(updateError.Message);
+        _message = updateError.Message;
         _statusCode = HttpStatusCode.InternalServerError;
       }
-      // save information
-      return response.AsJson(_stock, _statusCode);
+      var responseObject = new { Data = _stock, StatusCode = _statusCode, Message = _message };
+      return response.AsJson(responseObject, _statusCode);
     }
   }
 }

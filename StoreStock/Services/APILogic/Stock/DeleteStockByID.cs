@@ -9,22 +9,16 @@ namespace StoreStockWeb.Services {
   public partial class StockAPI {
     internal Response DeleteStockById(IResponseFormatter response, Request request) {
       try {
-        // Parsing query
-        int id = request.Query["id"];
-        Stock stock = _repository.DeleteOneStockByIdUsingState(id);
-        if (stock != null) {
-          _stock = stock;
-          _statusCode = HttpStatusCode.OK;
-        }
-        else {
-          _statusCode = HttpStatusCode.NotFound;
-        }
+        int? nullableId = ParseStringToNullableInteger(request.Query["id"]) ?? throw new NullReferenceException("Invalid ID");
+        _stock = _repository.DeleteOneStockByIdUsingState((int)nullableId);
+        if (_stock == null) _statusCode = HttpStatusCode.NotFound;
       }
       catch (Exception deleteError) {
-        Console.WriteLine(deleteError.Message);
+        _message = deleteError.Message;
         _statusCode = HttpStatusCode.InternalServerError;
       }
-      return response.AsJson(_stock, _statusCode);
+      var responseObject = new { Data = _stock, StatusCode = _statusCode, Message = _message };
+      return response.AsJson(responseObject, _statusCode);
     }
   }
 }
