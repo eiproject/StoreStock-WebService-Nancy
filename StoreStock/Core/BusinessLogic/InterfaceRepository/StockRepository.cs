@@ -1,7 +1,7 @@
 ﻿using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
-  class StockRepository : IStockRepository{
+  class StockRepository : IStockRepository {
     IFactory _factory;
     private IStockState _init;
     private IStockState _run;
@@ -21,23 +21,35 @@ namespace StoreStock.BusinessLogic {
       string publisher,
       string genre,
       string size) {
-      if (_state == null) { return null; }
-      return _state.CreateOneStock(type, amount, title, price, publisher, genre, size);
+      Stock createStockResult = null;
+      if (_state != null) {
+        createStockResult = _state.CreateOneStock(type, amount, title, price, publisher, genre, size);
+      }
+      return createStockResult;
     }
 
     Stock IStockRepository.ReadOneStockByIdUsingState(int id) {
-      if (_state == null) { return null; }
-      return _state.ReadOneStockById(id);
+      Stock readStockResult = null;
+      if (_state != null) {
+        readStockResult = _state.ReadOneStockById(id);
+      }
+      return readStockResult;
     }
 
     Stock IStockRepository.UpdateStockAmountByIdUsingState(int stockID, int amountDifference) {
-      if (_state == null) { return null; }
-      return _state.UpdateStockAmountById(stockID, amountDifference);
+      Stock updateStockResult = null;
+      if (_state != null) {
+        updateStockResult = _state.UpdateStockAmountById(stockID, amountDifference);
+      }
+      return updateStockResult;
     }
 
     Stock IStockRepository.DeleteOneStockByIdUsingState(int stockID) {
-      if (_state == null) { return null; }
-      return _state.DeleteOneStockById(stockID);
+      Stock deleteStockResult = null;
+      if (_state != null) {
+        deleteStockResult = _state.DeleteOneStockById(stockID);
+      }
+      return deleteStockResult;
     }
 
     void IStockRepository.ChangeStateToInit() {

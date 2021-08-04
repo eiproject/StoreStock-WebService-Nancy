@@ -12,27 +12,23 @@ namespace StoreStock.BusinessLogic {
     internal StoreRepository(IFactory factory, IStockRepository repository) {
       _factory = factory;
       _repository = repository;
-      // _state = _init;
     }
 
     Store IStoreRepository.ReadStoreObjectUsingState() {
+      Store readStoreResult = null;
       if (_state != null) {
-        return _state.ReadStoreObject();
+        readStoreResult = _state.ReadStoreObject();
       }
-      else {
-        return null;
-      }
+      return readStoreResult;
     }
 
     Store IStoreRepository.UpdateStoreNameUsingState(string name) {
+      Store updateStoreResult = null;
       if (_state!= null) {
         _state.UpdateStoreName(name);
-        return _state.ReadStoreObject();
+        updateStoreResult = _state.ReadStoreObject();
       }
-      else {
-        return null;
-      }
-
+      return updateStoreResult;
     }
     void IStoreRepository.ChangeStateToInit() {
       if (_init == null && !_isInitialized) {
