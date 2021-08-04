@@ -1,7 +1,9 @@
-﻿using StoreStock.Models;
+﻿using System;
+using StoreStock.Models;
 
 namespace StoreStock.BusinessLogic {
   class StockRepository : IStockRepository {
+    Stock _stock;
     IFactory _factory;
     private IStockState _init;
     private IStockState _run;
@@ -11,7 +13,6 @@ namespace StoreStock.BusinessLogic {
     private IStockState _state;
     internal StockRepository(IFactory factory) {
       _factory = factory;
-      // _state = _init;
     }
 
     Stock IStockRepository.CreateOneStockUsingState(string type,
@@ -29,27 +30,21 @@ namespace StoreStock.BusinessLogic {
     }
 
     Stock IStockRepository.ReadOneStockByIdUsingState(int id) {
-      Stock readStockResult = null;
-      if (_state != null) {
-        readStockResult = _state.ReadOneStockById(id);
-      }
-      return readStockResult;
+      CheckState();
+      _stock = _state.ReadOneStockById(id);
+      return _stock;
     }
 
     Stock IStockRepository.UpdateStockAmountByIdUsingState(int stockID, int amountDifference) {
-      Stock updateStockResult = null;
-      if (_state != null) {
-        updateStockResult = _state.UpdateStockAmountById(stockID, amountDifference);
-      }
-      return updateStockResult;
+      CheckState();
+      _stock = _state.UpdateStockAmountById(stockID, amountDifference);
+      return _stock;
     }
 
     Stock IStockRepository.DeleteOneStockByIdUsingState(int stockID) {
-      Stock deleteStockResult = null;
-      if (_state != null) {
-        deleteStockResult = _state.DeleteOneStockById(stockID);
-      }
-      return deleteStockResult;
+      CheckState();
+      _stock = _state.DeleteOneStockById(stockID);
+      return _stock;
     }
 
     void IStockRepository.ChangeStateToInit() {
@@ -60,16 +55,15 @@ namespace StoreStock.BusinessLogic {
       _state = _init;
     }
     void IStockRepository.ChangeStateToRun() {
-      if (_run == null) {
-        _run = new StockStateRun(_factory);
-      }
+      if (_run == null) _run = new StockStateRun(_factory);
       _state = _run;
     }
     void IStockRepository.ChangeStateToStop() {
-      if (_stop == null) {
-        _stop = new StockStateStop(_factory);
-      }
+      if (_stop == null) _stop = new StockStateStop(_factory);
       _state = _stop;
+    }
+    private void CheckState() {
+      _state = _state ?? throw new NullReferenceException("State not yet defined");
     }
   }
 }

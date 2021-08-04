@@ -1,7 +1,9 @@
 ﻿using StoreStock.Models;
+using System;
 
 namespace StoreStock.BusinessLogic {
   class StoreRepository : IStoreRepository{
+    Store _store;
     private IFactory _factory;
     private IStockRepository _repository;
     private IStoreState _init;
@@ -15,20 +17,16 @@ namespace StoreStock.BusinessLogic {
     }
 
     Store IStoreRepository.ReadStoreObjectUsingState() {
-      Store readStoreResult = null;
-      if (_state != null) {
-        readStoreResult = _state.ReadStoreObject();
-      }
-      return readStoreResult;
+      CheckState();
+      _store = _state.ReadStoreObject();
+      return _store;
     }
 
     Store IStoreRepository.UpdateStoreNameUsingState(string name) {
-      Store updateStoreResult = null;
-      if (_state!= null) {
-        _state.UpdateStoreName(name);
-        updateStoreResult = _state.ReadStoreObject();
-      }
-      return updateStoreResult;
+      CheckState();
+      _state.UpdateStoreName(name);
+      _store = _state.ReadStoreObject();
+      return _store;
     }
     void IStoreRepository.ChangeStateToInit() {
       if (_init == null && !_isInitialized) {
@@ -48,6 +46,9 @@ namespace StoreStock.BusinessLogic {
         _stop = new StoreStateStop(_factory, _repository);
       }
       _state = _stop;
+    }
+    private void CheckState() {
+      _state = _state ?? throw new NullReferenceException("State not yet defined");
     }
   }
 }
