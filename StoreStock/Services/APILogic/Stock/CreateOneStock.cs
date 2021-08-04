@@ -1,9 +1,6 @@
 ﻿using Nancy;
-using Nancy.ModelBinding;
-using StoreStock.BusinessLogic;
-using StoreStock.Models;
+using Nancy.ModelBinding; 
 using System;
-using System.Net.Http;
 
 namespace StoreStockWeb.Services {
   public partial class StockAPI {

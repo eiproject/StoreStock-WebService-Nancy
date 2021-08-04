@@ -1,7 +1,5 @@
 ﻿using Nancy;
 using Nancy.ModelBinding;
-using StoreStock.BusinessLogic;
-using StoreStock.Models;
 using System;
 
 namespace StoreStockWeb.Services {
@@ -9,25 +7,15 @@ namespace StoreStockWeb.Services {
     internal Response UpdateStoreName(IResponseFormatter response, Request request, StoreModule module) {
       try {
         RequestStore model = module.Bind<RequestStore>();
-        if (model.Name != null) {
-          _store = _repository.UpdateStoreNameUsingState(model.Name);
-          if (_store != null) {
-            _statusCode = HttpStatusCode.OK;
-          }
-          else {
-            _statusCode = HttpStatusCode.NotFound;
-          }
-        }
-        else {
-          _statusCode = HttpStatusCode.BadRequest;
-          _store = null;
-        }
+        _store = _repository.UpdateStoreNameUsingState(model.Name);
+        if (_store == null) _statusCode = HttpStatusCode.NotFound;
       }
-      catch (Exception e) {
-        Console.WriteLine(e.Message);
+      catch (Exception updateStoreNameError) {
+        _message = updateStoreNameError.Message;
         _statusCode = HttpStatusCode.InternalServerError;
       }
-      return response.AsJson(_store, _statusCode);
+      var responseObject = new { Data = _store, StatusCode = _statusCode, Message = _message };
+      return response.AsJson(responseObject, _statusCode);
     }
   }
 }
