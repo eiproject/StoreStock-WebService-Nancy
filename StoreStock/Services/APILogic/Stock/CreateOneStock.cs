@@ -9,7 +9,7 @@ namespace StoreStockWeb.Services {
   public partial class StockAPI {
     internal Response CreateOneStock(IResponseFormatter response, Request request, StockModule module) {
       try {
-        RequestStock model = module.Bind<RequestStock>();
+        dynamic model = module.Bind<RequestStock>();
         if (model != null && model.Type != null) {
           string type = model.Type;
           int amount = model.Amount;
