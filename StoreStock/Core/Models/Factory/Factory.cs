@@ -8,7 +8,7 @@ namespace StoreStock.BusinessLogic {
     internal Factory(Store store) {
       _store = store;
     }
-    Stock IFactory.FactoryOneStock(
+    Stock IFactory.FactoryStock(
       string type, int id, int amount, string title, decimal price,
       string category, string subCategpry, string size) {
 
@@ -22,7 +22,7 @@ namespace StoreStock.BusinessLogic {
         _newStock = new Pencil(_store, id, amount, title, price, category, subCategpry, size);
       }
       else {
-        Console.WriteLine("Type UNVALID");
+        throw new ArgumentException("Invalid Factory Stock input type");
       }
       return _newStock;
     }
