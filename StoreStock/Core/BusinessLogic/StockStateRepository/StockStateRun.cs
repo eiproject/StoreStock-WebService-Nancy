@@ -46,7 +46,7 @@ namespace StoreStock.BusinessLogic {
         }
       }
       else {
-        throw new NullReferenceException("Stock in IStockState.UpdateStockAmountById, null");
+        throw new ArgumentException("Invalid ID in IStockState.UpdateStockAmountById");
       }
 
       return stock;
@@ -58,7 +58,7 @@ namespace StoreStock.BusinessLogic {
         return stock;
       }
       else {
-        throw new NullReferenceException("Stock in IStockState.DeleteOneStockById, null");
+        throw new ArgumentException("Stock in IStockState.DeleteOneStockById, null");
       }
     }
   }
